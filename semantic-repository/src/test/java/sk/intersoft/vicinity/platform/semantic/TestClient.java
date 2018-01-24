@@ -128,9 +128,9 @@ public class TestClient {
 
     public static void main(String[] args) throws  Exception {
         TestClient t = new TestClient();
-//        t.query();
+        t.query();
 //        t.remove("abc1");
-        t.create();
+//        t.create();
     }
 
 }
