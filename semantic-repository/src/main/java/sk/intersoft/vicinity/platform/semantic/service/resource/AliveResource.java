@@ -7,7 +7,6 @@ public class AliveResource extends ServerResource {
 
     @Get("txt")
     public String doSomeGet() throws Exception {
-        System.out.println("DO GET");
         return "SEMANTIC REPO IS ALIVE";
     }
 

@@ -6,29 +6,33 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.graph.Graph;
 
 public class Repository {
     HTTPRepository repository = null;
     private static Repository instance = null;
+    Logger logger = LoggerFactory.getLogger(Repository.class.getName());
 
     public Repository() {
     }
     public Repository(String endpoint) {
-        System.out.println("CREATING HTTP REPOSITORY INSTANCE WITH: "+endpoint);
+        logger.info("CREATING HTTP REPOSITORY INSTANCE WITH: "+endpoint);
         this.repository = new HTTPRepository(endpoint);
     }
 
     public static Repository getInstance(){
+        Logger logger = LoggerFactory.getLogger(Repository.class.getName());
         String endpoint = System.getProperty("graphdb.endpoint");
-        System.out.println("CREATING REPOSITORY INSTANCE: "+endpoint);
+        logger.info("CREATING REPOSITORY INSTANCE: "+endpoint);
         if(instance == null) {
             if(endpoint != null){
-                System.out.println("REPOSITORY ENDPOINT: "+endpoint);
+                logger.info("REPOSITORY ENDPOINT: "+endpoint);
                 instance = new Repository(endpoint);
             }
             else {
-                System.out.println("REPOSITORY ENDPOINT IS NOT SET!!! :: "+endpoint);
+                logger.info("REPOSITORY ENDPOINT IS NOT SET!!! :: "+endpoint);
             }
         }
         return instance;
@@ -42,7 +46,7 @@ public class Repository {
             connection.close();
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("CLOSE EXCEPTION", e);
         }
         finally {
             connection.close();
@@ -55,7 +59,7 @@ public class Repository {
             connection.clear();
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("CLEAR EXCEPTION", e);
         }
         finally {
             connection.close();
@@ -68,7 +72,8 @@ public class Repository {
             connection.clear();
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("CLEAR INSTANCE EXCEPTION", e);
+
         }
         finally {
             connection.close();
@@ -77,7 +82,6 @@ public class Repository {
 
     public Graph loadGraph(String baseURI, String contextURI) {
         ValueFactory factory = SimpleValueFactory.getInstance();
-        System.out.println("loading graph from context: ["+contextURI+"]");
         Graph graph = new Graph(baseURI);
         try{
             RepositoryConnection connection = repository.getConnection();
@@ -92,14 +96,14 @@ public class Repository {
                 return graph;
             }
             catch(Exception e){
-                e.printStackTrace();
+                logger.error("LOAD GRAPH EXCEPTION", e);
             }
             finally {
                 connection.close();
             }
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("EXCEPTION", e);
         }
         return null;
     }

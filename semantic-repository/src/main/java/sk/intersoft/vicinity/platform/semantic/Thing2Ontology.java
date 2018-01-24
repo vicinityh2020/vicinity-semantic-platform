@@ -11,6 +11,8 @@ import org.eclipse.rdf4j.rio.RDFParser;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.helpers.StatementCollector;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.lifting.ThingsLifter;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
@@ -29,6 +31,8 @@ public class Thing2Ontology {
     Repository repository = Repository.getInstance();
     ValueFactory factory = SimpleValueFactory.getInstance();
 
+    Logger logger = LoggerFactory.getLogger(Thing2Ontology.class.getName());
+
     private Set<String> extract(String query, String key)  {
         try{
             SPARQL sparql = new SPARQL();
@@ -43,7 +47,7 @@ public class Thing2Ontology {
             return values;
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("EXCEPTION", e);
         }
 
         return new HashSet<String>();
@@ -60,7 +64,7 @@ public class Thing2Ontology {
                 "}";
 
         Set<String> result = extract(query, "x");
-        System.out.println("PROPS RESULT: \n"+result);
+        logger.info("PROPS RESULT: \n"+result);
 
         return result;
     }
@@ -74,7 +78,7 @@ public class Thing2Ontology {
                 "}";
 
         Set<String> result = extract(query, "x");
-        System.out.println("PROPS RESULT: \n"+result);
+        logger.info("PROPS RESULT: \n"+result);
 
         return result;
     }
@@ -85,11 +89,10 @@ public class Thing2Ontology {
         try{
             RDFParser rdfParser = Rio.createParser(RDFFormat.JSONLD);
 
-            System.out.println("----------------------");
-            System.out.println("THING STUFF:");
+            logger.info("THING POPULATION STUFF:");
 
             String contextURI = OntologyResource.thingContextURI(thing.getString(ThingJSON.oid));
-            System.out.println("CtX: "+contextURI);
+            logger.info("CtX: "+contextURI);
 
             TreeModel graph = new TreeModel();
             rdfParser.setRDFHandler(new StatementCollector(graph));
@@ -99,19 +102,18 @@ public class Thing2Ontology {
             while(i.hasNext()) {
                 Statement st = i.next();
 
-                System.out.println(
+                logger.debug(
                         st.getSubject() + " " +
                                 st.getPredicate() + " "+
                                 st.getObject());
-                System.out.println(
+                logger.debug(
                         Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
                                 Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
                                 Namespaces.toPrefixed(st.getObject().stringValue()));
-                System.out.println("");
 
                 connection.add(st, factory.createIRI(contextURI));
             }
-            System.out.println("----------------------");
+            logger.info("THING POPULATION STUFF: DONE");
 
         }
         finally {
@@ -124,17 +126,17 @@ public class Thing2Ontology {
         ThingsLifter lifter = new ThingsLifter(getTypes(), getProperties());
         ThingsLifterResult lifting = lifter.lift(data);
 
-        System.out.println("LIFTING: "+lifting.lifting);
+        logger.info("LIFTING: "+lifting.lifting);
         if(lifting.lifting != null){
-            System.out.println(lifting.lifting.toString(2));
+            logger.info(lifting.lifting.toString(2));
         }
-        System.out.println("LIFTING ERRORS: "+lifting.errors.size());
+        logger.info("LIFTING ERRORS: "+lifting.errors.size());
         for(String error : lifting.errors) {
-            System.out.println("> "+error);
+            logger.info("> "+error);
         }
 
         if(lifting.lifting != null && lifting.errors.isEmpty()){
-            System.out.println("POPULATING!");
+            logger.info("POPULATING!");
             try{
                 populate(lifting.lifting);
                 Ontology2Thing generator = new Ontology2Thing();
@@ -147,11 +149,11 @@ public class Thing2Ontology {
             }
             catch(Exception e) {
                 lifting.errors.add("something went ape during ontology population!");
-                e.printStackTrace();
+                logger.error("EXCEPTION", e);
             }
         }
         else {
-            System.out.println("NOT POPULATING!");
+            logger.info("NOT POPULATING!");
 
         }
 
@@ -159,7 +161,7 @@ public class Thing2Ontology {
     }
 
     public boolean contextExists(String contextURI, RepositoryConnection connection) throws Exception {
-        System.out.println("checking if context exists: ["+contextURI+"]");
+        logger.debug("checking if context exists: ["+contextURI+"]");
         RepositoryResult<Statement> result =
                 connection.getStatements(null, null, null, true, factory.createIRI(contextURI));
         return result.hasNext();
@@ -169,9 +171,9 @@ public class Thing2Ontology {
 
 
     public boolean delete(String oid) throws Exception {
-        System.out.println("DELETING INSTANCE FOR: ["+oid+"]");
+        logger.info("DELETING INSTANCE FOR: ["+oid+"]");
         String contextURI = OntologyResource.thingContextURI(oid);
-        System.out.println("CONTEXT URI: ["+contextURI+"]");
+        logger.info("CONTEXT URI: ["+contextURI+"]");
 
         try{
             RepositoryConnection connection = repository.getConnection();
@@ -185,14 +187,14 @@ public class Thing2Ontology {
 
             }
             catch(Exception e){
-                e.printStackTrace();
+                logger.error("EXCEPTION", e);
             }
             finally {
                 connection.close();
             }
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("EXCEPTION", e);
         }
 
         return false;

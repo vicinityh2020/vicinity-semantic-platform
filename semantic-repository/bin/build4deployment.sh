@@ -6,8 +6,12 @@ JAR=semantic-repository-1.0-SNAPSHOT.jar
 rm -rf $BUILD
 mkdir $BUILD
 mkdir $BUILD/lib
+mkdir $BUILD/logs
 
 echo "build folder created"
+
+cp -a logging $BUILD/
+echo "added logging configurations"
 
 cp -a ../target/dependency/* $BUILD/lib/
 echo "added dependencies"

@@ -80,7 +80,7 @@ public class TestRepo {
 
 
     public void query() throws Exception {
-        String q = "PREFIX data:<http://examples.ontotext.com/family/data#>  SELECT * WHERE {data:John ?p ?o.}";
+        String q = "PREFIXx data:<http://examples.ontotext.com/family/data#>  SELECT * WHERE {data:John ?p ?o.}";
         SPARQL s=  new SPARQL();
         System.out.println(s.query(q).toString(2));
     }

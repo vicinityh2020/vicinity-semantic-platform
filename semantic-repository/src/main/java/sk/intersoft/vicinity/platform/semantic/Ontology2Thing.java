@@ -2,6 +2,8 @@ package sk.intersoft.vicinity.platform.semantic;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.graph.Graph;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
 import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
@@ -15,6 +17,7 @@ import java.util.Set;
 
 public class Ontology2Thing {
     Repository repository = Repository.getInstance();
+    Logger logger = LoggerFactory.getLogger(Ontology2Thing.class.getName());
 
     private void addProperty(String graphProperty,
                              String key,
@@ -173,6 +176,8 @@ public class Ontology2Thing {
     }
 
     public JSONObject toJSON(String oid)  {
+        logger.debug("getting graph for OID: "+oid);
+
         JSONObject thing = new JSONObject();
         thing.put(ThingJSON.properties, new JSONArray());
         thing.put(ThingJSON.actions, new JSONArray());
@@ -183,7 +188,7 @@ public class Ontology2Thing {
 
         Graph graph = repository.loadGraph(uri, contextURI);
 
-        System.out.println(graph.describe());
+        logger.debug("graph: \n"+graph.describe());
         addThingProperties(thing, graph);
         addThingInteractionPatterns(thing, graph);
 

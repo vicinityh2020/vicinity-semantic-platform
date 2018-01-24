@@ -2,6 +2,8 @@ package sk.intersoft.vicinity.platform.semantic.lifting;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
 import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
@@ -13,12 +15,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 public class ThingsLifter {
     public static String JSONLD_SCHEMA_LOCATION = System.getProperty("jsonld.schema.location");
 
-    private final static Logger LOGGER = Logger.getLogger(ThingsLifter.class.getName());
+    private final static Logger logger = LoggerFactory.getLogger(ThingsLifter.class.getName());
     private Set<String> types;
     private Set<String> properties;
 
@@ -26,43 +27,33 @@ public class ThingsLifter {
         this.types = types;
         this.properties = properties;
 
-        System.out.println("INITIALIZED WITH: ");
-        System.out.println("types: "+this.types);
-        System.out.println("properties: "+this.properties);
+        logger.info("THINGS-LIFTER INITIALIZED WITH: ");
+        logger.info("types: "+this.types);
+        logger.info("properties: "+this.properties);
     }
 
     private void instantiateObjects(JSONObject object) {
-//        System.out.println("Resolving object: \n"+object.toString(2));
         if(object.has(ThingJSON.idAnnotation)) {
-//            System.out.println("> NOT adding annotation");
         }
         else {
-//            System.out.println("> adding annotation");
             String id = UniqueID.create();
             String instance = Namespaces.prefixed(NamespacePrefix.data, id);
             object.put(ThingJSON.idAnnotation, instance);
         }
         for(String key : object.keySet()) {
-//            System.out.println("> trying: "+key);
             Object value = object.get(key);
             if(value instanceof JSONObject){
-//                System.out.println("  > is object .. resolve");
                 instantiateObjects((JSONObject) value);
             }
             else if(value instanceof JSONArray){
-//                System.out.println("  > is array .. resolve");
                 JSONArray array = object.getJSONArray(key);
                 Iterator i = array.iterator();
                 while(i.hasNext()){
                     Object item = i.next();
                     if(item instanceof JSONObject){
-//                        System.out.println("    > item is object .. resolve");
                         instantiateObjects((JSONObject) item);
                     }
                 }
-            }
-            else {
-//                System.out.println("  > skip");
             }
 
         }

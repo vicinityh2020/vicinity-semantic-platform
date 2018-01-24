@@ -2,12 +2,15 @@ package sk.intersoft.vicinity.platform.semantic.util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class JSONUtil {
+    static Logger logger = LoggerFactory.getLogger(JSONUtil.class.getName());
 
     public static List<String> getStringArray(String key, JSONObject object) {
         List<String> result = new ArrayList<String>();
@@ -37,7 +40,7 @@ public class JSONUtil {
 
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("EXCEPTION", e);
             return null;
         }
     }
@@ -77,7 +80,7 @@ public class JSONUtil {
 
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("EXCEPTION", e);
             return null;
         }
     }
