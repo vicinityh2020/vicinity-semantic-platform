@@ -1,0 +1,52 @@
+{
+	"type": "Lightbulb",
+	"oid": "abc1",
+	"pfe": "hua",
+	"infrastructure-id": "bulb1",
+	"properties": [{
+		"pid": "consumption",
+		"monitors": "MinCO2Concentration",
+		"writable": "false",
+		"output": {
+			"units": "watt",
+			"datatype": "double"
+		},
+		"read_links": [{
+			"href": "/objects/bulb1/properties/consumption",
+			"mediatype": "application/json"
+		}],
+		"write_links": [{
+			"href": "/objects/bulb1/properties/consumption",
+			"mediatype": "application/json"
+		}]
+	}],
+	"actions": [
+{
+		"aid": "action",
+		"affects": "Luminance",
+		"writable": "false",
+		"output": {
+			"units": "watt",
+			"datatype": "double"
+		},
+		"input": [
+		{
+			"units": "watt",
+			"datatype": "double"
+		},
+		{
+			"units": "celsius",
+			"datatype": "int"
+		}
+		],
+		"read_links": [{
+			"href": "/objects/bulb1/properties/consumptionx",
+			"mediatype": "application/json"
+		}],
+		"write_links": [{
+			"href": "/objects/bulb1/properties/consumptiony",
+			"mediatype": "application/json"
+		}]
+	}
+	]
+}

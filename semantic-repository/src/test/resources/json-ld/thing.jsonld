@@ -1,0 +1,74 @@
+{
+	"@context": {
+		"@vocab": "http://iot.linkeddata.es/def/wot#",
+		"core": "http://iot.linkeddata.es/def/core#",
+		"sosa": "http://www.w3.org/ns/sosa/",
+		"wot": "http://iot.linkeddata.es/def/wot#",
+		"xsd": "http://www.w3.org/2001/XMLSchema#",
+		"data": "http://vicinity.eu/data#",
+		"links": {
+			"@id": "wot:isAccessibleThrough",
+			"@type": "@id"
+		},
+		"read_links": {
+			"@id": "wot:isReadableThrough",
+			"@type": "@id"
+		},
+		"write_links": {
+			"@id": "wot:isWritableThrough",
+			"@type": "@id"
+		},
+		"properties": {
+			"@id": "wot:providesInteractionPattern",
+			"@type": "@id"
+		},
+		"actions": {
+			"@id": "wot:providesInteractionPattern",
+			"@type": "@id"
+		},
+		"monitors": {
+			"@id": "sosa:observes",
+			"@type": "@id"
+		},
+		"affects": {
+			"@id": "sosa:forProperty",
+			"@type": "@id"
+		},
+		"pid": {
+			"@id": "wot:interactionName",
+			"@type": "xsd:string"
+		},
+		"aid": {
+			"@id": "wot:interactionName",
+			"@type": "xsd:string"
+		},
+		"oid": {
+			"@id": "wot:thingName",
+			"@type": "xsd:string"
+		},
+		"href": {
+			"@id": "wot:href",
+			"@type": "xsd:string"
+		},
+		"mediatype": {
+			"@id": "wot:hasMediaType",
+			"@type": "@id"
+		},
+		"output": {
+			"@id": "wot:hasOutputData",
+			"@type": "@id"
+		},
+		"input": {
+			"@id": "wot:hasInputData",
+			"@type": "@id"
+		},
+		"units": {
+			"@id": "wot:isMeasuredIn",
+			"@type": "@id"
+		},
+		"datatype": {
+			"@id": "wot:hasValueType",
+			"@type": "@id"
+		}
+	}
+}
