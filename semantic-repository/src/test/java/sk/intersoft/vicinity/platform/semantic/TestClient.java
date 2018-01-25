@@ -130,7 +130,7 @@ public class TestClient {
         TestClient t = new TestClient();
         t.query();
         t.remove("abc1");
-//        t.create();
+        t.create();
     }
 
 }

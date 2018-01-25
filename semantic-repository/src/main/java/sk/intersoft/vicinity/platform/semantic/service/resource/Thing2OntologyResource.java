@@ -11,7 +11,7 @@ import sk.intersoft.vicinity.platform.semantic.Thing2Ontology;
 import java.util.logging.Level;
 
 public class Thing2OntologyResource extends ServerResource {
-    Logger logger = LoggerFactory.getLogger(Thing2OntologyResource.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(Thing2OntologyResource.class.getName());
 
     @Post()
     public String execute(Representation entity) throws Exception {

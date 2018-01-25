@@ -12,7 +12,7 @@ import java.io.ByteArrayOutputStream;
 
 public class SPARQL {
     Repository repository = Repository.getInstance();
-    Logger logger = LoggerFactory.getLogger(SPARQL.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(SPARQL.class.getName());
 
     public JSONObject query(String query) throws Exception {
         RepositoryConnection connection = repository.getConnection();

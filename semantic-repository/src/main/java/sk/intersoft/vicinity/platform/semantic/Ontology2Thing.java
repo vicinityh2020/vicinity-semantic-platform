@@ -17,7 +17,7 @@ import java.util.Set;
 
 public class Ontology2Thing {
     Repository repository = Repository.getInstance();
-    Logger logger = LoggerFactory.getLogger(Ontology2Thing.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(Ontology2Thing.class.getName());
 
     private void addProperty(String graphProperty,
                              String key,

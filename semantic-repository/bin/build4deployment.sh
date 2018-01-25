@@ -10,8 +10,8 @@ mkdir $BUILD/logs
 
 echo "build folder created"
 
-cp -a logging $BUILD/
-echo "added logging configurations"
+cp -a config $BUILD/
+echo "added configurations"
 
 cp -a ../target/dependency/* $BUILD/lib/
 echo "added dependencies"

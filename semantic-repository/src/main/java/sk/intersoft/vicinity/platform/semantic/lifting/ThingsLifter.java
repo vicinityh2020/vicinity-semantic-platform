@@ -19,7 +19,7 @@ import java.util.Set;
 public class ThingsLifter {
     public static String JSONLD_SCHEMA_LOCATION = System.getProperty("jsonld.schema.location");
 
-    private final static Logger logger = LoggerFactory.getLogger(ThingsLifter.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(ThingsLifter.class.getName());
     private Set<String> types;
     private Set<String> properties;
 

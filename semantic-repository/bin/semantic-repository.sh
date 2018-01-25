@@ -3,8 +3,8 @@
 SERVER_PORT=9004
 MAIN_CLASS=sk.intersoft.vicinity.platform.semantic.service.SemanticRepositoryServer
 
-RESTLET_LOG_CONFIG=/home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/bin/build/logging/restlet.properties
-LOGBACK_CONFIG=/home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/bin/build/logging/my-logback.xml
+RESTLET_LOG_CONFIG=/home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/bin/build/config/logging/restlet.properties
+LOGBACK_CONFIG=/home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/bin/build/config/logging/my-logback.xml
 
 GRAPHDB_ENDPOINT=http://localhost:7200/repositories/vicinity-test
 JSONLD_SCHEMA_LOCATION=file:///home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/src/test/resources/json-ld/thing.jsonld

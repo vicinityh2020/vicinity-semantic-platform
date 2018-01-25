@@ -13,7 +13,7 @@ import sk.intersoft.vicinity.platform.semantic.graph.Graph;
 public class Repository {
     HTTPRepository repository = null;
     private static Repository instance = null;
-    Logger logger = LoggerFactory.getLogger(Repository.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(Repository.class.getName());
 
     public Repository() {
     }
@@ -23,7 +23,6 @@ public class Repository {
     }
 
     public static Repository getInstance(){
-        Logger logger = LoggerFactory.getLogger(Repository.class.getName());
         String endpoint = System.getProperty("graphdb.endpoint");
         logger.info("CREATING REPOSITORY INSTANCE: "+endpoint);
         if(instance == null) {

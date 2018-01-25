@@ -11,7 +11,7 @@ import sk.intersoft.vicinity.platform.semantic.sparql.SPARQL;
 import java.util.logging.Level;
 
 public class SPARQLResource extends ServerResource {
-    Logger logger = LoggerFactory.getLogger(SPARQLResource.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(SPARQLResource.class.getName());
 
     @Post()
     public String execute(Representation entity) throws Exception {

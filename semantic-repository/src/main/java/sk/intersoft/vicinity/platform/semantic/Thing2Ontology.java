@@ -31,7 +31,7 @@ public class Thing2Ontology {
     Repository repository = Repository.getInstance();
     ValueFactory factory = SimpleValueFactory.getInstance();
 
-    Logger logger = LoggerFactory.getLogger(Thing2Ontology.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(Thing2Ontology.class.getName());
 
     private Set<String> extract(String query, String key)  {
         try{

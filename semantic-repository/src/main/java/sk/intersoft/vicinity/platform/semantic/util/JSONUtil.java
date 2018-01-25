@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class JSONUtil {
-    static Logger logger = LoggerFactory.getLogger(JSONUtil.class.getName());
+    final static Logger logger = LoggerFactory.getLogger(JSONUtil.class.getName());
 
     public static List<String> getStringArray(String key, JSONObject object) {
         List<String> result = new ArrayList<String>();
