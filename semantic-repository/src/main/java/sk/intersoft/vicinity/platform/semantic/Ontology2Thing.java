@@ -181,10 +181,12 @@ public class Ontology2Thing {
         JSONObject thing = new JSONObject();
         thing.put(ThingJSON.properties, new JSONArray());
         thing.put(ThingJSON.actions, new JSONArray());
-        thing.put("GENERATED", "YO");
 
         String uri = OntologyResource.thingInstanceURI(oid);
-        String contextURI = OntologyResource.thingContextURI(oid);
+        String contextURI = OntologyResource.thingInstanceURI(oid);
+
+        logger.debug("OID URI: "+uri);
+        logger.debug("OID CONTEXT URI: "+contextURI);
 
         Graph graph = repository.loadGraph(uri, contextURI);
 

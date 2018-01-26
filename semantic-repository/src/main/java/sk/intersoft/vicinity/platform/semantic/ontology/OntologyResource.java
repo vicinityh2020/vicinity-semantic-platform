@@ -11,7 +11,4 @@ public class OntologyResource {
     }
 
 
-    public static String thingContextURI(String oid) {
-        return Namespaces.data +"/"+oid;
-    }
 }

@@ -26,7 +26,7 @@ public class TestThing2Ontology {
     public void testDelete() {
         try{
 
-            String uuid = "abc4";
+            String uuid = "abc1";
             System.out.println("DELETE: "+uuid);
 
             Thing2Ontology handler = new Thing2Ontology();
@@ -44,7 +44,7 @@ public class TestThing2Ontology {
 
     public static void main(String[] args) throws  Exception {
         TestThing2Ontology t = new TestThing2Ontology();
-        t.populate();
-//        t.testDelete();
+//        t.populate();
+        t.testDelete();
     }
 }

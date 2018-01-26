@@ -91,7 +91,7 @@ public class Thing2Ontology {
 
             logger.info("THING POPULATION STUFF:");
 
-            String contextURI = OntologyResource.thingContextURI(thing.getString(ThingJSON.oid));
+            String contextURI = OntologyResource.thingInstanceURI(thing.getString(ThingJSON.oid));
             logger.info("CtX: "+contextURI);
 
             TreeModel graph = new TreeModel();
@@ -172,7 +172,7 @@ public class Thing2Ontology {
 
     public boolean delete(String oid) throws Exception {
         logger.info("DELETING INSTANCE FOR: ["+oid+"]");
-        String contextURI = OntologyResource.thingContextURI(oid);
+        String contextURI = OntologyResource.thingInstanceURI(oid);
         logger.info("CONTEXT URI: ["+contextURI+"]");
 
         try{
