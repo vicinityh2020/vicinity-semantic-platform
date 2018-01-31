@@ -1,13 +1,26 @@
 #!/bin/bash
 
+JAR=semantic-repository-1.0-SNAPSHOT.jar
+
 SERVER_PORT=9004
 MAIN_CLASS=sk.intersoft.vicinity.platform.semantic.service.SemanticRepositoryServer
 
-RESTLET_LOG_CONFIG=/home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/bin/build/config/logging/restlet.properties
-LOGBACK_CONFIG=/home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/bin/build/config/logging/logback.xml
-
 GRAPHDB_ENDPOINT=http://localhost:9003/repositories/vicinity-test
 JSONLD_SCHEMA_LOCATION=file:///home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/config/json-ld/thing.jsonld
+
+# LOG CONFIGURATION ..
+LOGS_FOLDER=logs
+DEFAULT_LOG=$LOGS_FOLDER/repository.log
+
+LOG_CONFIG=config/logging
+
+LOGGING_CONFIG_SOURCE=${LOG_CONFIG}/logging.properties
+LOGBACK_CONFIG_SOURCE=${LOG_CONFIG}/logback.xml
+
+LOGGING_CONFIG=${LOG_CONFIG}/resolved.logging.properties
+LOGBACK_CONFIG=${LOG_CONFIG}/resolved.logback.xml
+
+
 
 COMMAND=$1
 
@@ -33,14 +46,23 @@ else
     if [[ "" !=  "$PID" ]]; then
       echo "semantic repository is running"
     else
-        rm nohup.out;
+        rm $DEFAULT_LOG;
+
+        echo "prepare logging";
+        java -cp "lib/*" \
+            -Dlogback.configurationFile=$LOGBACK_CONFIG_SOURCE \
+            -Djava.util.logging.config.file=$LOGGING_CONFIG_SOURCE \
+            -Dlogs.folder=$LOGS_FOLDER \
+            sk.intersoft.vicinity.platform.semantic.config.PrepareLogging > $DEFAULT_LOG;
+
+        echo "start service";
         nohup java -cp "lib/*" \
             -Dserver.port=$SERVER_PORT \
             -Dgraphdb.endpoint=$GRAPHDB_ENDPOINT \
             -Djsonld.schema.location=$JSONLD_SCHEMA_LOCATION \
             -Dlogback.configurationFile=$LOGBACK_CONFIG \
-            -Djava.util.logging.config.file=$RESTLET_LOG_CONFIG \
-            $MAIN_CLASS &
+            -Djava.util.logging.config.file=$LOGGING_CONFIG \
+            $MAIN_CLASS >> $DEFAULT_LOG 2>&1 &
         echo "semantic repository started"
 
     fi
