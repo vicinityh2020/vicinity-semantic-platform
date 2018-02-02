@@ -31,9 +31,16 @@ public class SemanticRepositoryApplication extends Application {
     public Router createApiRouter() {
         Router apiRouter = new Router(getContext());
         apiRouter.attach(ALIVE, AliveResource.class);
+        apiRouter.attach(ALIVE+"/", AliveResource.class);
+
         apiRouter.attach(SPARQL, SPARQLResource.class);
+        apiRouter.attach(SPARQL+"/", SPARQLResource.class);
+
         apiRouter.attach(CREATE_TD, Thing2OntologyResource.class);
+        apiRouter.attach(CREATE_TD+"/", Thing2OntologyResource.class);
+
         apiRouter.attach(REMOVE_TD, RemoveThingFromOntologyResource.class);
+        apiRouter.attach(REMOVE_TD+"/", RemoveThingFromOntologyResource.class);
 
         return apiRouter;
     }

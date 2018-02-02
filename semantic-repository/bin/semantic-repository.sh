@@ -6,7 +6,9 @@ SERVER_PORT=9004
 MAIN_CLASS=sk.intersoft.vicinity.platform.semantic.service.SemanticRepositoryServer
 
 GRAPHDB_ENDPOINT=http://localhost:9003/repositories/vicinity-test
+
 JSONLD_SCHEMA_LOCATION=file:///home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/config/json-ld/thing.jsonld
+#JSONLD_SCHEMA_LOCATION=file:///home/peter/semantic-platform/semantic-repository/config/json-ld/thing.jsonld
 
 # LOG CONFIGURATION ..
 LOGS_FOLDER=logs

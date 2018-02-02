@@ -109,7 +109,10 @@ public class TestClient {
         System.out.println("TEST SPQRQL for: "+query);
         JSONObject queryJSON = new JSONObject();
         queryJSON.put("query", query);
-        System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "sparql", queryJSON.toString()))).toString(2));
+        String endpoint = ENDPOINT + "sparql";
+        System.out.println("ENDPOINT: "+endpoint);
+
+        System.out.println("query post: "+(new JSONObject(post(endpoint, queryJSON.toString()))).toString(2));
 
     }
 

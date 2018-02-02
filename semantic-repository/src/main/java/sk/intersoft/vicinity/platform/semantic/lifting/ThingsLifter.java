@@ -186,9 +186,6 @@ public class ThingsLifter {
         String oid = JSONUtil.getString(ThingJSON.oid, thing);
         if(oid == null) errors.add("missing thing [oid]");
 
-        String infrastructureId = JSONUtil.getString(ThingJSON.infrastructureId, thing);
-        if(infrastructureId == null) errors.add("missing thing [infrastructure-id]");
-
         thing.put(ThingJSON.idAnnotation, Namespaces.prefixed(NamespacePrefix.data, oid));
 
         resolveType(thing, errors);
