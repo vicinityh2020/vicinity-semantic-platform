@@ -44,7 +44,7 @@ public class TestThing2Ontology {
 
     public static void main(String[] args) throws  Exception {
         TestThing2Ontology t = new TestThing2Ontology();
-//        t.populate();
-        t.testDelete();
+        t.populate();
+//        t.testDelete();
     }
 }

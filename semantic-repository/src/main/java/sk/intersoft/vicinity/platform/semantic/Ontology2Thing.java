@@ -32,6 +32,7 @@ public class Ontology2Thing {
     private void addThingProperties(JSONObject thing, Graph graph) {
         thing.put(ThingJSON.idAnnotation, Namespaces.toPrefixed(graph.baseURI));
         thing.put(ThingJSON.oid, Namespaces.valueFromPrefixed(Namespaces.toPrefixed(graph.baseURI)));
+        addProperty("wot:name", ThingJSON.name, thing, graph);
         addProperty("rdf:type", ThingJSON.typeAnnotation, thing, graph);
         addProperty("wot:thingName", ThingJSON.oid, thing, graph);
     }

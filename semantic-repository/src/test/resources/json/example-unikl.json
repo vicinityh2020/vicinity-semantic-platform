@@ -1,6 +1,7 @@
 {
 	"type": "Lightbulb",
 	"oid": "abc2",
+	"name": "test name",
 	"pfe": "hua",
 	"infrastructure-id": "bulb1",
 	"properties": [{
