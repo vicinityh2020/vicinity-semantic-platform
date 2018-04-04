@@ -9,6 +9,7 @@ public class ThingJSON {
     public static final String name = "name";
     public static final String properties = "properties";
     public static final String actions = "actions";
+    public static final String events = "events";
 
 
     // ID mapping in results
@@ -42,5 +43,7 @@ public class ThingJSON {
     public static final String affects = "affects";
     public static final String forProperty = "forProperty";
 
+    // event
+    public static final String eid = "eid";
 
 }

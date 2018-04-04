@@ -157,13 +157,28 @@ public class Ontology2Thing {
         thing.getJSONArray(ThingJSON.actions).put(object);
     }
 
+    private void addEvent(Graph property, JSONObject thing, Graph graph) {
+        JSONObject object = new JSONObject();
+
+        System.out.println("ADDING EVENT");
+        object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Event"));
+        addProperty("wot:interactionName", ThingJSON.eid, object, property);
+        addProperty("sosa:observes", ThingJSON.observes, object, property);
+
+        addOutput(object, property);
+
+        thing.getJSONArray(ThingJSON.events).put(object);
+    }
+
     private void addThingInteractionPatterns(JSONObject thing, Graph graph) {
         Set<Graph> patterns = graph.subGraphs("wot:providesInteractionPattern");
-        Set<JSONObject> properties = new HashSet<JSONObject>();
-        Set<JSONObject> actions = new HashSet<JSONObject>();
+
 
         for(Graph pattern : patterns) {
             String type = pattern.value("rdf:type");
+
+            System.out.println("ADDING PATTERN: \n"+pattern.describe());
+
             if(type != null){
                 String typeName = Namespaces.valueFromPrefixed(Namespaces.toPrefixed(type));
                 if(typeName.equals("Action")){
@@ -171,6 +186,9 @@ public class Ontology2Thing {
                 }
                 else if(typeName.equals("Property")){
                     addProperty(pattern, thing, graph);
+                }
+                else if(typeName.equals("Event")){
+                    addEvent(pattern, thing, graph);
                 }
             }
         }
@@ -182,6 +200,7 @@ public class Ontology2Thing {
         JSONObject thing = new JSONObject();
         thing.put(ThingJSON.properties, new JSONArray());
         thing.put(ThingJSON.actions, new JSONArray());
+        thing.put(ThingJSON.events, new JSONArray());
 
         String uri = OntologyResource.thingInstanceURI(oid);
         String contextURI = OntologyResource.thingInstanceURI(oid);

@@ -93,14 +93,14 @@ public class TestRepo {
 
     public void o2t() throws Exception {
         Ontology2Thing o = new Ontology2Thing();
-        System.out.println(o.toJSON("abc4"));
+        System.out.println(o.toJSON("6101cce5-e79a-41a7-b53d-d8c0eb823bd3"));
     }
 
     public static void main(String[] args) throws  Exception {
         TestRepo t = new TestRepo();
-        t.query();
+//        t.query();
 //        t.graph();
-//        t.o2t();
+        t.o2t();
     }
 
 }

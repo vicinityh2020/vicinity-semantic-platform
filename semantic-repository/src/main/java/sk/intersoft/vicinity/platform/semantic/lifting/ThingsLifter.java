@@ -155,6 +155,7 @@ public class ThingsLifter {
         }
     }
 
+
     private void liftAction(JSONObject object, ArrayList<String> errors)  {
         String aid = JSONUtil.getString(ThingJSON.aid, object);
         if(aid == null) errors.add("missing [aid] in action description: "+object.toString());
@@ -178,6 +179,28 @@ public class ThingsLifter {
         }
     }
 
+    private void liftEvent(JSONObject object, ArrayList<String> errors)  {
+        String pid = JSONUtil.getString(ThingJSON.eid, object);
+        if(pid == null) errors.add("missing [eid] in property description: "+object.toString());
+
+        resolveAffect(object, ThingJSON.monitors, errors);
+        resolveOutput(object, errors);
+        object.remove(ThingJSON.type);
+        object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Event"));
+
+    }
+
+    private void liftEvents(JSONObject thing, ArrayList<String> errors)  {
+        if(thing.has(ThingJSON.events)) {
+            JSONArray events = thing.getJSONArray(ThingJSON.events);
+            Iterator i = events.iterator();
+            while(i.hasNext()){
+                JSONObject event = (JSONObject)i.next();
+                liftEvent(event, errors);
+            }
+        }
+    }
+
     private void lift(JSONObject thing, ArrayList<String> errors) {
 
         thing.put("@context", JSONLD_SCHEMA_LOCATION);
@@ -191,6 +214,7 @@ public class ThingsLifter {
         resolveType(thing, errors);
         liftProperties(thing, errors);
         liftActions(thing, errors);
+        liftEvents(thing, errors);
 
         instantiateObjects(thing);
 

@@ -26,6 +26,10 @@
 			"@id": "wot:providesInteractionPattern",
 			"@type": "@id"
 		},
+		"events": {
+			"@id": "wot:providesInteractionPattern",
+			"@type": "@id"
+		},
 		"monitors": {
 			"@id": "sosa:observes",
 			"@type": "@id"
@@ -39,6 +43,10 @@
 			"@type": "xsd:string"
 		},
 		"aid": {
+			"@id": "wot:interactionName",
+			"@type": "xsd:string"
+		},
+		"eid": {
 			"@id": "wot:interactionName",
 			"@type": "xsd:string"
 		},
