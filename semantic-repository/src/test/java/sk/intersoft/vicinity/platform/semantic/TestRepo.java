@@ -93,7 +93,13 @@ public class TestRepo {
 
     public void o2t() throws Exception {
         Ontology2Thing o = new Ontology2Thing();
-        System.out.println(o.toJSON("6101cce5-e79a-41a7-b53d-d8c0eb823bd3"));
+        System.out.println(o.toJSON("5a7394a9-317e-4726-a265-95ceaea72987"));
+    }
+
+    public void delete() throws Exception {
+        Thing2Ontology handler = new Thing2Ontology();
+        System.out.println(handler.delete("5a7394a9-317e-4726-a265-95ceaea72987"));
+
     }
 
     public static void main(String[] args) throws  Exception {
@@ -101,6 +107,7 @@ public class TestRepo {
 //        t.query();
 //        t.graph();
         t.o2t();
+//        t.delete();
     }
 
 }

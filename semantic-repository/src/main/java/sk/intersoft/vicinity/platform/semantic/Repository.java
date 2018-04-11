@@ -87,12 +87,13 @@ public class Repository {
             try{
                 RepositoryResult<Statement> result =
                         connection.getStatements(null, null, null, true, factory.createIRI(contextURI));
-                while (result.hasNext()) {
-                    Statement st = result.next();
-                    graph.add(st);
+                if(result.hasNext()){
+                    while (result.hasNext()) {
+                        Statement st = result.next();
+                        graph.add(st);
+                    }
+                    return graph;
                 }
-
-                return graph;
             }
             catch(Exception e){
                 logger.error("LOAD GRAPH EXCEPTION", e);
