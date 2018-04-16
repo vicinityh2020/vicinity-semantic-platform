@@ -7,7 +7,7 @@ public class TestThing2Ontology {
 
     public void populate() {
         try{
-            String json = TestUtil.file2string(TestUtil.path(jsonPath+"example-unikl.json"));
+            String json = TestUtil.file2string(TestUtil.path(jsonPath+"example-thing.json"));
 
             System.out.println("INPUT: \n"+json);
 
@@ -26,7 +26,7 @@ public class TestThing2Ontology {
     public void testDelete() {
         try{
 
-            String uuid = "abc1";
+            String uuid = "test";
             System.out.println("DELETE: "+uuid);
 
             Thing2Ontology handler = new Thing2Ontology();

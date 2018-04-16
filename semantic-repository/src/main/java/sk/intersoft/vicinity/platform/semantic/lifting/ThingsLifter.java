@@ -28,29 +28,27 @@ public class ThingsLifter {
         this.properties = properties;
 
         logger.info("THINGS-LIFTER INITIALIZED WITH: ");
-        logger.info("types: "+this.types);
-        logger.info("properties: "+this.properties);
+        logger.info("types: " + this.types);
+        logger.info("properties: " + this.properties);
     }
 
     private void instantiateObjects(JSONObject object) {
-        if(object.has(ThingJSON.idAnnotation)) {
-        }
-        else {
+        if (object.has(ThingJSON.idAnnotation)) {
+        } else {
             String id = UniqueID.create();
             String instance = Namespaces.prefixed(NamespacePrefix.data, id);
             object.put(ThingJSON.idAnnotation, instance);
         }
-        for(String key : object.keySet()) {
+        for (String key : object.keySet()) {
             Object value = object.get(key);
-            if(value instanceof JSONObject){
+            if (value instanceof JSONObject) {
                 instantiateObjects((JSONObject) value);
-            }
-            else if(value instanceof JSONArray){
+            } else if (value instanceof JSONArray) {
                 JSONArray array = object.getJSONArray(key);
                 Iterator i = array.iterator();
-                while(i.hasNext()){
+                while (i.hasNext()) {
                     Object item = i.next();
-                    if(item instanceof JSONObject){
+                    if (item instanceof JSONObject) {
                         instantiateObjects((JSONObject) item);
                     }
                 }
@@ -63,73 +61,68 @@ public class ThingsLifter {
     private void resolveType(JSONObject object, ArrayList<String> errors) {
 
         String type = JSONUtil.getString(ThingJSON.type, object);
-        if(type != null){
+        if (type != null) {
             String thingType = Namespaces.prefixed(NamespacePrefix.core, type);
-            if(types.contains(thingType)){
+            if (types.contains(thingType)) {
                 object.put(ThingJSON.typeAnnotation, thingType);
                 object.remove(ThingJSON.type);
+            } else {
+                errors.add("unknown ontology thing [type]: [" + type + "]");
             }
-            else{
-                errors.add("unknown ontology thing [type]: ["+type+"]");
-            }
-        }
-        else {
+        } else {
             errors.add("missing thing [type]");
         }
     }
 
-    private void resolveAffect(JSONObject object, String key, ArrayList<String> errors)  {
+    private void resolveAffect(JSONObject object, String key, ArrayList<String> errors) {
 
         String affect = JSONUtil.getString(key, object);
-        if(affect != null){
+        if (affect != null) {
             String instance = Namespaces.prefixed(NamespacePrefix.core, affect);
-            if(properties.contains(instance)){
+            if (properties.contains(instance)) {
                 object.put(key, instance);
+            } else {
+                errors.add("unknown ontology property [" + key + "]: [" + affect + "] in: " + object.toString());
             }
-            else {
-                errors.add("unknown ontology property ["+key+"]: ["+affect+"] in: "+object.toString());
-            }
-        }
-        else {
-            errors.add("missing property ["+key+"] in: "+object.toString());
+        } else {
+            errors.add("missing property [" + key + "] in: " + object.toString());
         }
     }
 
-    private void resolveOutput(JSONObject object, ArrayList<String> errors) {
-
-        JSONObject output = JSONUtil.getObject(ThingJSON.output, object);
-        if(output != null){
-            String units = JSONUtil.getString(ThingJSON.units, output);
-            String datatype = JSONUtil.getString(ThingJSON.datatype, output);
-            if(units != null){
-                output.put(ThingJSON.units, Namespaces.prefixed(NamespacePrefix.core, units));
-            }
-            if(datatype != null){
-                output.put(ThingJSON.datatype, Namespaces.prefixed(NamespacePrefix.xsd, datatype));
-            }
+    private void resolveData(JSONObject object, String key, boolean mandatory, ArrayList<String> errors) {
+        JSONObject data = JSONUtil.getObject(key, object);
+        if(mandatory && data == null){
+            errors.add("missing ["+data+"] in: "+object.toString());
         }
-        else {
-//            errors.add("missing property [output] in: "+object.toString());
+        else if (data != null){
+            data.put(ThingJSON.jsonSource, data.toString());
         }
     }
 
-    private void resolveInputs(JSONObject object, ArrayList<String> errors) {
+    private void resolveLink(JSONObject object, String linkType, ArrayList<String> errors) {
 
-        List<JSONObject> inputs = JSONUtil.getObjectArray(ThingJSON.input, object);
-        if(inputs != null && inputs.size() > 0){
-            for(JSONObject input : inputs){
-                String units = JSONUtil.getString(ThingJSON.units, input);
-                String datatype = JSONUtil.getString(ThingJSON.datatype, input);
-                if(units != null){
-                    input.put(ThingJSON.units, Namespaces.prefixed(NamespacePrefix.core, units));
-                }
-                if(datatype != null){
-                    input.put(ThingJSON.datatype, Namespaces.prefixed(NamespacePrefix.xsd, datatype));
-                }
-            }
+        String href = JSONUtil.getString(ThingJSON.href, object);
+        if(href == null) {
+            errors.add("missing [href] in: "+object.toString());
         }
-        else {
-//            errors.add("missing property [input] in: "+object.toString());
+
+        resolveData(object, ThingJSON.output, true, errors);
+        resolveData(object, ThingJSON.input, (linkType.equals(ThingJSON.writeLink)), errors);
+    }
+
+    private void resolveLinks(JSONObject object, ArrayList<String> errors) {
+
+        JSONObject read = JSONUtil.getObject(ThingJSON.readLink, object);
+        JSONObject write = JSONUtil.getObject(ThingJSON.writeLink, object);
+        if(read == null && write == null) {
+            errors.add("at least one link must be provided! missing [read_link] or [write_link] in: "+object.toString());
+        }
+
+        if(read != null){
+            resolveLink(read, ThingJSON.readLink, errors);
+        }
+        if(write != null){
+            resolveLink(write, ThingJSON.writeLink, errors);
         }
     }
 
@@ -138,7 +131,7 @@ public class ThingsLifter {
         if(pid == null) errors.add("missing [pid] in property description: "+object.toString());
 
         resolveAffect(object, ThingJSON.monitors, errors);
-        resolveOutput(object, errors);
+        resolveLinks(object, errors);
         object.remove(ThingJSON.type);
         object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Property"));
 
@@ -161,8 +154,7 @@ public class ThingsLifter {
         if(aid == null) errors.add("missing [aid] in action description: "+object.toString());
 
         resolveAffect(object, ThingJSON.affects, errors);
-        resolveOutput(object, errors);
-        resolveInputs(object, errors);
+        resolveLinks(object, errors);
         object.remove(ThingJSON.type);
         object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Action"));
 
@@ -180,13 +172,18 @@ public class ThingsLifter {
     }
 
     private void liftEvent(JSONObject object, ArrayList<String> errors)  {
-        String pid = JSONUtil.getString(ThingJSON.eid, object);
-        if(pid == null) errors.add("missing [eid] in property description: "+object.toString());
+        String eid = JSONUtil.getString(ThingJSON.eid, object);
+        if(eid == null) errors.add("missing [eid] in: "+object.toString());
 
         resolveAffect(object, ThingJSON.monitors, errors);
-        resolveOutput(object, errors);
+
+        JSONObject output = JSONUtil.getObject(ThingJSON.output, object);
+        if(output == null) errors.add("missing [output] in: "+object.toString());
+
         object.remove(ThingJSON.type);
         object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Event"));
+
+        resolveData(object, ThingJSON.output, true, errors);
 
     }
 

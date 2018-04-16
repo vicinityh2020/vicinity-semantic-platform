@@ -87,6 +87,7 @@ public class Repository {
             try{
                 RepositoryResult<Statement> result =
                         connection.getStatements(null, null, null, true, factory.createIRI(contextURI));
+                System.out.println("GRAPH LOADER ["+factory.createIRI(contextURI)+"] .. triples .. has next: "+result.hasNext());
                 if(result.hasNext()){
                     while (result.hasNext()) {
                         Statement st = result.next();

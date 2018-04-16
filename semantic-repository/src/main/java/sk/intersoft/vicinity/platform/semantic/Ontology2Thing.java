@@ -11,7 +11,6 @@ import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 import sk.intersoft.vicinity.platform.semantic.ontology.OntologyResource;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -35,96 +34,45 @@ public class Ontology2Thing {
         addProperty("wot:name", ThingJSON.name, thing, graph);
         addProperty("rdf:type", ThingJSON.typeAnnotation, thing, graph);
         addProperty("wot:thingName", ThingJSON.oid, thing, graph);
+
+        thing.put(ThingJSON.type, Namespaces.valueFromPrefixed(thing.getString(ThingJSON.typeAnnotation)));
+
     }
 
 
-    private void addLinks(String property,
-                          String key,
-                          JSONObject object,
-                          Graph graph) {
-        Set<Graph> links = graph.subGraphs(property);
-        List<JSONObject> linkJSONs = new ArrayList<JSONObject>();
+    private void addLink(String property,
+                         String key,
+                         JSONObject object,
+                         Graph graph) {
+        Graph link = graph.subGraph(property);
 
-        for(Graph link : links) {
-            JSONObject o = new JSONObject();
+        if(link != null){
+            JSONObject linkJSON = new JSONObject();
 
-            addProperty("wot:href", ThingJSON.href, o, link);
-            linkJSONs.add(o);
-        }
-
-        if(linkJSONs.size() > 0){
-
-            JSONArray list = new JSONArray();
-            for(JSONObject o : linkJSONs){
-                list.put(o);
+            addProperty("wot:href", ThingJSON.href, linkJSON, link);
+            Graph output = link.subGraph("wot:hasOutputData");
+            if(output != null) {
+                linkJSON.put(ThingJSON.output, new JSONObject(output.value("wot:jsonSource")));
             }
 
-            object.put(key, list);
+            Graph input = link.subGraph("wot:hasInputData");
+            if(input != null) {
+                linkJSON.put(ThingJSON.input, new JSONObject(input.value("wot:jsonSource")));
+            }
+
+            object.put(key, linkJSON);
         }
+
 
     }
 
     private void addLinks(JSONObject object, Graph graph) {
-        addLinks("wot:isReadableThrough", ThingJSON.readLinks, object, graph);
-        addLinks("wot:isWritableThrough", ThingJSON.writeLinks, object, graph);
+        addLink("wot:isReadableThrough", ThingJSON.readLink, object, graph);
+        addLink("wot:isWritableThrough", ThingJSON.writeLink, object, graph);
     }
 
 
 
-    private void addOutput(JSONObject object, Graph graph) {
-        Set<Graph> outputs = graph.subGraphs("wot:hasOutputData");
-        List<JSONObject> outputJSONs = new ArrayList<JSONObject>();
-        for(Graph output : outputs) {
-            JSONObject o = new JSONObject();
-
-            addProperty("wot:hasValueType", ThingJSON.datatype, o, output);
-            addProperty("wot:isMeasuredIn", ThingJSON.units, o, output);
-            outputJSONs.add(o);
-        }
-
-        if(outputJSONs.size() > 0){
-
-            if(outputJSONs.size() == 1){
-                object.put(ThingJSON.output, outputJSONs.get(0));
-            }
-            else {
-                JSONArray list = new JSONArray();
-                for(JSONObject o : outputJSONs){
-                    list.put(o);
-                }
-
-                object.put(ThingJSON.output, list);
-            }
-        }
-    }
-
-
-    private void addInput(JSONObject object, Graph graph) {
-        Set<Graph> inputs = graph.subGraphs("wot:hasInputData");
-        List<JSONObject> inputJSONs = new ArrayList<JSONObject>();
-        for(Graph input : inputs) {
-            JSONObject o = new JSONObject();
-
-            addProperty("wot:hasValueType", ThingJSON.datatype, o, input);
-            addProperty("wot:isMeasuredIn", ThingJSON.units, o, input);
-            inputJSONs.add(o);
-        }
-
-        if(inputJSONs.size() > 0){
-
-            if(inputJSONs.size() == 1){
-                object.put(ThingJSON.input, inputJSONs.get(0));
-            }
-            else {
-                JSONArray list = new JSONArray();
-                for(JSONObject o : inputJSONs){
-                    list.put(o);
-                }
-
-                object.put(ThingJSON.input, list);
-            }
-        }
-    }
 
     private void addProperty(Graph property, JSONObject thing, Graph graph) {
         JSONObject object = new JSONObject();
@@ -132,9 +80,7 @@ public class Ontology2Thing {
         object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Property"));
         addProperty("wot:interactionName", ThingJSON.pid, object, property);
         addProperty("sosa:observes", ThingJSON.observes, object, property);
-
-        addOutput(object, property);
-        addInput(object, property);
+        object.put(ThingJSON.monitors, Namespaces.valueFromPrefixed(object.getString(ThingJSON.observes)));
 
         addLinks(object, property);
 
@@ -148,24 +94,27 @@ public class Ontology2Thing {
         object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Action"));
         addProperty("wot:interactionName", ThingJSON.aid, object, action);
         addProperty("sosa:forProperty", ThingJSON.forProperty, object, action);
-
-        addOutput(object, action);
-        addInput(object, action);
+        object.put(ThingJSON.affects, Namespaces.valueFromPrefixed(object.getString(ThingJSON.forProperty)));
 
         addLinks(object, action);
 
         thing.getJSONArray(ThingJSON.actions).put(object);
     }
 
-    private void addEvent(Graph property, JSONObject thing, Graph graph) {
+    private void addEvent(Graph event, JSONObject thing, Graph graph) {
         JSONObject object = new JSONObject();
 
-        System.out.println("ADDING EVENT");
+        System.out.println("ADDING EVENT\n"+event.describe());
         object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Event"));
-        addProperty("wot:interactionName", ThingJSON.eid, object, property);
-        addProperty("sosa:observes", ThingJSON.observes, object, property);
+        addProperty("wot:interactionName", ThingJSON.eid, object, event);
+        addProperty("sosa:observes", ThingJSON.observes, object, event);
+        object.put(ThingJSON.monitors, Namespaces.valueFromPrefixed(object.getString(ThingJSON.observes)));
 
-        addOutput(object, property);
+        Graph output = event.subGraph("wot:hasOutputData");
+//        System.out.println("EVENT output:\n"+output);
+        if(output != null){
+            object.put(ThingJSON.output, new JSONObject(output.value("wot:jsonSource")));
+        }
 
         thing.getJSONArray(ThingJSON.events).put(object);
     }
@@ -194,8 +143,8 @@ public class Ontology2Thing {
         }
     }
 
-    public JSONObject toJSON(String oid)  {
-        logger.debug("getting graph for OID: "+oid);
+    public JSONObject toJSON(String oid) throws Exception {
+        logger.debug("getting graph for OID: ["+oid+"]");
 
         JSONObject thing = new JSONObject();
         thing.put(ThingJSON.properties, new JSONArray());
@@ -210,6 +159,7 @@ public class Ontology2Thing {
 
         Graph graph = repository.loadGraph(uri, contextURI);
 
+        if(graph == null) throw new Exception("Missing semantic graph for thing [oid="+oid+"]!");
         logger.debug("graph: \n"+graph.describe());
         addThingProperties(thing, graph);
         addThingInteractionPatterns(thing, graph);

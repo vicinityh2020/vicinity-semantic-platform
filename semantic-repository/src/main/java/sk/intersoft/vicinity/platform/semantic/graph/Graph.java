@@ -3,6 +3,7 @@ package sk.intersoft.vicinity.platform.semantic.graph;
 import org.eclipse.rdf4j.model.*;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.impl.TreeModel;
+import org.json.JSONObject;
 import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 
 import java.util.HashSet;
@@ -128,6 +129,8 @@ public class Graph {
     private String describe(int indent) {
         return describe(factory.createIRI(baseURI), indent);
     }
+
+
 
     @Override
     public String toString(){

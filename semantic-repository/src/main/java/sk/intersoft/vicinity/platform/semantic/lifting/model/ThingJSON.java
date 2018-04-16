@@ -24,10 +24,9 @@ public class ThingJSON {
     public static final String input = "input";
 
     // links
-    public static final String readLinks = "read_links";
-    public static final String writeLinks = "write_links";
+    public static final String readLink = "read_link";
+    public static final String writeLink = "write_link";
     public static final String href = "href";
-    public static final String mediatype = "mediatype";
 
     // property/action input/output
     public static final String units = "units";
@@ -45,5 +44,8 @@ public class ThingJSON {
 
     // event
     public static final String eid = "eid";
+
+    // original json source
+    public static final String jsonSource = "jsonSource";
 
 }

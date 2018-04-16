@@ -6,15 +6,11 @@
 		"wot": "http://iot.linkeddata.es/def/wot#",
 		"xsd": "http://www.w3.org/2001/XMLSchema#",
 		"data": "http://vicinity.eu/data#",
-		"links": {
-			"@id": "wot:isAccessibleThrough",
-			"@type": "@id"
-		},
-		"read_links": {
+		"read_link": {
 			"@id": "wot:isReadableThrough",
 			"@type": "@id"
 		},
-		"write_links": {
+		"write_link": {
 			"@id": "wot:isWritableThrough",
 			"@type": "@id"
 		},

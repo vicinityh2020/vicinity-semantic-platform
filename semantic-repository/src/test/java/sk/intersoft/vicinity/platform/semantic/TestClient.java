@@ -123,7 +123,7 @@ public class TestClient {
     }
 
     public void create(){
-        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-unikl.json";
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-thing.json";
         JSONObject json = new JSONObject(TestUtil.file2string(source));
         System.out.println("CREATE TD: \n"+json.toString(2));
         System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "td/create", json.toString()))).toString(2));

@@ -10,5 +10,4 @@ public class OntologyResource {
         return Namespaces.toURI(prefixed);
     }
 
-
 }

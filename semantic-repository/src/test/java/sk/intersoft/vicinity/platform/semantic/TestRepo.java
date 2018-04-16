@@ -86,19 +86,19 @@ public class TestRepo {
     }
 
     public void graph() throws Exception {
-        Graph g = repository.loadGraph("", "http://test.context#x");
+        Graph g = repository.loadGraph("http://vicinity.eu/data#xyz", "http://vicinity.eu/data#xyz");
         System.out.println(g.show());
         System.out.println(g.describe());
     }
 
     public void o2t() throws Exception {
         Ontology2Thing o = new Ontology2Thing();
-        System.out.println(o.toJSON("5a7394a9-317e-4726-a265-95ceaea72987"));
+        System.out.println(o.toJSON("test3").toString(2));
     }
 
     public void delete() throws Exception {
         Thing2Ontology handler = new Thing2Ontology();
-        System.out.println(handler.delete("5a7394a9-317e-4726-a265-95ceaea72987"));
+        System.out.println(handler.delete("test3"));
 
     }
 
@@ -106,8 +106,8 @@ public class TestRepo {
         TestRepo t = new TestRepo();
 //        t.query();
 //        t.graph();
-        t.o2t();
 //        t.delete();
+        t.o2t();
     }
 
 }
