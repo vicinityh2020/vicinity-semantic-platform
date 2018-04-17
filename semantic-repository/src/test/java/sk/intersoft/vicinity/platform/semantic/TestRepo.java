@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class TestRepo {
+
+
     Repository repository = Repository.getInstance();
 
     public static String file2string(String path) {
@@ -93,7 +95,8 @@ public class TestRepo {
 
     public void o2t() throws Exception {
         Ontology2Thing o = new Ontology2Thing();
-        System.out.println(o.toJSON("test3").toString(2));
+        System.out.println(o.toJSON("814fb36d-beab-40a9-b4ba-4680ae5d67e5").toString(2));
+//        System.out.println(o.toJSON("test3").toString(2));
     }
 
     public void delete() throws Exception {

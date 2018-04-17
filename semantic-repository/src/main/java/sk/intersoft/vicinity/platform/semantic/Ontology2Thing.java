@@ -46,7 +46,10 @@ public class Ontology2Thing {
                          Graph graph) {
         Graph link = graph.subGraph(property);
 
+        System.out.println("ADDING LINK ["+key+"]: "+link);
+
         if(link != null){
+            System.out.println("LINK ["+key+"]: \n"+link.describe());
             JSONObject linkJSON = new JSONObject();
 
             addProperty("wot:href", ThingJSON.href, linkJSON, link);
@@ -67,6 +70,8 @@ public class Ontology2Thing {
     }
 
     private void addLinks(JSONObject object, Graph graph) {
+        System.out.println("ADDING LINKS");
+
         addLink("wot:isReadableThrough", ThingJSON.readLink, object, graph);
         addLink("wot:isWritableThrough", ThingJSON.writeLink, object, graph);
     }
@@ -76,6 +81,8 @@ public class Ontology2Thing {
 
     private void addProperty(Graph property, JSONObject thing, Graph graph) {
         JSONObject object = new JSONObject();
+        System.out.println("ADDING PROPERTY\n"+property.describe());
+
 
         object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Property"));
         addProperty("wot:interactionName", ThingJSON.pid, object, property);
