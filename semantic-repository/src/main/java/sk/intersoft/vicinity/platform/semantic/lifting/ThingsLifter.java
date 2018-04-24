@@ -92,7 +92,7 @@ public class ThingsLifter {
     private void resolveData(JSONObject object, String key, boolean mandatory, ArrayList<String> errors) {
         JSONObject data = JSONUtil.getObject(key, object);
         if(mandatory && data == null){
-            errors.add("missing ["+data+"] in: "+object.toString());
+            errors.add("missing ["+key+"] in: "+object.toString());
         }
         else if (data != null){
             data.put(ThingJSON.jsonSource, data.toString());
