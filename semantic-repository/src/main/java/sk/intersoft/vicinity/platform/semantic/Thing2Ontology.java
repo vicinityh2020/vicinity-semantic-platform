@@ -98,6 +98,9 @@ public class Thing2Ontology {
             rdfParser.setRDFHandler(new StatementCollector(graph));
             rdfParser.parse(new StringReader(thing.toString()), "");
 
+
+            connection.begin();
+
             Iterator<Statement> i = graph.iterator();
             while(i.hasNext()) {
                 Statement st = i.next();
@@ -115,6 +118,10 @@ public class Thing2Ontology {
             }
             logger.info("THING POPULATION STUFF: DONE");
 
+            connection.commit();
+        }
+        catch(Exception e){
+            connection.rollback();
         }
         finally {
             connection.close();
