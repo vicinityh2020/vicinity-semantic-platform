@@ -69,6 +69,12 @@
             <version>${restlet.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>sk.intersoft.vicinity.repository</groupId>
+            <artifactId>utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

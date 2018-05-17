@@ -1,11 +1,11 @@
 {
     "oid": "test3",
     "name": "human reads my name here",
-    "type": "Lightbulb",
+    "type": "adapters:ActivityTracker",
     "properties": [
         {
             "pid": "brightness",
-            "monitors": "Luminance",
+            "monitors": "adapters:Luminance",
             "read_link": {
                 "href": "/device/{oid}/property/{pid}",
                 "output": {
@@ -56,7 +56,7 @@
     "actions": [
         {
             "aid": "set-brightness",
-            "affects": "Luminance",
+            "affects": "adapters:ValvePosition",
             "read_link": {
                 "href": "/device/{oid}/status/{aid}",
                 "output": {
@@ -107,7 +107,7 @@
     "events": [
         {
             "eid": "set-brightness",
-            "monitors": "Luminance",
+            "monitors": "adapters:StoredEnergy",
             "output": {
                 "type": "object",
                 "field": [

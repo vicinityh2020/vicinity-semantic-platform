@@ -9,6 +9,7 @@ import org.eclipse.rdf4j.repository.http.HTTPRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.graph.Graph;
+import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 
 public class Repository {
     HTTPRepository repository = null;
@@ -87,10 +88,12 @@ public class Repository {
             try{
                 RepositoryResult<Statement> result =
                         connection.getStatements(null, null, null, true, factory.createIRI(contextURI));
-                System.out.println("GRAPH LOADER ["+factory.createIRI(contextURI)+"] .. triples .. has next: "+result.hasNext());
+                logger.debug("GRAPH LOADER ["+factory.createIRI(contextURI)+"] .. triples .. has next: "+result.hasNext());
                 if(result.hasNext()){
                     while (result.hasNext()) {
                         Statement st = result.next();
+
+
                         graph.add(st);
                     }
                     return graph;

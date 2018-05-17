@@ -16,10 +16,12 @@ import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.lifting.ThingsLifter;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
+import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingDescription;
+import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
 import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 import sk.intersoft.vicinity.platform.semantic.ontology.OntologyResource;
 import sk.intersoft.vicinity.platform.semantic.sparql.SPARQL;
-import sk.intersoft.vicinity.platform.semantic.util.JSONUtil;
+import sk.intersoft.vicinity.platform.semantic.utils.JSONUtil;
 
 import java.io.StringReader;
 import java.util.HashSet;
@@ -54,31 +56,44 @@ public class Thing2Ontology {
     }
 
     private Set<String> getProperties()  {
-        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX : <http://iot.linkeddata.es/def/core#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX wot: <http://iot.linkeddata.es/def/wot#>" +
-                "PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn#>" +
+        String query = "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
+                "PREFIX ssn: <"+Namespaces.nsToPrefixURI(Namespaces.ssn)+"> " +
                 "select ?x where {" +
                 "?x rdf:type ssn:Property ." +
                 "}";
 
         Set<String> result = extract(query, "x");
-        logger.info("PROPS RESULT: \n"+result);
+        result.add(Namespaces.prefixed(NamespacePrefix.ssn, "Property"));
+        logger.info("PROPERTIES QUERY: \n"+query);
+        logger.info("PROPERTY INDIVIDUALS: \n" + result);
 
         return result;
     }
-    private Set<String> getTypes()  {
-        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX : <http://iot.linkeddata.es/def/core#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX wot: <http://iot.linkeddata.es/def/wot#>" +
+    private Set<String> getDeviceTypes()  {
+        String query = "PREFIX : <"+Namespaces.nsToPrefixURI(Namespaces.core)+"> " +
+                "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
                 "select ?x where {" +
                 "?x rdfs:subClassOf :Device ." +
                 "}";
 
         Set<String> result = extract(query, "x");
-        logger.info("PROPS RESULT: \n"+result);
+        result.add(Namespaces.prefixed(NamespacePrefix.core, "Device"));
+        logger.info("DEVICES QUERY: \n"+query);
+        logger.info("DEVICE TYPES: \n"+result);
+
+        return result;
+    }
+    private Set<String> getServiceTypes()  {
+        String query = "PREFIX : <"+Namespaces.nsToPrefixURI(Namespaces.core)+"> " +
+                "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
+                "select ?x where {" +
+                "?x rdfs:subClassOf :Service ." +
+                "}";
+
+        Set<String> result = extract(query, "x");
+        result.add(Namespaces.prefixed(NamespacePrefix.core, "Service"));
+        logger.info("SERVICES QUERY: \n"+query);
+        logger.info("SERVICE TYPES: \n"+result);
 
         return result;
     }
@@ -91,7 +106,7 @@ public class Thing2Ontology {
 
             logger.info("THING POPULATION STUFF:");
 
-            String contextURI = OntologyResource.thingInstanceURI(thing.getString(ThingJSON.oid));
+            String contextURI = OntologyResource.thingInstanceURI(thing.getString(ThingDescription.OID_KEY));
             logger.info("CtX: "+contextURI);
 
             TreeModel graph = new TreeModel();
@@ -105,14 +120,14 @@ public class Thing2Ontology {
             while(i.hasNext()) {
                 Statement st = i.next();
 
-                logger.debug(
-                        st.getSubject() + " " +
-                                st.getPredicate() + " "+
-                                st.getObject());
-                logger.debug(
-                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
-                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
-                                Namespaces.toPrefixed(st.getObject().stringValue()));
+//                logger.debug(
+//                        st.getSubject() + " " +
+//                                st.getPredicate() + " "+
+//                                st.getObject());
+//                logger.debug(
+//                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
+//                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
+//                                Namespaces.toPrefixed(st.getObject().stringValue()));
 
                 connection.add(st, factory.createIRI(contextURI));
             }
@@ -130,24 +145,25 @@ public class Thing2Ontology {
     }
 
     public JSONObject populate(String data)  {
-        ThingsLifter lifter = new ThingsLifter(getTypes(), getProperties());
+        ThingsLifter lifter = new ThingsLifter(getDeviceTypes(), getServiceTypes(), getProperties());
         ThingsLifterResult lifting = lifter.lift(data);
 
-        logger.info("LIFTING: "+lifting.lifting);
-        if(lifting.lifting != null){
-            logger.info(lifting.lifting.toString(2));
+        logger.info("LIFTING: "+lifting.thing);
+        if(lifting.thing != null){
+            logger.info(lifting.thing.toString(2));
         }
         logger.info("LIFTING ERRORS: "+lifting.errors.size());
         for(String error : lifting.errors) {
             logger.info("> "+error);
         }
 
-        if(lifting.lifting != null && lifting.errors.isEmpty()){
+        if(lifting.thing != null && lifting.errors.isEmpty()){
             logger.info("POPULATING!");
             try{
-                populate(lifting.lifting);
+                populate(lifting.thing);
                 Ontology2Thing generator = new Ontology2Thing();
-                JSONObject thing = generator.toJSON(lifting.lifting.getString(ThingJSON.oid));
+
+                JSONObject thing = generator.toJSON(lifting.thing.getString(ThingDescription.OID_KEY));
 
                 JSONObject out = new JSONObject();
                 out.put("lifting", thing);
@@ -155,8 +171,10 @@ public class Thing2Ontology {
 
             }
             catch(Exception e) {
+                lifting.errors.add(e.getMessage());
                 lifting.errors.add("something went ape during ontology population!");
                 logger.error("EXCEPTION", e);
+                delete(lifting.thing.getString(ThingDescription.OID_KEY));
             }
         }
         else {
@@ -177,7 +195,7 @@ public class Thing2Ontology {
 
 
 
-    public boolean delete(String oid) throws Exception {
+    public boolean delete(String oid) {
         logger.info("DELETING INSTANCE FOR: ["+oid+"]");
         String contextURI = OntologyResource.thingInstanceURI(oid);
         logger.info("CONTEXT URI: ["+contextURI+"]");

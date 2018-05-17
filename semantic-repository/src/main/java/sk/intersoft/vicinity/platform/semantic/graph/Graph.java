@@ -90,6 +90,21 @@ public class Graph {
     }
 
     private String describe(Value base, int indent) {
+//        System.out.println("DESCRIBE ["+baseURI+"]: "+base);
+//        System.out.println("model dump: "+model.size());
+//        Iterator<Statement> mi = model.iterator();
+//        while(mi.hasNext()){
+//            Statement st = mi.next();
+//            System.out.println(
+////                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
+////                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
+////                                Namespaces.toPrefixed(st.getObject().stringValue()));
+//            st.getSubject().stringValue() + " " +
+//                    st.getPredicate().stringValue() + " "+
+//                    st.getObject().stringValue());
+//
+//        }
+
         String out = "";
         if(base instanceof Resource){
             IRI baseURI = factory.createIRI(base.stringValue());
@@ -98,6 +113,7 @@ public class Graph {
             Iterator<Statement> i = model.filter((Resource)base, null, null).iterator();
             while(i.hasNext()){
                 Statement s = i.next();
+                System.out.println(s);
                 Value obj = s.getObject();
                 String value = obj.stringValue();
                 if(obj instanceof Resource) {
@@ -127,6 +143,7 @@ public class Graph {
     }
 
     private String describe(int indent) {
+
         return describe(factory.createIRI(baseURI), indent);
     }
 

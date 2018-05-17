@@ -24,10 +24,12 @@
         <processorPath useClasspath="true" />
         <module name="semantic-repository" />
         <module name="test" />
+        <module name="utils" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="semantic-repository" target="1.8" />
+      <module name="utils" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

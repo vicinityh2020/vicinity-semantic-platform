@@ -26,7 +26,7 @@ public class TestThing2Ontology {
     public void testDelete() {
         try{
 
-            String uuid = "test";
+            String uuid = "test3";
             System.out.println("DELETE: "+uuid);
 
             Thing2Ontology handler = new Thing2Ontology();
@@ -41,10 +41,29 @@ public class TestThing2Ontology {
         }
     }
 
+    public void o2t() {
+        try{
+
+            String oid = "test3";
+            System.out.println("O2T: "+oid);
+
+            Ontology2Thing handler = new Ontology2Thing();
+            JSONObject result = handler.toJSON(oid);
+
+            System.out.println("RESULT: "+result);
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
 
     public static void main(String[] args) throws  Exception {
         TestThing2Ontology t = new TestThing2Ontology();
-        t.populate();
+//        t.populate();
+//        t.o2t();
 //        t.testDelete();
     }
 }

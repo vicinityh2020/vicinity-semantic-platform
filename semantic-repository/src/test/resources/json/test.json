@@ -4,7 +4,7 @@
 	"pfe": "hua",
 	"infrastructure-id": "bulb1",
 	"properties": [{
-		"pidx": "consumption",
+		"pid": "consumption",
 		"monitors": "MinCO2Concentration",
 		"writable": "false",
 		"output": {

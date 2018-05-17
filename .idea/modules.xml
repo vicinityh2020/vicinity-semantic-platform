@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/semantic-repository/semantic-repository.iml" filepath="$PROJECT_DIR$/semantic-repository/semantic-repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/vicinity-semantic-platform.iml" filepath="$PROJECT_DIR$/vicinity-semantic-platform.iml" />
     </modules>
   </component>

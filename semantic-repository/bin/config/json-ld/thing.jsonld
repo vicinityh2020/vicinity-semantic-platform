@@ -1,11 +1,13 @@
 {
 	"@context": {
 		"@vocab": "http://iot.linkeddata.es/def/wot#",
-		"core": "http://iot.linkeddata.es/def/core#",
-		"sosa": "http://www.w3.org/ns/sosa/",
 		"wot": "http://iot.linkeddata.es/def/wot#",
+		"core": "http://iot.linkeddata.es/def/core#",
+		"thing": "http://vicinity.eu/data/things/",
+		"adapters": "http://iot.linkeddata.es/def/adapters#",
+		"ssn": "http://www.w3.org/ns/ssn/",
+		"sosa": "http://www.w3.org/ns/sosa/",
 		"xsd": "http://www.w3.org/2001/XMLSchema#",
-		"data": "http://vicinity.eu/data#",
 		"read_link": {
 			"@id": "wot:isReadableThrough",
 			"@type": "@id"

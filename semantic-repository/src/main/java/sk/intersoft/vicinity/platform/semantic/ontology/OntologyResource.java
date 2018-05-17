@@ -2,7 +2,7 @@ package sk.intersoft.vicinity.platform.semantic.ontology;
 
 public class OntologyResource {
     public static String thingInstancePrefixed(String oid) {
-        return Namespaces.prefixed(NamespacePrefix.data, oid);
+        return Namespaces.prefixed(NamespacePrefix.thing, oid);
     }
 
     public static String thingInstanceURI(String oid) {

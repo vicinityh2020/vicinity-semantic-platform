@@ -6,12 +6,14 @@ import java.util.*;
 
 public class Namespaces {
     public static final String vicinity = "http://vicinity.eu";
-    public static final String data = vicinity+"/data";
+    public static final String thing = vicinity+"/data/things/";
 
     public static final String core = "http://iot.linkeddata.es/def/core";
     public static final String wot = "http://iot.linkeddata.es/def/wot";
+    public static final String adapters = "http://iot.linkeddata.es/def/adapters";
+
     public static final String sosa = "http://www.w3.org/ns/sosa/";
-    public static final String ssn = "http://purl.oclc.org/NET/ssnx/ssn";
+    public static final String ssn = "http://www.w3.org/ns/ssn/";
 
     public static final String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns";
     public static final String rdfs = "http://www.w3.org/2000/01/rdf-schema";
@@ -25,14 +27,24 @@ public class Namespaces {
 
                 put(NamespacePrefix.core, core);
                 put(NamespacePrefix.wot, wot);
+                put(NamespacePrefix.adapters, adapters);
+
+                put(NamespacePrefix.thing, thing);
+
                 put(NamespacePrefix.sosa, sosa);
                 put(NamespacePrefix.ssn, ssn);
-                put(NamespacePrefix.data, data);
             }});
+
+
+    public static String nsToPrefixURI(String uri) {
+        if(uri.endsWith("/")) return uri;
+        else return uri + "#";
+    }
 
     public static String prefixed(String prefix, String value) {
         return prefix + ":" + value;
     }
+
 
     public static String toURI(String prefixed) {
         String[] parts = prefixed.split(":");
@@ -43,12 +55,7 @@ public class Namespaces {
 
             String base = uriMapping.get(prefix);
             if(base != null){
-                if(base.endsWith("/")){
-                    return base+value;
-                }
-                else {
-                    return base+"#"+value;
-                }
+                return nsToPrefixURI(base)+value;
             }
         }
         return prefixed;
