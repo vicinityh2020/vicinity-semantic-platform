@@ -62,7 +62,7 @@ public class TestThing2Ontology {
 
     public static void main(String[] args) throws  Exception {
         TestThing2Ontology t = new TestThing2Ontology();
-//        t.populate();
+        t.populate();
 //        t.o2t();
 //        t.testDelete();
     }

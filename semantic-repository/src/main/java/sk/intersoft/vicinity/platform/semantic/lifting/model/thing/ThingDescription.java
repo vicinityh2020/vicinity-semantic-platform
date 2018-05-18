@@ -16,9 +16,10 @@ public class ThingDescription {
 
     public String oid = null;
     public String infrastructureId = null;
-    public String name = null;
     public String adapterId = null;
-    public String agentId = null;
+    public String adapterInfrastructureID = null;
+
+    public String name = null;
     public String password = null;
     public String type;
 
@@ -31,6 +32,7 @@ public class ThingDescription {
 
     // JSON keys
     public static String OID_KEY = "oid";
+    public static String ADAPTER_ID_KEY = "adapter-id";
     public static String NAME_KEY = "name";
     public static String TYPE_KEY = "type";
     public static String PROPERTIES_KEY = "properties";
@@ -52,6 +54,9 @@ public class ThingDescription {
 
             thing.oid = JSONUtil.getString(OID_KEY, thingJSON);
             if(thing.oid == null) fail = validator.error("Missing thing [oid].");
+
+            thing.adapterId = JSONUtil.getString(ADAPTER_ID_KEY, thingJSON);
+            if(thing.adapterId == null) fail = validator.error("Missing thing [adapter-id].");
 
             thing.type = JSONUtil.getString(TYPE_KEY, thingJSON);
             if(thing.type == null) fail = validator.error("Missing thing [type].");
@@ -98,7 +103,6 @@ public class ThingDescription {
             }
         }
         catch(Exception e) {
-            logger.error("", e);
             validator.error("Unable to process thing: "+validator.identify(thing.oid, thingJSON));
             return null;
         }
@@ -127,6 +131,7 @@ public class ThingDescription {
 
         object.put(OID_KEY, thing.oid);
         object.put(TYPE_KEY, thing.type);
+        object.put(ADAPTER_ID_KEY, thing.adapterId);
         object.put(NAME_KEY, thing.name);
 
         for (Map.Entry<String, InteractionPattern> entry : thing.properties.entrySet()) {
@@ -152,12 +157,10 @@ public class ThingDescription {
 
         dump.add("THING :", indent);
         dump.add("oid: "+oid, (indent + 1));
+        dump.add("adapter-id: "+adapterId, (indent + 1));
         dump.add("type: "+type, (indent + 1));
         dump.add("name: "+name, (indent + 1));
-        dump.add("agent-id: "+ agentId, (indent + 1));
-        dump.add("adapter-id: "+ adapterId, (indent + 1));
         dump.add("password: "+password, (indent + 1));
-        dump.add("credentials: ", (indent + 1));
         dump.add("PROPERTIES: "+properties.size(), (indent + 1));
         for (Map.Entry<String, InteractionPattern> entry : properties.entrySet()) {
             String id = entry.getKey();
@@ -189,6 +192,6 @@ public class ThingDescription {
     }
 
     public String toSimpleString(){
-        return "THING : [OID: "+oid+"][INFRA-ID: "+ infrastructureId +"][PWD: "+password+"] ";
+        return "THING : [OID: "+oid+"][INFRA-ID: "+ infrastructureId +"][ADAPTER-INFRA-ID: "+adapterInfrastructureID+"][PWD: "+password+"] ";
     }
 }

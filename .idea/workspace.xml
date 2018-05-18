@@ -2,36 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4f95401-083a-41c8-9082-1aa8f02f1945" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/DataSchema.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/DataSchemaField.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/src/main/java/sk/intersoft/vicinity/platform/semantic/utils/Dump.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/InteractionPattern.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/InteractionPatternEndpoint.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingValidator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/utils.iml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/util/JSONUtil.java" afterPath="$PROJECT_DIR$/utils/src/main/java/sk/intersoft/vicinity/platform/semantic/utils/JSONUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/NamespacePrefix.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/NamespacePrefix.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/Namespaces.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/Namespaces.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Ontology2Thing.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Ontology2Thing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/OntologyResource.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/OntologyResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestThing2Ontology.java" afterPath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestThing2Ontology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/ThingJSON.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/ThingJSON.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/ThingsLifter.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/ThingsLifter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/ThingsLifterResult.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/ThingsLifterResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json" afterPath="$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/pom.xml" afterPath="$PROJECT_DIR$/semantic-repository/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/semantic-repository.iml" afterPath="$PROJECT_DIR$/semantic-repository/semantic-repository.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/src/test/resources/json/test.json" afterPath="$PROJECT_DIR$/semantic-repository/src/test/resources/json/test.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/bin/config/json-ld/thing.jsonld" afterPath="$PROJECT_DIR$/semantic-repository/bin/config/json-ld/thing.jsonld" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vicinity-semantic-platform.iws" />
@@ -58,11 +32,9 @@
       <file leaf-file-name="Ontology2Thing.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Ontology2Thing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4038" max-vertical-offset="4884">
-              <caret line="192" column="22" selection-start-line="192" selection-start-column="22" selection-end-line="192" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="3605" max-vertical-offset="4708">
+              <caret line="186" column="50" selection-start-line="186" selection-start-column="50" selection-end-line="186" selection-end-column="50" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -70,9 +42,21 @@
       <file leaf-file-name="example-thing.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1650" max-vertical-offset="2992">
-              <caret line="108" column="16" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3014">
+              <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThingDescription.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7712177" vertical-offset="2860" max-vertical-offset="4466">
+              <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,18 +66,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="2058" max-vertical-offset="3894">
               <caret line="111" column="46" selection-start-line="111" selection-start-column="46" selection-end-line="111" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ThingJSON.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/ThingJSON.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="396">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -102,8 +74,8 @@
       <file leaf-file-name="TestThing2Ontology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestThing2Ontology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="958" max-vertical-offset="1650">
-              <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1650">
+              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -112,11 +84,9 @@
       <file leaf-file-name="Thing2Ontology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.555555" vertical-offset="3452" max-vertical-offset="5126">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3452" max-vertical-offset="5126">
               <caret line="176" column="71" selection-start-line="176" selection-start-column="71" selection-end-line="176" selection-end-column="71" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -124,7 +94,7 @@
       <file leaf-file-name="Thing2OntologyResource.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/Thing2OntologyResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="74" max-vertical-offset="638">
+            <state vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="814">
               <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
               <folding />
             </state>
@@ -134,7 +104,7 @@
       <file leaf-file-name="SPARQLResource.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/SPARQLResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="770">
+            <state vertical-scroll-proportion="0.0" vertical-offset="264" max-vertical-offset="946">
               <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
               <folding />
             </state>
@@ -144,17 +114,17 @@
       <file leaf-file-name="ServiceResponse.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/ServiceResponse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="461" max-vertical-offset="1034">
+            <state vertical-scroll-proportion="0.0" vertical-offset="704" max-vertical-offset="1100">
               <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RemoveThingFromOntologyResource.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RemoveThingFromOntologyResource.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/RemoveThingFromOntologyResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6642984" vertical-offset="0" max-vertical-offset="660">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
               <caret line="23" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
@@ -203,7 +173,6 @@
         <option value="$PROJECT_DIR$/utils/src/main/java/JSONUtil.java" />
         <option value="$PROJECT_DIR$/semantic-repository/pom.xml" />
         <option value="$PROJECT_DIR$/utils/src/main/java/sk/intersoft/vicinity/platform/semantic/utils/JSONUtil.java" />
-        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/ThingsLifterBackup.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/ThingsLifterResult.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingValidator.java" />
@@ -215,7 +184,6 @@
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/NamespacePrefix.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/InteractionPatternEndpoint.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/Namespaces.java" />
-        <option value="$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java" />
         <option value="$PROJECT_DIR$/semantic-repository/bin/build/config/json-ld/thing.jsonld" />
         <option value="$PROJECT_DIR$/semantic-repository/bin/config/json-ld/thing.jsonld" />
@@ -223,8 +191,10 @@
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/ThingJSON.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/ThingsLifter.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java" />
-        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Ontology2Thing.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestThing2Ontology.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Ontology2Thing.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java" />
       </list>
     </option>
   </component>
@@ -320,7 +290,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -1077,8 +1047,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1130,11 +1100,11 @@
       <recent name="$PROJECT_DIR$/semantic-repository/src/test/resources/json-ld" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sk.intersoft.vicinity.platform.semantic.lifting.model.thing" />
       <recent name="sk.intersoft.vicinity.platform.semantic.lifting" />
       <recent name="sk.intersoft.vicinity.platform.semantic.utils" />
       <recent name="sk.intersoft.vicinity.platform.semantic" />
       <recent name="sk.intersoft.vicinity.platform.semantic.config" />
-      <recent name="sk.intersoft.vicinity.platform.semantic.service" />
     </key>
   </component>
   <component name="RunManager" selected="Application.TestThing2Ontology">
@@ -1474,14 +1444,18 @@
       <created>1526543895945</created>
       <updated>1526543895945</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="complete refactoring of ontology population and ontology2thing serializers .. using agent model to be completely consistent .. all checks included!">
+      <created>1526566055447</created>
+      <updated>1526566055447</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="35" width="1920" height="1045" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32939914" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32832617" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1489,13 +1463,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18235295" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18395722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33261803" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919786" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32725322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39914164" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1504,6 +1477,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32725322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -1540,7 +1514,8 @@
     <MESSAGE value="updated thing json-ld" />
     <MESSAGE value="small bug in error messsage" />
     <MESSAGE value="added transaction when populating thing to drastically speed it up" />
-    <option name="LAST_COMMIT_MESSAGE" value="added transaction when populating thing to drastically speed it up" />
+    <MESSAGE value="complete refactoring of ontology population and ontology2thing serializers .. using agent model to be completely consistent .. all checks included!" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete refactoring of ontology population and ontology2thing serializers .. using agent model to be completely consistent .. all checks included!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1550,6 +1525,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/RemoveThingFromOntologyResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="660">
+          <caret line="23" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/rdf4j/rdf4j-queryresultio-sparqljson/2.2.2/rdf4j-queryresultio-sparqljson-2.2.2.jar!/org/eclipse/rdf4j/query/resultio/sparqljson/SPARQLResultsJSONWriter.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.029069768" vertical-offset="0" max-vertical-offset="516">
@@ -1696,7 +1679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="264" max-vertical-offset="1260">
           <caret line="37" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1746,7 +1728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.07678883" vertical-offset="0" max-vertical-offset="1254">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1754,7 +1735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="462">
           <caret line="10" column="51" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1791,10 +1771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="418">
           <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding>
-            <element signature="e#150#151#0" expanded="true" />
-            <element signature="e#220#221#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1802,7 +1778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1464" max-vertical-offset="2420">
           <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1810,7 +1785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1914">
           <caret line="7" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1826,10 +1800,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1618" max-vertical-offset="3542">
           <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-          <folding>
-            <element signature="e#4847#4848#0" expanded="true" />
-            <element signature="e#4909#4910#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1845,15 +1815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="65" max-vertical-offset="682">
           <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="4202">
-          <caret line="86" column="76" selection-start-line="86" selection-start-column="76" selection-end-line="86" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1877,44 +1838,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2058" max-vertical-offset="3894">
           <caret line="111" column="46" selection-start-line="111" selection-start-column="46" selection-end-line="111" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.555555" vertical-offset="3452" max-vertical-offset="5126">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3452" max-vertical-offset="5126">
           <caret line="176" column="71" selection-start-line="176" selection-start-column="71" selection-end-line="176" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2109" max-vertical-offset="2992">
-          <caret line="108" column="16" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Ontology2Thing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4038" max-vertical-offset="4884">
-          <caret line="192" column="22" selection-start-line="192" selection-start-column="22" selection-end-line="192" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestThing2Ontology.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="958" max-vertical-offset="1650">
-          <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1945,9 +1876,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/RemoveThingFromOntologyResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6642984" vertical-offset="0" max-vertical-offset="660">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
           <caret line="23" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Ontology2Thing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3605" max-vertical-offset="4708">
+          <caret line="186" column="50" selection-start-line="186" selection-start-column="50" selection-end-line="186" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestThing2Ontology.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1650">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3014">
+          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7712177" vertical-offset="2860" max-vertical-offset="4466">
+          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
