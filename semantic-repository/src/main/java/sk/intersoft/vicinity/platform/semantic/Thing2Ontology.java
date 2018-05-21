@@ -69,7 +69,7 @@ public class Thing2Ontology {
 
         return result;
     }
-    private Set<String> getDeviceTypes()  {
+    public Set<String> getDeviceTypes()  {
         String query = "PREFIX : <"+Namespaces.nsToPrefixURI(Namespaces.core)+"> " +
                 "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
                 "select ?x where {" +
@@ -83,7 +83,7 @@ public class Thing2Ontology {
 
         return result;
     }
-    private Set<String> getServiceTypes()  {
+    public Set<String> getServiceTypes()  {
         String query = "PREFIX : <"+Namespaces.nsToPrefixURI(Namespaces.core)+"> " +
                 "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
                 "select ?x where {" +
