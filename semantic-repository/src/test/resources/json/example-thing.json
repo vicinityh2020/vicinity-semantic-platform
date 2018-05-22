@@ -1,14 +1,14 @@
 {
     "oid": "test3",
     "adapter-id": "test3adapter",
-    "name": "human reads my name herex",
+    "name": "human reads my name herex xxl",
     "type": "adapters:ActivityTracker",
     "properties": [
         {
             "pid": "brightness",
             "monitors": "adapters:Luminance",
             "read_link": {
-                "href": "/device/{oid}/property/{pid}",
+                "href": "/device/{oid}/property/{pid}/updated",
                 "output": {
                     "type": "object",
                     "field": [

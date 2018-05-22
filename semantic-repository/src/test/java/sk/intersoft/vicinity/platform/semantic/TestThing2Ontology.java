@@ -5,14 +5,21 @@ import org.json.JSONObject;
 public class TestThing2Ontology {
     String jsonPath = "/semantic-repository/src/test/resources/json/";
 
-    public void populate() {
+    public void populate(boolean create) {
         try{
             String json = TestUtil.file2string(TestUtil.path(jsonPath+"example-thing.json"));
 
             System.out.println("INPUT: \n"+json);
+            System.out.println("CREATE: "+create);
 
             Thing2Ontology handler = new Thing2Ontology();
-            JSONObject result = handler.populate(json);
+            JSONObject result;
+            if(create){
+                result = handler.create(json);
+            }
+            else{
+                result = handler.update(json);
+            }
 
             System.out.println("RESULT: \n"+result.toString(2));
 
@@ -62,7 +69,8 @@ public class TestThing2Ontology {
 
     public static void main(String[] args) throws  Exception {
         TestThing2Ontology t = new TestThing2Ontology();
-        t.populate();
+//        t.populate(true);
+        t.populate(false);
 //        t.o2t();
 //        t.testDelete();
     }

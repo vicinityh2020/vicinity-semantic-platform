@@ -144,7 +144,7 @@ public class Thing2Ontology {
 
     }
 
-    public JSONObject populate(String data)  {
+    public JSONObject populate(String data, boolean updateContent)  {
         ThingsLifter lifter = new ThingsLifter(getDeviceTypes(), getServiceTypes(), getProperties());
         ThingsLifterResult lifting = lifter.lift(data);
 
@@ -158,6 +158,18 @@ public class Thing2Ontology {
         }
 
         if(lifting.thing != null && lifting.errors.isEmpty()){
+            if(updateContent){
+                logger.info("UPDATING CONTENT .. DELETE FIRST");
+                String oid = lifting.thing.getString(ThingDescription.OID_KEY);
+                if(oid != null){
+                    delete(oid);
+                }
+                else{
+                    logger.info("UNABLE TO DELETE THING WITH UNKNOWN OID!");
+                }
+
+
+            }
             logger.info("POPULATING!");
             try{
                 populate(lifting.thing);
@@ -183,6 +195,15 @@ public class Thing2Ontology {
         }
 
         return lifting.failure();
+    }
+
+
+    public JSONObject create(String data)  {
+        return populate(data, false);
+    }
+
+    public JSONObject update(String data)  {
+        return populate(data, true);
     }
 
     public boolean contextExists(String contextURI, RepositoryConnection connection) throws Exception {
