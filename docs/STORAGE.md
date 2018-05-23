@@ -15,11 +15,11 @@ implements the RDF4J API.
 
 In VICINITY, the [GraphDB](http://graphdb.ontotext.com/documentation/free/)
 semantic database is currently used. Reasons why we used the GraphDB:
-* It is the state of art semantic database, implementing the most of the W3C standards.
+* It is the state of art semantic database, implementing the quantum of necessary the W3C standards.
 * It natively contains the configurable reasoning mechanisms, enabling rich semantic search in stored
 semantic data. Reasoning mechanism can be configured for custom semantic ruleset,
 specifying the expressivity of the semantic language, the more expressive, the
- more query capabilities (e.g. OWL-Lite, OWL-Horst, OWL-Full, RDFS, etc.).
+ more query capabilities it provides (e.g. RDFS, OWL-Lite, OWL-Horst, OWL-Full, etc.).
 * Nowadays it is one of the most scalable and the most fast triplestores available.
 It is able to handle literally the billions of statements in real time (for CRUD and querying).
 * It comes with intuitive workbench making the life of developer really easier.
@@ -28,4 +28,7 @@ It is able to handle literally the billions of statements in real time (for CRUD
  functionality (i was using it as the prototype in different project).
  This reason is not sentimental, this reason is common sense, because
  I know, that this guys are bloody professionals in semantics.
- So simply said, i don't know anything better available than GraphDB!
+ So simply said, i don't know anything better available than GraphDB today!
+
+GraphDB may run as the standalone server or can be bundled in the application.
+

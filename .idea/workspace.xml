@@ -4,6 +4,7 @@
     <list default="true" id="c4f95401-083a-41c8-9082-1aa8f02f1945" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/STORAGE.md" afterPath="$PROJECT_DIR$/docs/STORAGE.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh" afterPath="$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vicinity-semantic-platform.iws" />
@@ -27,16 +28,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ThingDescription.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/ThingDescription.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1012" max-vertical-offset="5038">
-              <caret line="46" column="27" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="example-thing.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -97,21 +88,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7667844" vertical-offset="688" max-vertical-offset="1254">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="STORAGE.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="semantic-repository.sh" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1804">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="STORAGE.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/STORAGE.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6219081" vertical-offset="0" max-vertical-offset="566">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="226" max-vertical-offset="880">
+              <caret line="32" column="78" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -180,7 +181,6 @@
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/DataSchemaField.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/InteractionPattern.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing/InteractionPatternEndpoint.java" />
-        <option value="$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/SemanticRepositoryApplication.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/AnnotationsResource.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/Thing2OntologyResource.java" />
@@ -189,8 +189,9 @@
         <option value="$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-thing.json" />
         <option value="$PROJECT_DIR$/RAEDME.md" />
         <option value="$PROJECT_DIR$/docs/SERVICES.md" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/docs/STORAGE.md" />
+        <option value="$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -1364,14 +1365,26 @@
       <created>1527058298182</created>
       <updated>1527058298182</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="updating docs">
+      <created>1527059147227</created>
+      <updated>1527059147227</updated>
+    </task>
+    <task id="LOCAL-00024" summary="updating docs">
+      <created>1527059613606</created>
+      <updated>1527059613606</updated>
+    </task>
+    <task id="LOCAL-00025" summary="updating docs">
+      <created>1527059826268</created>
+      <updated>1527059826268</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="35" width="1920" height="1045" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32618025" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32618025" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1694,13 +1707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1804">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/semantic-repository/bin/build4deployment.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="748">
@@ -1803,18 +1809,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/docs/STORAGE.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="226" max-vertical-offset="880">
+          <caret line="32" column="78" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/STORAGE.md">
+    <entry file="file://$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6219081" vertical-offset="0" max-vertical-offset="566">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1804">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7667844" vertical-offset="688" max-vertical-offset="1254">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding />
         </state>
       </provider>
