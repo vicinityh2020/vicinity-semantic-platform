@@ -27,8 +27,9 @@ semantic-repository.sh
 ```
 
 * **config/json-ld/thing.jsonld** is the JSON-LD document used to automatically
-translate IoT object description formalized in JSON into semantic representation
-(see documentation on VICINITY Agent)
+translate IoT object description formalized in JSON (see documentation on VICINITY Agent)
+into semantic representation. See [semantic services](docs/SERVICES.md) for more information on this transformation.
+
 * **semantic-repository.sh** - guess what!
 
 To run it, just execute script:
