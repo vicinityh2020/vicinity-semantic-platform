@@ -24,6 +24,11 @@ Using separate named graph enables to retrieve whole bunch of triples representi
 This triples are loaded into the graph, which enables to easily access
 all parts of semantic representation.
 
+Once JSON is translated into triples, all inferences provided by VICINITY ontology
+are available, so the individual semantic description takes the full advance of the whole
+semantic model (inheritance, transitivity, (a)symetricity, whatever is provided by
+ontology).
+
 ### Validation
 
 The part of IoT object population is the strong validation, consisting of:
