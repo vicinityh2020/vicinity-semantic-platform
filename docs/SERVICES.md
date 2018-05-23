@@ -33,6 +33,18 @@ The part of IoT object population is the strong validation, consisting of:
 If validation fails, it responds with the list of all errors in human readable form, so
 developers may adjust their thing description content.
 
+### Serialization
+
+IoT objects are transformed back to JSON representation in VICINITY Common Thing Description.
+It is used each time any component requires the description ot IoT object. The object
+is found in semantic model, and translated from triples into JSON.
+
+Serialization into JSON is performed as the sequence of graph operations on semantic
+model, where each part of relevant subgraphs are programatically translated into
+JSON construct. This transformation, unfortunately, can not be fully automatic
+(in declarative way), because there is couple of logical rules for constructing
+some parts of JSON objects.
+
 
 ### Population API
 
@@ -47,6 +59,9 @@ POST: /td/create
 payload is the the JSON object containing the Thing Description in VICINITY Common
 Thing Description format.
 
+Response is the created IoT object translated from its semantic model back into
+JSON in VICINITY Common Thing Description format
+
 #### Update:
 
 The whole content for individual representing the IoT object is relpaced by new one.
@@ -57,6 +72,9 @@ PUT: /td/create
 
 payload is the the JSON object containing the Thing Description in VICINITY Common
 Thing Description format.
+
+Response is the created IoT object translated from its semantic model back into
+JSON in VICINITY Common Thing Description format
 
 
 #### Delete:
