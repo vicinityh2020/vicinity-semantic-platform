@@ -15,10 +15,13 @@ implements the RDF4J API.
 
 In VICINITY, the [GraphDB](http://graphdb.ontotext.com/documentation/free/)
 semantic database is currently used. Reasons why we used the GraphDB:
-* It is the state of art semantic database, implementing the most of the W3C standards and
-its native part is the reasoning mechanisms, enabling rich semantic search in stored
-semantic data.
+* It is the state of art semantic database, implementing the most of the W3C standards.
+* It natively contains the configurable reasoning mechanisms, enabling rich semantic search in stored
+semantic data. Reasoning mechanism can be configured for custom semantic ruleset,
+specifying the expressivity of the semantic language, the more expressive, the
+ more query capabilities (e.g. OWL-Lite, OWL-Horst, OWL-Full, RDFS, etc.).
 * Nowadays it is one of the most scalable and the most fast triplestores available.
+It is able to handle literally the billions of statements in real time (for CRUD and querying).
 * It comes with intuitive workbench making the life of developer really easier.
 * I had a chance to be in contact with GraphDB developers,
  when GraphDB was in quite early development stage (known as OWLIM that time) and I've tested its
