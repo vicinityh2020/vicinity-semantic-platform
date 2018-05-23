@@ -39,6 +39,11 @@ To run it, just execute script:
 ./semantic-repository.sh
 ```
 
+Semantic repository services are available at endpoint:
+
+```
+http://host:PORT/semantic-repository/
+```
 
 ## Configuration
 
