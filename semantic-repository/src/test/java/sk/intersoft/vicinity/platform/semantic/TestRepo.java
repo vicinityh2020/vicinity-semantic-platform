@@ -95,7 +95,7 @@ public class TestRepo {
 
     public void o2t() throws Exception {
         Ontology2Thing o = new Ontology2Thing();
-        System.out.println(o.toJSON("814fb36d-beab-40a9-b4ba-4680ae5d67e5").toString(2));
+        System.out.println(o.toJSON(o.toThing("814fb36d-beab-40a9-b4ba-4680ae5d67e5")).toString(2));
 //        System.out.println(o.toJSON("test3").toString(2));
     }
 

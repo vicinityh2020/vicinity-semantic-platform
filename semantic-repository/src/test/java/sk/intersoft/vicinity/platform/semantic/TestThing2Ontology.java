@@ -55,7 +55,7 @@ public class TestThing2Ontology {
             System.out.println("O2T: "+oid);
 
             Ontology2Thing handler = new Ontology2Thing();
-            JSONObject result = handler.toJSON(oid);
+            JSONObject result = handler.toJSON(handler.toThing(oid));
 
             System.out.println("RESULT: "+result);
 

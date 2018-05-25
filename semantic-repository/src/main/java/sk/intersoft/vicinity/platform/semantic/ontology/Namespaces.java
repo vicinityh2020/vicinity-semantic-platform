@@ -7,10 +7,12 @@ import java.util.*;
 public class Namespaces {
     public static final String vicinity = "http://vicinity.eu";
     public static final String thing = vicinity+"/data/things/";
+    public static final String thingDescription = vicinity+"/data/descriptions/";
 
     public static final String core = "http://iot.linkeddata.es/def/core";
     public static final String wot = "http://iot.linkeddata.es/def/wot";
     public static final String adapters = "http://iot.linkeddata.es/def/adapters";
+    public static final String mappings = "http://iot.linkeddata.es/def/wot-mappings";
 
     public static final String sosa = "http://www.w3.org/ns/sosa/";
     public static final String ssn = "http://www.w3.org/ns/ssn/";
@@ -28,8 +30,10 @@ public class Namespaces {
                 put(NamespacePrefix.core, core);
                 put(NamespacePrefix.wot, wot);
                 put(NamespacePrefix.adapters, adapters);
+                put(NamespacePrefix.mappings, mappings);
 
                 put(NamespacePrefix.thing, thing);
+                put(NamespacePrefix.thingDescription, thingDescription);
 
                 put(NamespacePrefix.sosa, sosa);
                 put(NamespacePrefix.ssn, ssn);

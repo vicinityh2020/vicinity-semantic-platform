@@ -10,4 +10,10 @@ public class OntologyResource {
         return Namespaces.toURI(prefixed);
     }
 
+    public static String thingDescriptionURI(String id) {
+        return Namespaces.toURI(
+                        Namespaces.prefixed(
+                                NamespacePrefix.thingDescription,
+                                id));
+    }
 }

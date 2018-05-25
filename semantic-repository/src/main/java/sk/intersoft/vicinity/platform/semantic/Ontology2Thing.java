@@ -15,43 +15,8 @@ public class Ontology2Thing {
     Repository repository = Repository.getInstance();
     final static Logger logger = LoggerFactory.getLogger(Ontology2Thing.class.getName());
 
-//
-//
-//
-//
-//
-//
-//    private void addAction(Graph action, JSONObject thing, Graph graph) {
-//        JSONObject object = new JSONObject();
-//
-//        object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Action"));
-//        addProperty("wot:interactionName", ThingJSON.aid, object, action);
-//        addProperty("sosa:forProperty", ThingJSON.forProperty, object, action);
-//        object.put(ThingJSON.affects, Namespaces.valueFromPrefixed(object.getString(ThingJSON.forProperty)));
-//
-//        addLinks(object, action);
-//
-//        thing.getJSONArray(ThingJSON.actions).put(object);
-//    }
-//
-//    private void addEvent(Graph event, JSONObject thing, Graph graph) {
-//        JSONObject object = new JSONObject();
-//
-//        System.out.println("ADDING EVENT\n"+event.describe());
-//        object.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Event"));
-//        addProperty("wot:interactionName", ThingJSON.eid, object, event);
-//        addProperty("sosa:observes", ThingJSON.observes, object, event);
-//        object.put(ThingJSON.monitors, Namespaces.valueFromPrefixed(object.getString(ThingJSON.observes)));
-//
-//        Graph output = event.subGraph("wot:hasOutputData");
-////        System.out.println("EVENT output:\n"+output);
-//        if(output != null){
-//            object.put(ThingJSON.output, new JSONObject(output.value("wot:jsonSource")));
-//        }
-//
-//        thing.getJSONArray(ThingJSON.events).put(object);
-//    }
-//
+    public static final String URI_KEY = "uri";
+
     private String getValue(String graphProperty,
                             Graph graph) throws Exception  {
         String value = graph.value(graphProperty);
@@ -61,35 +26,6 @@ public class Ontology2Thing {
         else throw new Exception("graph property ["+graphProperty+"] not found!");
     }
 
-    //    private void addLink(String property,
-//                         String key,
-//                         JSONObject object,
-//                         Graph graph) {
-//        Graph link = graph.subGraph(property);
-//
-//        System.out.println("ADDING LINK ["+key+"]: "+link);
-//
-//        if(link != null){
-//            System.out.println("LINK ["+key+"]: \n"+link.describe());
-//            JSONObject linkJSON = new JSONObject();
-//
-//            addProperty("wot:href", ThingJSON.href, linkJSON, link);
-//            Graph output = link.subGraph("wot:hasOutputData");
-//            if(output != null) {
-//                linkJSON.put(ThingJSON.output, new JSONObject(output.value("wot:jsonSource")));
-//            }
-//
-//            Graph input = link.subGraph("wot:hasInputData");
-//            if(input != null) {
-//                linkJSON.put(ThingJSON.input, new JSONObject(input.value("wot:jsonSource")));
-//            }
-//
-//            object.put(key, linkJSON);
-//        }
-//
-//
-//    }
-//
     private DataSchema addDataSchema(String key, Graph graph) throws Exception {
         String content = getValue("wot:"+key, graph);
         return DataSchema.create(new JSONObject(content), new ThingValidator(true));
@@ -128,6 +64,7 @@ public class Ontology2Thing {
         pattern.id = getValue("wot:interactionName", graph);
         pattern.refersTo = getValue("sosa:observes", graph);
 
+        pattern.jsonExtension.put(URI_KEY, graph.baseURI);
         addLinks(pattern, graph);
 
         return pattern;
@@ -191,7 +128,7 @@ public class Ontology2Thing {
 
 
 
-    public JSONObject toJSON(String oid) throws Exception {
+    public ThingDescription toThing(String oid) throws Exception {
         String uri = OntologyResource.thingInstanceURI(oid);
         String contextURI = OntologyResource.thingInstanceURI(oid);
 
@@ -208,10 +145,12 @@ public class Ontology2Thing {
         addThingProperties(thing, graph);
         addThingInteractionPatterns(thing, graph);
 
-        logger.debug("THING FROM GRAPH: \n"+thing.toString(0));
-        ThingDescription.create(ThingDescription.toJSON(thing), new ThingValidator(true));
-
-        return ThingDescription.toJSON(thing);
+        return thing;
     }
 
+    public JSONObject toJSON(ThingDescription thing) throws Exception {
+        // double validation
+        ThingDescription validated = ThingDescription.create(ThingDescription.toJSON(thing), new ThingValidator(true));
+        return ThingDescription.toJSON(validated);
+    }
 }

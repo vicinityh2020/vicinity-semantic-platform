@@ -20,18 +20,18 @@ public class ThingsLifter {
     final static Logger logger = LoggerFactory.getLogger(ThingsLifter.class.getName());
     private Set<String> deviceTypes;
     private Set<String> serviceTypes;
-    private Set<String> properties;
+    private Set<String> propertyIndividuals;
 
 
-    public ThingsLifter(Set<String> deviceTypes, Set<String> serviceTypes, Set<String> properties) {
+    public ThingsLifter(Set<String> deviceTypes, Set<String> serviceTypes, Set<String> propertyIndividuals) {
         this.deviceTypes = deviceTypes;
         this.serviceTypes = serviceTypes;
-        this.properties = properties;
+        this.propertyIndividuals = propertyIndividuals;
 
         logger.info("THINGS-LIFTER INITIALIZED WITH: ");
         logger.info("device types: " + this.deviceTypes);
         logger.info("service types: " + this.serviceTypes);
-        logger.info("properties: " + this.properties);
+        logger.info("property individuals: " + this.propertyIndividuals);
     }
 
     private void instantiateObjects(JSONObject object) {
@@ -79,7 +79,7 @@ public class ThingsLifter {
             InteractionPattern property = entry.getValue();
             property.jsonExtension.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Property"));
 
-            if (!properties.contains(property.refersTo)) {
+            if (!propertyIndividuals.contains(property.refersTo)) {
                 validator.errors.add("unknown ontology property individual for [monitors]: [" + property.refersTo + "], thing ["+thing.oid+"] property ["+property.id+"]");
             }
 
@@ -92,7 +92,7 @@ public class ThingsLifter {
             InteractionPattern action = entry.getValue();
             action.jsonExtension.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Action"));
 
-            if (!properties.contains(action.refersTo)) {
+            if (!propertyIndividuals.contains(action.refersTo)) {
                 validator.errors.add("unknown ontology property individual for [affects]: [" + action.refersTo + "], thing ["+thing.oid+"] action ["+action.id+"]");
             }
 
@@ -105,7 +105,7 @@ public class ThingsLifter {
             InteractionPattern event = entry.getValue();
             event.jsonExtension.put(ThingJSON.typeAnnotation, Namespaces.prefixed(NamespacePrefix.wot, "Event"));
 
-            if (!properties.contains(event.refersTo)) {
+            if (!propertyIndividuals.contains(event.refersTo)) {
                 validator.errors.add("unknown ontology property individual for [monitors]: [" + event.refersTo + "], thing ["+thing.oid+"] event ["+event.id+"]");
             }
 
@@ -118,9 +118,18 @@ public class ThingsLifter {
             thing.jsonExtension.put("@context", JSONLD_SCHEMA_LOCATION);
             thing.jsonExtension.put(ThingJSON.idAnnotation, Namespaces.prefixed(NamespacePrefix.thing, thing.oid));
 
+            logger.debug("Checking thing type annotation ["+thing.type+"]");
+            logger.debug("device types: "+deviceTypes);
+            logger.debug("service types: "+serviceTypes);
             if (deviceTypes.contains(thing.type)) {
+                logger.debug("hurray, its device!");
                 thing.jsonExtension.put(ThingJSON.typeAnnotation, thing.type);
-            } else {
+            }
+            else if (serviceTypes.contains(thing.type)) {
+                logger.debug("hurray, its service!");
+                thing.jsonExtension.put(ThingJSON.typeAnnotation, thing.type);
+            }
+            else {
                 validator.errors.add("unknown ontology class for thing [type]: [" + thing.type + "]");
             }
 

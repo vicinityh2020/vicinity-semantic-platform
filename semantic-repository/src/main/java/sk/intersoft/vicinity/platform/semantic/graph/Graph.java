@@ -113,7 +113,6 @@ public class Graph {
             Iterator<Statement> i = model.filter((Resource)base, null, null).iterator();
             while(i.hasNext()){
                 Statement s = i.next();
-                System.out.println(s);
                 Value obj = s.getObject();
                 String value = obj.stringValue();
                 if(obj instanceof Resource) {

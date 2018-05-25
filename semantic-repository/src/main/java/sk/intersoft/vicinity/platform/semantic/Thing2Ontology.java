@@ -13,10 +13,12 @@ import org.eclipse.rdf4j.rio.helpers.StatementCollector;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sk.intersoft.vicinity.platform.semantic.lifting.AgoraSupport;
 import sk.intersoft.vicinity.platform.semantic.lifting.ThingsLifter;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingDescription;
+import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingValidator;
 import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
 import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 import sk.intersoft.vicinity.platform.semantic.ontology.OntologyResource;
@@ -173,12 +175,21 @@ public class Thing2Ontology {
             logger.info("POPULATING!");
             try{
                 populate(lifting.thing);
-                Ontology2Thing generator = new Ontology2Thing();
 
-                JSONObject thing = generator.toJSON(lifting.thing.getString(ThingDescription.OID_KEY));
+                Ontology2Thing o2t = new Ontology2Thing();
+                ThingDescription thing = o2t.toThing(lifting.thing.getString(ThingDescription.OID_KEY));
+
+                logger.debug("THING FROM GRAPH: \n"+thing.toString(0));
+
+//                (new AgoraSupport(thing)).add();
+//                System.exit(1);
+
+
+
+                JSONObject thingJSON = o2t.toJSON(thing);
 
                 JSONObject out = new JSONObject();
-                out.put("lifting", thing);
+                out.put("lifting", thingJSON);
                 return out;
 
             }
