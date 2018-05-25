@@ -11,6 +11,7 @@ public class SemanticRepositoryApplication extends Application {
     public static final String ALIVE = "/alive";
     public static final String SPARQL = "/sparql";
     public static final String ANNOTATIONS = "/annotations";
+    public static final String VALIDATE_TD = "/td/validate";
     public static final String CREATE_TD = "/td/create";
     public static final String REMOVE_TD = "/td/remove/{oid}";
 
@@ -36,6 +37,9 @@ public class SemanticRepositoryApplication extends Application {
 
         apiRouter.attach(ANNOTATIONS, AnnotationsResource.class);
         apiRouter.attach(ANNOTATIONS+"/", AnnotationsResource.class);
+
+        apiRouter.attach(VALIDATE_TD, ValidateThingResource.class);
+        apiRouter.attach(VALIDATE_TD+"/", ValidateThingResource.class);
 
         apiRouter.attach(CREATE_TD, Thing2OntologyResource.class);
         apiRouter.attach(CREATE_TD+"/", Thing2OntologyResource.class);

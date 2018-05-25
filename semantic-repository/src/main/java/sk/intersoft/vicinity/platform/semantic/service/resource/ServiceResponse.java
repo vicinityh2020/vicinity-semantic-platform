@@ -41,4 +41,12 @@ public class ServiceResponse {
 //        response.put(REASON, getStackTrace(exception));
         return response;
     }
+
+    public static JSONObject failure(Object o){
+        JSONObject response = new JSONObject();
+        response.put(STATUS, FAILURE);
+        response.put(REASON, o);
+//        response.put(REASON, getStackTrace(exception));
+        return response;
+    }
 }

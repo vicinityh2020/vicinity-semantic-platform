@@ -138,6 +138,7 @@ public class Thing2Ontology {
             connection.commit();
         }
         catch(Exception e){
+            logger.error("", e);
             connection.rollback();
         }
         finally {
@@ -146,7 +147,10 @@ public class Thing2Ontology {
 
     }
 
-    public JSONObject populate(String data, boolean updateContent)  {
+    public ThingsLifterResult validateAndLift(String data){
+        logger.info("VALIDATING AND LIFTING THING DATA");
+
+
         ThingsLifter lifter = new ThingsLifter(getDeviceTypes(), getServiceTypes(), getProperties());
         ThingsLifterResult lifting = lifter.lift(data);
 
@@ -154,10 +158,21 @@ public class Thing2Ontology {
         if(lifting.thing != null){
             logger.info(lifting.thing.toString(2));
         }
+        else{
+            lifting.errors.add("Thing was not processed!");
+        }
         logger.info("LIFTING ERRORS: "+lifting.errors.size());
         for(String error : lifting.errors) {
             logger.info("> "+error);
         }
+
+        return lifting;
+    }
+
+    public JSONObject populate(String data, boolean updateContent)  {
+        logger.info("POPULATING NEW THING");
+
+        ThingsLifterResult lifting = validateAndLift(data);
 
         if(lifting.thing != null && lifting.errors.isEmpty()){
             if(updateContent){

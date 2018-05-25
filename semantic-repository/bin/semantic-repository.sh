@@ -3,9 +3,10 @@
 JAR=semantic-repository-1.0-SNAPSHOT.jar
 
 SERVER_PORT=9004
-GRAPHDB_ENDPOINT=http://localhost:9003/repositories/vicinity-test
+GRAPHDB_ENDPOINT=http://localhost:7200/repositories/vicinity-test
+#GRAPHDB_ENDPOINT=http://localhost:9003/repositories/vicinity-test
 
-JSONLD_SCHEMA_LOCATION=file:///home/kostelni/work/eu-projekty/vicinity/bitbucket-workspace/vicinity-semantic-platform/semantic-repository/config/json-ld/thing.jsonld
+JSONLD_SCHEMA_LOCATION=file:///home/kostelni/work/eu-projekty/vicinity/github-workspace/vicinity-semantic-platform/semantic-repository/bin/config/json-ld/thing.jsonld
 #JSONLD_SCHEMA_LOCATION=file:///home/peter/semantic-platform/semantic-repository/config/json-ld/thing.jsonld
 
 MAIN_CLASS=sk.intersoft.vicinity.platform.semantic.service.SemanticRepositoryServer

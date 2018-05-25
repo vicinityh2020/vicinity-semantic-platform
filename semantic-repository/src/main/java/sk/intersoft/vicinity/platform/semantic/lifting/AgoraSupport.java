@@ -78,6 +78,7 @@ public class AgoraSupport {
             }
             connection.commit();
         } catch (Exception e) {
+            logger.error("", e);
             connection.rollback();
         } finally {
             connection.close();
