@@ -18,6 +18,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFParser;
 import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.helpers.StatementCollector;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import sk.intersoft.vicinity.platform.semantic.sparql.SPARQL;
 
@@ -28,8 +29,8 @@ import java.util.Scanner;
 
 public class TestClient {
     HttpClient client = HttpClientBuilder.create().build();
-    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
-//    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
+//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
 
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -130,11 +131,18 @@ public class TestClient {
 
     }
     public void validate(){
-        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-thing-validation.json";
-        JSONObject json = new JSONObject(TestUtil.file2string(source));
-        System.out.println("VALIDATE TD: \n"+json.toString(2));
-        System.out.println("post: "+(new JSONObject(post(ENDPOINT + "td/validate", json.toString()))).toString(2));
-
+//        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-thing-validation.json";
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-things-validation.json";
+        String json = TestUtil.file2string(source);
+//        System.out.println("VALIDATE TD: \n"+json.toString(2));
+        String result  =post(ENDPOINT + "td/validate", json);
+        System.out.println("VALIDATION RESULT: \n"+result);
+        try{
+            System.out.println((new JSONObject(result)).toString(2));
+        }
+        catch(Exception e){
+            System.out.println((new JSONArray(result)).toString(2));
+        }
     }
 
     public static void main(String[] args) throws  Exception {

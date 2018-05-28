@@ -1,0 +1,18 @@
+{
+    "adapter-id": "kokot",
+    "thing-descriptions": [
+        {
+            "oid": "test-valid",
+            "adapter-id": "test3adapter",
+            "name": "human reads my name herex xxl",
+            "type": "adapters:ActivityTracker",
+        },
+        {
+            "oid": "test-valid-1",
+            "adapter-id": "test3adapter",
+            "name": "human reads my name herex xxl",
+            "type": "adapters:ActivityTrackerx",
+        }
+
+    ]
+}

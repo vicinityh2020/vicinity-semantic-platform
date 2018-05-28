@@ -13,6 +13,10 @@ public class ServiceResponse {
     public static final String REMOVED = "removed";
     public static final String DATA = "data";
 
+    public static String encode(String msg) {
+        return msg.replaceAll("\"", "'");
+    }
+
     public static JSONObject success(String key, Object result){
         JSONObject response = new JSONObject();
         response.put(STATUS, SUCCESS);
@@ -37,7 +41,7 @@ public class ServiceResponse {
     public static JSONObject failure(Exception exception){
         JSONObject response = new JSONObject();
         response.put(STATUS, FAILURE);
-        response.put(REASON, exception.getMessage());
+        response.put(REASON, encode(exception.getMessage()));
 //        response.put(REASON, getStackTrace(exception));
         return response;
     }
