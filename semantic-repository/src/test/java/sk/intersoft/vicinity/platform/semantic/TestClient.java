@@ -31,6 +31,7 @@ public class TestClient {
     HttpClient client = HttpClientBuilder.create().build();
 //    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
     public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
+//    public String ENDPOINT = "https://vicinity.bavenir.eu:3000/api/items/validate";
 
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -136,7 +137,8 @@ public class TestClient {
         String json = TestUtil.file2string(source);
 //        System.out.println("VALIDATE TD: \n"+json.toString(2));
         String result  =post(ENDPOINT + "td/validate", json);
-        System.out.println("VALIDATION RESULT: \n"+result);
+//        String result  = post(ENDPOINT, json);
+        System.out.println("VALIDATION RESULT ["+ENDPOINT+"]: \n"+result);
         try{
             System.out.println((new JSONObject(result)).toString(2));
         }
@@ -145,12 +147,20 @@ public class TestClient {
         }
     }
 
+    public void annotations(){
+        String result  = get(ENDPOINT + "annotations/hierarchy");
+//        String result  = get(ENDPOINT + "annotations");
+        System.out.println("ANNS : \n"+result);
+        System.out.println((new JSONObject(result)).toString(2));
+    }
+
     public static void main(String[] args) throws  Exception {
         TestClient t = new TestClient();
 //        t.query();
 //        t.remove("abc2");
 //        t.create();
-        t.validate();
+//        t.validate();
+        t.annotations();
     }
 
 }

@@ -27,10 +27,12 @@ public class AnnotationsResource extends ServerResource {
         try{
             JSONArray deviceArray = toArray(handler.getDeviceTypes());
             JSONArray serviceArray = toArray(handler.getServiceTypes());
+            JSONArray propertiesArray = toArray(handler.getProperties());
             JSONObject result = new JSONObject();
             result.put("device", deviceArray);
             result.put("service", serviceArray);
-            return ServiceResponse.success(result).toString();
+            result.put("property", propertiesArray);
+            return ServiceResponse.success(result).toString(2);
         }
         catch(Exception e){
             return ServiceResponse.failure(e).toString();

@@ -87,7 +87,7 @@ public class ValidateThingResource extends ServerResource {
                 JSONArray array = object.getJSONArray("thing-descriptions");
                 List<JSONObject> things = JSONUtil.getObjectArray("thing-descriptions", object);
                 if(things != null){
-                    return validate(things).toString();
+                    return ServiceResponse.success(validate(things)).toString(2);
                 }
                 else {
                     throw new Exception("unable to get array of thing descriptions!");
@@ -95,7 +95,7 @@ public class ValidateThingResource extends ServerResource {
             }
             else {
                 logger.info("VALIDATING SINGLE THING");
-                return validate(object).toString();
+                return ServiceResponse.success(validate(object)).toString(2);
             }
         }
         catch(Exception e){

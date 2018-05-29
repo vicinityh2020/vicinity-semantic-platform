@@ -16,6 +16,7 @@ public class Namespaces {
 
     public static final String sosa = "http://www.w3.org/ns/sosa/";
     public static final String ssn = "http://www.w3.org/ns/ssn/";
+    public static final String ssnSystems = "http://www.w3.org/ns/ssn/systems/";
 
     public static final String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns";
     public static final String rdfs = "http://www.w3.org/2000/01/rdf-schema";
@@ -37,6 +38,7 @@ public class Namespaces {
 
                 put(NamespacePrefix.sosa, sosa);
                 put(NamespacePrefix.ssn, ssn);
+                put(NamespacePrefix.ssnSystems, ssnSystems);
             }});
 
 

@@ -57,7 +57,7 @@ public class Thing2Ontology {
         return new HashSet<String>();
     }
 
-    private Set<String> getProperties()  {
+    public Set<String> getProperties()  {
         String query = "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
                 "PREFIX ssn: <"+Namespaces.nsToPrefixURI(Namespaces.ssn)+"> " +
                 "select ?x where {" +
@@ -65,7 +65,6 @@ public class Thing2Ontology {
                 "}";
 
         Set<String> result = extract(query, "x");
-        result.add(Namespaces.prefixed(NamespacePrefix.ssn, "Property"));
         logger.info("PROPERTIES QUERY: \n"+query);
         logger.info("PROPERTY INDIVIDUALS: \n" + result);
 
