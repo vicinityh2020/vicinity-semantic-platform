@@ -9,9 +9,9 @@
         },
         {
             "oid": "test-valid-1",
-            "adapter-id": "test3adapter",
+            "adapter-idx": "test3adapter",
             "name": "human reads my name herex xxl",
-            "type": "adapters:ActivityTracker"
+            "type": "adapters:ActivityTrackerx"
         }
 
     ]

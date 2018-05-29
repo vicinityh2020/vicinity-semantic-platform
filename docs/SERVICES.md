@@ -105,16 +105,26 @@ POST: /sparql
 
 Payload is always the object:
 ```
+#!json
 {
     "query": "your SPARQL query goes here"
 }
 ```
 
+## Developer's tools
 
-## Semantic annotations
+The set of services helping developers to debug or prepare the payloads
+including thing description.
 
-This service is used by Neighbourhood manager to perform very basic semantic
-validation, if needed. This service returns the structured lists of
+**All Developer's tool services are available via Neighbourhood Manager API!**
+
+
+### Semantic annotations
+
+There are two annotations services.
+
+One is used by Neighbourhood manager to perform very basic semantic
+validation, if needed. This service returns the raw lists of
  all semantic annotations used in IoT thing descriptions.
 
 The endpoint:
@@ -126,6 +136,7 @@ GET: /annotations
 The response example:
 
 ```
+#!json
 {
 	"data": {
 		"service": ["core:Application", "core:Service"],
@@ -136,11 +147,145 @@ The response example:
 }
 ```
 
-## Semantic validation
+Second is the tool for developers returning the dump of full tree hierarchy
+for all types used in annotations: **core:Device**, **core:Service**, **ssn:Property**.
+For devices and services, the full class hierarchy is included, for properties, there
+are attached also individuals, which are the subject of annotations on case of properties.
 
-The part of tools for developers. When developers create the thing descriptions
+The endpoint:
+
+```
+GET: /annotations/hierarchy
+```
+
+The response example:
+
+```
+#!json
+{
+	"data": {
+
+    "device-hierarchy": {
+      "path": " / core:Device",
+      "sub-classes": [
+        {
+          "path": " / core:Device / core:Actuator",
+          "sub-classes": [
+            {
+              "path": " / core:Device / core:Actuator / adapters:HVACSensor",
+              "class": "adapters:HVACSensor"
+            },
+            {
+              "path": " / core:Device / core:Actuator / adapters:LightSwitch",
+              "class": "adapters:LightSwitch"
+            },
+            {
+              "path": " / core:Device / core:Actuator / adapters:Thermostat",
+              "class": "adapters:Thermostat"
+            }
+          ],
+          "class": "core:Actuator"
+        }
+      ]
+    },
+
+    "service-hierarchy": {
+      "path": " / core:Service",
+      "sub-classes": [{
+        "path": " / core:Service / core:Application",
+        "class": "core:Application"
+      }],
+      "class": "core:Service"
+    },
+
+    "property-hierarchy": {
+      "path": " / ssn:Property",
+      "sub-classes": [
+        {
+          "path": " / ssn:Property / sosa:ActuatableProperty",
+          "individuals": [
+            "adapters:DeviceTemperature",
+            "adapters:LightColor",
+            "adapters:Luminance"
+          ],
+          "class": "sosa:ActuatableProperty"
+        }
+      ]
+    }
+
+	},
+	"status": "success"
+}
+```
+
+
+### Semantic validation
+
+The tool for developers. When developers create the thing descriptions
 in configuration of their Adapters, they are free to completely validate in advance
 this thing descriptions in syntactic (the structure is checked)
 and also semantic way (the annotations are checked). See [validation](#validation).
 
-...to be implemented
+The endpoint:
+
+```
+POST: /td/validate
+```
+
+The two forms of payload are accepted:
+* JSON object including single Thing Description
+* JSON object containing the Adapter Discovery Information (the content of Adapter's **/objects** service).
+
+Payload example for single Thing Description:
+
+```
+#!json
+{
+    "oid": "test-valid",
+    "adapter-id": "test3adapter",
+    "name": "human reads my name here",
+    "type": "adapters:ActivityTracker",
+    "properties": [],
+    "actions": [],
+    "events": []
+}
+```
+
+Payload example for Adapter discovery data:
+
+```
+#!json
+{
+    "adapter-id": "unique adapter identifier",
+    "thing-descriptions":
+    [
+     array of thing descriptions
+    ]
+}
+```
+
+The response is the array of validation results, for each thing passed into.
+Things are identified by **oid** in provided data. Example:
+
+```
+#!json
+{
+  "data": [
+    {
+      "oid": "test-valid",
+      "message": "Thing is valid"
+    },
+    {
+      "oid": "test-valid-1",
+      "errors": [
+        "Missing thing [adapter-id].",
+        "Unable to process thing: [test-valid-1]",
+        "thing was not parsed, unable to lift it",
+        "Thing was not processed!"
+      ]
+    }
+  ],
+  "status": "success"
+}
+```
+

@@ -159,8 +159,8 @@ public class TestClient {
 //        t.query();
 //        t.remove("abc2");
 //        t.create();
-//        t.validate();
-        t.annotations();
+        t.validate();
+//        t.annotations();
     }
 
 }
