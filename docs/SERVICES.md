@@ -116,7 +116,7 @@ Payload is always the object:
 The set of services helping developers to debug or prepare the payloads
 including thing description.
 
-**All Developer's tool services are available via Neighbourhood Manager API!**
+**All Developer's tool services are available via Neighbourhood Manager API!, Neighbourhood manager serves as the proxy to semantic platform services.**
 
 
 ### Semantic annotations
@@ -127,11 +127,18 @@ One is used by Neighbourhood manager to perform very basic semantic
 validation, if needed. This service returns the raw lists of
  all semantic annotations used in IoT thing descriptions.
 
-The endpoint:
+Semantic repository endpoint:
 
 ```
 GET: /annotations
 ```
+
+Neighbourhood manager endpoint:
+
+```
+GET: https://vicinity.bavenir.eu:3000/api/repository/annotations
+```
+
 
 The response example:
 
@@ -157,6 +164,13 @@ The endpoint:
 ```
 GET: /annotations/hierarchy
 ```
+
+Neighbourhood manager endpoint:
+
+```
+GET: https://vicinity.bavenir.eu:3000/api/repository/annotations?hierarchical=true
+```
+
 
 The response example:
 
@@ -230,9 +244,30 @@ The endpoint:
 POST: /td/validate
 ```
 
+Neighbourhood manager endpoint:
+
+```
+POST: https://vicinity.bavenir.eu:3000/api/repository/validate
+```
+
+
 The two forms of payload are accepted:
-* JSON object including single Thing Description
 * JSON object containing the Adapter Discovery Information (the content of Adapter's **/objects** service).
+* JSON object including single Thing Description
+
+
+Payload example for Adapter discovery data:
+
+```
+#!json
+{
+    "adapter-id": "unique adapter identifier",
+    "thing-descriptions":
+    [
+     array of thing descriptions
+    ]
+}
+```
 
 Payload example for single Thing Description:
 
@@ -249,20 +284,8 @@ Payload example for single Thing Description:
 }
 ```
 
-Payload example for Adapter discovery data:
 
-```
-#!json
-{
-    "adapter-id": "unique adapter identifier",
-    "thing-descriptions":
-    [
-     array of thing descriptions
-    ]
-}
-```
-
-The response is the array of validation results, for each thing passed into.
+The response is the array of validation results, one result object per each thing passed into service.
 Things are identified by **oid** in provided data. Example:
 
 ```

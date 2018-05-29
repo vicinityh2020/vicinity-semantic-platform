@@ -29,9 +29,8 @@ import java.util.Scanner;
 
 public class TestClient {
     HttpClient client = HttpClientBuilder.create().build();
-//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
-    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
-//    public String ENDPOINT = "https://vicinity.bavenir.eu:3000/api/items/validate";
+    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+//    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
 
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -136,7 +135,8 @@ public class TestClient {
         String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-things-validation.json";
         String json = TestUtil.file2string(source);
 //        System.out.println("VALIDATE TD: \n"+json.toString(2));
-        String result  =post(ENDPOINT + "td/validate", json);
+//        String result  =post(ENDPOINT + "td/validate", json);
+        String result  =post("https://vicinity.bavenir.eu:3000/api/repository/validate", json);
 //        String result  = post(ENDPOINT, json);
         System.out.println("VALIDATION RESULT ["+ENDPOINT+"]: \n"+result);
         try{
@@ -148,8 +148,8 @@ public class TestClient {
     }
 
     public void annotations(){
-        String result  = get(ENDPOINT + "annotations/hierarchy");
-//        String result  = get(ENDPOINT + "annotations");
+//        String result  = get(ENDPOINT + "annotations/hierarchy");
+        String result  = get("https://vicinity.bavenir.eu:3000/api/repository/annotations?hierarchical=true");
         System.out.println("ANNS : \n"+result);
         System.out.println((new JSONObject(result)).toString(2));
     }
@@ -159,8 +159,8 @@ public class TestClient {
 //        t.query();
 //        t.remove("abc2");
 //        t.create();
-        t.validate();
-//        t.annotations();
+//        t.validate();
+        t.annotations();
     }
 
 }

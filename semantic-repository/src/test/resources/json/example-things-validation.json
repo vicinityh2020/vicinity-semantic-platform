@@ -9,7 +9,7 @@
         },
         {
             "oidx": "test-valid-1",
-            "adapter-id": "test3adapter",
+            "adapter-idx": "test3adapter",
             "name": "human reads my name here xxl",
             "type": "adapters:ActivityTracker",
             "properties": [
