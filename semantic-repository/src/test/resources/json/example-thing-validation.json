@@ -6,7 +6,7 @@
     "properties": [
         {
             "pid": "brightness",
-            "monitors": "adapters:Luminance",
+            "monitors": "xadapters:Luminance",
             "read_link": {
                 "href": "/device/{oid}/property/{pid}/updated",
                 "output": {

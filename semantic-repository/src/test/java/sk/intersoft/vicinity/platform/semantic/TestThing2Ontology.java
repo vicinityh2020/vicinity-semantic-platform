@@ -1,6 +1,7 @@
 package sk.intersoft.vicinity.platform.semantic;
 
 import org.json.JSONObject;
+import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
 
 public class TestThing2Ontology {
     String jsonPath = "/semantic-repository/src/test/resources/json/";
@@ -66,12 +67,28 @@ public class TestThing2Ontology {
         }
     }
 
+    public void validate(){
+        Thing2Ontology handler = new Thing2Ontology();
+
+        String json = TestUtil.file2string(TestUtil.path(jsonPath+"example-thing-validation.json"));
+
+        ThingsLifterResult result = handler.validateAndLift(json.toString());
+        if(result.errors.size() > 0){
+            System.out.println("ERRORS: \n"+result.failureArray().toString(2));
+        }
+        else{
+            System.out.println("success!");
+        }
+
+
+    }
 
     public static void main(String[] args) throws  Exception {
         TestThing2Ontology t = new TestThing2Ontology();
 //        t.populate(true);
-        t.populate(false);
+//        t.populate(false);
 //        t.o2t();
 //        t.testDelete();
+        t.validate();
     }
 }

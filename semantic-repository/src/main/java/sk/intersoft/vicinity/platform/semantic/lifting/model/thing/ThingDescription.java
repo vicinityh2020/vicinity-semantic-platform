@@ -70,12 +70,10 @@ public class ThingDescription {
             boolean fail = false;
 
             thing.oid = JSONUtil.getString(OID_KEY, thingJSON);
-            if(thing.oid == null) fail = validator.error("Missing thing [oid].");
-            if(thing.oid.equals("")) fail = validator.error("Empty thing [oid].");
+            if(thing.oid == null || thing.oid.equals("")) fail = validator.error("Missing thing [oid].");
 
             thing.adapterId = JSONUtil.getString(ADAPTER_ID_KEY, thingJSON);
-            if(thing.adapterId == null) fail = validator.error("Missing thing [adapter-id].");
-            if(thing.adapterId .equals("")) fail = validator.error("Empty thing [adapter-id].");
+            if(thing.adapterId == null || thing.adapterId.equals("")) fail = validator.error("Missing thing [adapter-id].");
 
             thing.adapterOID = identifier(thing.oid, thing.adapterId);
 
@@ -127,6 +125,7 @@ public class ThingDescription {
         }
         catch(Exception e) {
             validator.error("Unable to process thing: "+validator.identify(thing.oid, thingJSON));
+            logger.error("", e);
             return null;
         }
 

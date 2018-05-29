@@ -8,10 +8,16 @@
             "type": "adapters:ActivityTracker"
         },
         {
-            "oid": "test-valid-1",
-            "adapter-idx": "test3adapter",
-            "name": "human reads my name herex xxl",
-            "type": "adapters:ActivityTrackerx"
+            "oidx": "test-valid-1",
+            "adapter-id": "test3adapter",
+            "name": "human reads my name here xxl",
+            "type": "adapters:ActivityTracker",
+            "properties": [
+                {
+                    "pidx": "test-pid",
+                    "monitors": "i've made typo in annotation here"
+                }
+            ]
         }
 
     ]

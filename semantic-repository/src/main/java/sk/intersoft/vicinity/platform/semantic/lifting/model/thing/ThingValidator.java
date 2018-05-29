@@ -2,11 +2,15 @@ package sk.intersoft.vicinity.platform.semantic.lifting.model.thing;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ThingValidator {
+    final static Logger logger = LoggerFactory.getLogger(ThingValidator.class.getName());
+
     public boolean failOnError;
     public ThingDescription thing = null;
     public List<String> errors = new ArrayList<String>();
@@ -36,7 +40,9 @@ public class ThingValidator {
     public boolean error(String error) throws Exception {
         String encode = error.replaceAll("\"", "\'");
         errors.add(encode);
-        if(failOnError) throw new Exception(encode);
+        if(failOnError) {
+            throw new Exception(encode);
+        }
         return true;
     }
 
