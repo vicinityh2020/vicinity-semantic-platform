@@ -179,51 +179,54 @@ The response example:
 {
     "data": {
         "device-hierarchy": {
+          "class": "core:Device",
           "path": " / core:Device",
           "sub-classes": [
             {
+              "class": "core:Actuator",
               "path": " / core:Device / core:Actuator",
               "sub-classes": [
                 {
-                  "path": " / core:Device / core:Actuator / adapters:HVACSensor",
-                  "class": "adapters:HVACSensor"
+                  "class": "adapters:HVACSensor",
+                  "path": " / core:Device / core:Actuator / adapters:HVACSensor"
                 },
                 {
-                  "path": " / core:Device / core:Actuator / adapters:LightSwitch",
-                  "class": "adapters:LightSwitch"
+                  "class": "adapters:LightSwitch",
+                  "path": " / core:Device / core:Actuator / adapters:LightSwitch"
                 },
                 {
-                  "path": " / core:Device / core:Actuator / adapters:Thermostat",
-                  "class": "adapters:Thermostat"
+                  "class": "adapters:Thermostat",
+                  "path": " / core:Device / core:Actuator / adapters:Thermostat"
                 }
-              ],
-              "class": "core:Actuator"
+              ]
             }
           ]
         },
 
         "service-hierarchy": {
+          "class": "core:Service",
           "path": " / core:Service",
           "sub-classes": [{
-            "path": " / core:Service / core:Application",
-            "class": "core:Application"
-          }],
-          "class": "core:Service"
+            "class": "core:Application",
+            "path": " / core:Service / core:Application"
+          }]
         },
 
         "property-hierarchy": {
+          "class": "ssn:Property"
           "path": " / ssn:Property",
           "sub-classes": [
             {
+              "class": "sosa:ActuatableProperty",
               "path": " / ssn:Property / sosa:ActuatableProperty",
               "individuals": [
                 "adapters:DeviceTemperature",
                 "adapters:LightColor",
                 "adapters:Luminance"
-              ],
-              "class": "sosa:ActuatableProperty"
+              ]
             }
-          ]
+          ],
+          "individuals": []
         }
     },
     "status": "success"
