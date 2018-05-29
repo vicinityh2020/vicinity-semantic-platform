@@ -163,58 +163,56 @@ The response example:
 ```
 #!json
 {
-	"data": {
-
-    "device-hierarchy": {
-      "path": " / core:Device",
-      "sub-classes": [
-        {
-          "path": " / core:Device / core:Actuator",
+    "data": {
+        "device-hierarchy": {
+          "path": " / core:Device",
           "sub-classes": [
             {
-              "path": " / core:Device / core:Actuator / adapters:HVACSensor",
-              "class": "adapters:HVACSensor"
-            },
-            {
-              "path": " / core:Device / core:Actuator / adapters:LightSwitch",
-              "class": "adapters:LightSwitch"
-            },
-            {
-              "path": " / core:Device / core:Actuator / adapters:Thermostat",
-              "class": "adapters:Thermostat"
+              "path": " / core:Device / core:Actuator",
+              "sub-classes": [
+                {
+                  "path": " / core:Device / core:Actuator / adapters:HVACSensor",
+                  "class": "adapters:HVACSensor"
+                },
+                {
+                  "path": " / core:Device / core:Actuator / adapters:LightSwitch",
+                  "class": "adapters:LightSwitch"
+                },
+                {
+                  "path": " / core:Device / core:Actuator / adapters:Thermostat",
+                  "class": "adapters:Thermostat"
+                }
+              ],
+              "class": "core:Actuator"
             }
-          ],
-          "class": "core:Actuator"
+          ]
+        },
+
+        "service-hierarchy": {
+          "path": " / core:Service",
+          "sub-classes": [{
+            "path": " / core:Service / core:Application",
+            "class": "core:Application"
+          }],
+          "class": "core:Service"
+        },
+
+        "property-hierarchy": {
+          "path": " / ssn:Property",
+          "sub-classes": [
+            {
+              "path": " / ssn:Property / sosa:ActuatableProperty",
+              "individuals": [
+                "adapters:DeviceTemperature",
+                "adapters:LightColor",
+                "adapters:Luminance"
+              ],
+              "class": "sosa:ActuatableProperty"
+            }
+          ]
         }
-      ]
     },
-
-    "service-hierarchy": {
-      "path": " / core:Service",
-      "sub-classes": [{
-        "path": " / core:Service / core:Application",
-        "class": "core:Application"
-      }],
-      "class": "core:Service"
-    },
-
-    "property-hierarchy": {
-      "path": " / ssn:Property",
-      "sub-classes": [
-        {
-          "path": " / ssn:Property / sosa:ActuatableProperty",
-          "individuals": [
-            "adapters:DeviceTemperature",
-            "adapters:LightColor",
-            "adapters:Luminance"
-          ],
-          "class": "sosa:ActuatableProperty"
-        }
-      ]
-    }
-
-	},
-	"status": "success"
+    "status": "success"
 }
 ```
 
