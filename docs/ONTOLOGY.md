@@ -17,6 +17,7 @@ In the updated version of the ontology network, there is a total of five modules
 * Adapters: http://iot.linkeddata.es/def/adapters/
 * Datatypes: http://iot.linkeddata.es/def/datatypes/
 
+![](img/ontology-1.png)
 <p align="center">Figure 1. Updated VICINITY ontology network overview</p>
 
 It is worth noting that most of the content of the adapters module was previously defined in the core module of the network. That is, the adapters module has been created to decouple from the generic part of the ontology related to the VICINITY platform (i.e., the core module) the particular characteristics of those devices that come from specific pilot scenarios. In summary, while the datatypes module has been created from scratch for this release, the adapters module represents an extraction of part of the previous core module as documented in “D4.1. Set of open sample VICINITY gateway adapters”.
@@ -44,6 +45,7 @@ First of all, the namespace for the SSN ontology has been updated. More precisel
 | ssn | http://www.w3.org/ns/ssn/ |
 | ssn-system | http://www.w3.org/ns/ssn/systems/ |
 
+![](img/ontology-2.png)
 <p align="center">Figure 2. SOSA/SSN ontology architecture. Image taken from [3]</p>
 
 It should me mentioned that the prefix old-ssn will be used to refer to the previous SSN ontology namespace http://purl.oclc.org/NET/ssnx/ssn#.
@@ -66,7 +68,11 @@ Finally, the core:Service concept is being refined according to the conversation
 
 In summary, the updated diagrams for the core and wot modules are provided in Figure 3 and Figure 4 respectively.
 
+![](img/ontology-3.png)
 <p align="center">Figure 3. VICINITY core module conceptualization</p>
+
+![](img/ontology-4.png)
+<p align="center">Figure 4. VICINITY WoT module conceptualization</p>
 
 In the figures included to represent parts of the ontologies, the following graphical conventions are used.
 
