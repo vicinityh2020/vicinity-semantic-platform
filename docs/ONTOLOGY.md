@@ -1,10 +1,8 @@
 # Ontology network updates for VICINITY platform
 
 **Authors:**
-* Andrea Cimmino
 * María Poveda Villalón
 * Raúl García Castro
-* Fernando Serena
 
 This section describes the evolution of the [VICINITY ontology network](http://vicinity.iot.linkeddata.es/) according to the VICINITY platform needs (it is worth noting that other updates of the ontology network will be reported in the corresponding deliverables). As already described in “D2.2. Detailed Specification of the Semantic Model” [1], the VICINITY ontology network is designed following a modular approach. In such document, the general process being followed to develop the ontology network was also described.
 

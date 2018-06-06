@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4f95401-083a-41c8-9082-1aa8f02f1945" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/img/ontology-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/img/ontology-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/img/ontology-3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/img/ontology-4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/INTEROPERABILITY.md" afterPath="$PROJECT_DIR$/docs/INTEROPERABILITY.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/ONTOLOGY.md" afterPath="$PROJECT_DIR$/docs/ONTOLOGY.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -70,21 +67,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="INTEROPERABILITY.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="INTEROPERABILITY.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/INTEROPERABILITY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="924" max-vertical-offset="2002">
-              <caret line="60" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.15742397" vertical-offset="0" max-vertical-offset="1958">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ONTOLOGY.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ONTOLOGY.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/ONTOLOGY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27549195" vertical-offset="1474" max-vertical-offset="2420">
-              <caret line="74" column="65" selection-start-line="74" selection-start-column="65" selection-end-line="74" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2376">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -181,9 +178,9 @@
         <option value="$PROJECT_DIR$/semantic-repository/src/test/resources/json/example-things-validation.json" />
         <option value="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestClient.java" />
         <option value="$PROJECT_DIR$/docs/SERVICES.md" />
-        <option value="$PROJECT_DIR$/docs/INTEROPERABILITY.md" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/docs/ONTOLOGY.md" />
+        <option value="$PROJECT_DIR$/docs/INTEROPERABILITY.md" />
       </list>
     </option>
   </component>
@@ -1482,7 +1479,11 @@
       <created>1528287499885</created>
       <updated>1528287499885</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="updated docs">
+      <created>1528289340710</created>
+      <updated>1528289340710</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1926,14 +1927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/INTEROPERABILITY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="924" max-vertical-offset="2002">
-          <caret line="60" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/img/ontology-2.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1941,8 +1934,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/ONTOLOGY.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27549195" vertical-offset="1474" max-vertical-offset="2420">
-          <caret line="74" column="65" selection-start-line="74" selection-start-column="65" selection-end-line="74" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2376">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/INTEROPERABILITY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15742397" vertical-offset="0" max-vertical-offset="1958">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>

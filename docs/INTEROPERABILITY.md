@@ -2,8 +2,6 @@
 
 **Authors:**
 * Andrea Cimmino
-* María Poveda Villalón
-* Raúl García Castro
 * Fernando Serena
 
 In this section we introduce the approach followed in the VICINITY project to solve interoperability among data endpoints that expose data under a wide range of different formats.
