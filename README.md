@@ -10,6 +10,12 @@ Semantic discovery platform consists of:
 * [semantic storage](docs/STORAGE.md)
 * [semantic (discovery, configuration) services](docs/SERVICES.md)
 
+The important part of VICINITY Semantic discovery platform is the interoperability
+among the data.
+* [The complete description of interoperability approach](docs/INTEROPERABILITY.md).
+* [The actualized extension of VICINITY ontology](docs/ONTOLOGY.md)
+
+
 ## Deployment
 
 The semantic discovery platform requires to run the semantic storage as
