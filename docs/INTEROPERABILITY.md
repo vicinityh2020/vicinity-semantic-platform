@@ -34,7 +34,7 @@ Interoperability among Gateway APIs in VICINITY has two phases: the former aims 
 In the discovery phase a Gateway API provides its Distributed Query Client with a SPARQL query (1 from Figure 1). Then the Distributed Query Client forwards the query to the Gateway API Services in order to retrieve a Thing Ecosystem Description (TED) that contains the identifiers of relevant Things to answer the query (2 and 3 in Figure 1).  To do so, the Gateway API Services retrieves all the Things contained in the Semantic Repository and applies a discovery algorithm that keeps the identifiers of those things that potentially may answer the received query (2.1 in Figure 1). Then, the Distributed Query Client retrieves a suitable Query plan forwarding the query to the Gateway API Services (4 and 5 in Figure 1), the Gateway API Services generates the Query Plan relying on the VICINITY ontologies (4.1 in Figure 1). As a result, at the end of this process the Distributed Query Client counts with a Thing Ecosystem Description containing relevant Thing identifiers and a Query Plan that establishes which data is relevant to answer the query.
 
 ![Figure 1](img/discovery.png)
-Figure 1.
+<p align="center">Figure 1.</p>
 
 ### Distributed Access
 
@@ -45,7 +45,7 @@ Using the VTED, the Distributed Query Client retrieves the http addresses of the
 Finally, the Distributed Query Client uses the retrieved Query Plan to prune those Things which semantic data do not fit the plan. After this, a query solution is produced. As a result, the Distributed Query Client generates a set of query solutions for the input query (5 in Figure 2).
 
 ![Figure 2](img/distributed-access.png)
-Figure 2.
+<p align="center">Figure 2.</p>
 
 ## Gateway API Services Interface
 
