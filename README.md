@@ -13,6 +13,9 @@ Semantic discovery platform consists of:
 The important part of VICINITY Semantic discovery platform is the interoperability
 among the data.
 * [The complete description of interoperability approach](docs/INTEROPERABILITY.md).
+
+VICINITY Ontology:
+* [Complete set of VICINITY Ontologies](http://vicinity.iot.linkeddata.es/vicinity/)
 * [The actualized extension of VICINITY ontology](docs/ONTOLOGY.md)
 
 
