@@ -13,6 +13,7 @@ import sk.intersoft.vicinity.platform.semantic.Repository;
 import sk.intersoft.vicinity.platform.semantic.graph.Graph;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.AgoraMapping;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.DataSchema;
+import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.DataSchemaField;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.InteractionPattern;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingDescription;
 import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
@@ -26,6 +27,9 @@ public class AgoraSupport {
     final static Logger logger = LoggerFactory.getLogger(AgoraSupport.class.getName());
 
     private ThingDescription thing = null;
+    private Map<IRI, Set<Statement>> statements = new HashMap<IRI, Set<Statement>>();
+
+    public static String HAS_CONTEXT_GRAPH = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "hasContextGraph"));
 
     private static String THING_DESCRIPTION_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "ThingDescription"));
     private static String VALUE_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "Value"));
@@ -45,15 +49,25 @@ public class AgoraSupport {
     private static String MAPS_RESOURCE_FROM = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "mapsResourceFrom"));
     private static String MAPPING_KEY = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "key"));
     private static String MAPPING_PREDICATE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "predicate"));
-    private static String MAPPING_ROOT_MODE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "rootMode"));
+    private static String MAPPING_JSON_PATH = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "jsonPath"));
 
     private static String LINK_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "Link"));
     private static String HREF = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "href"));
     private static String MEDIA_TYPE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "mediaType"));
 
 
+    private static String TIMESTAMP_PREDICATE = "core:timestamp";
+    private static String VALUE_PREDICATE = "core:value";
+
+    public static final Set<String> mappingPredicates =
+            Collections.unmodifiableSet(new HashSet<String>() {{
+                add(TIMESTAMP_PREDICATE);
+                add(VALUE_PREDICATE);
+            }});
+
     public AgoraSupport(ThingDescription thing) {
         this.thing = thing;
+        this.statements = new HashMap<IRI, Set<Statement>>();
     }
 
     Repository repository = Repository.getInstance();
@@ -63,25 +77,42 @@ public class AgoraSupport {
         return OntologyResource.thingDescriptionURI(oid);
     }
 
-    private void addStatements(Set<Statement> statements,
-                               IRI context) throws Exception {
+    private void addStatements() throws Exception {
         RepositoryConnection connection = repository.getConnection();
-        logger.debug("ADDING STATEMENTS TO CONTEXT [" + context + "]");
         try {
             connection.begin();
-            for (Statement s : statements) {
-                logger.debug("adding: " +
-                        Namespaces.toPrefixed(s.getSubject().stringValue()) + " " +
-                        Namespaces.toPrefixed(s.getPredicate().stringValue()) + " " +
-                        Namespaces.toPrefixed(s.getObject().stringValue()));
-                connection.add(s, context);
+
+            for(Map.Entry<IRI, Set<Statement>> entry : statements.entrySet()) {
+                IRI context = entry.getKey();
+                Set<Statement> statementSet = entry.getValue();
+
+                logger.debug("ADDING STATEMENTS TO CONTEXT [" + context + "]");
+                for (Statement s : statementSet) {
+                    logger.debug("adding: " +
+                            Namespaces.toPrefixed(s.getSubject().stringValue()) + " " +
+                            Namespaces.toPrefixed(s.getPredicate().stringValue()) + " " +
+                            Namespaces.toPrefixed(s.getObject().stringValue()));
+                    connection.add(s, context);
+                }
             }
+
             connection.commit();
         } catch (Exception e) {
             logger.error("", e);
             connection.rollback();
         } finally {
             connection.close();
+        }
+    }
+
+    private void addStatements(IRI context, Set<Statement> sts) {
+        Set<Statement> content = statements.get(context);
+        if(content != null){
+            content.addAll(sts);
+            statements.put(context, content);
+        }
+        else {
+            statements.put(context, sts);
         }
     }
 
@@ -104,8 +135,10 @@ public class AgoraSupport {
         thingDescription.add(factory.createStatement(tdIRI, factory.createIRI(DESCRIBES), thingIRI));
         thingDescription.add(factory.createStatement(tdIRI, factory.createIRI(IDENTIFIER), factory.createLiteral(thing.oid)));
 
-        addStatements(thingExtension, thingContextIRI);
-        addStatements(thingDescription, tdIRI);
+        thingExtension.add(factory.createStatement(thingIRI, factory.createIRI(HAS_CONTEXT_GRAPH), tdIRI));
+
+        addStatements(thingContextIRI, thingExtension);
+        addStatements(tdIRI, thingDescription);
     }
 
     private IRI createIRI(String prefix, String value) {
@@ -116,19 +149,50 @@ public class AgoraSupport {
                                 value)));
     }
 
-    private void traverse(DataSchema schema, Set<AgoraMapping> mappings, List<String> path) {
+    private static void traverse(DataSchema schema,
+                                 Set<AgoraMapping> mappings,
+                                 String path,
+                                 boolean validate) {
+        if(schema.isArray()){
+            traverse(schema.item, mappings, path+".[*]", validate);
+        }
+        else if(schema.isObject()){
+            if(schema.field != null){
+                for(DataSchemaField field : schema.field){
+                    if(field.predicate != null){
+                        AgoraMapping mapping = new AgoraMapping(path, field.name, field.predicate);
+                        if(validate){
+                            for(String predicate : mappingPredicates){
+                                if(predicate.equals(field.predicate)){
+                                    mappings.add(mapping);
+                                }
+                            }
+                        }
+                        else {
+                            mappings.add(mapping);
+                        }
+                    }
 
+                    traverse(field.schema, mappings, path+"."+field.name, validate);
+                }
+            }
+        }
     }
 
-    private void addMappings(IRI mappingIRI, DataSchema output) {
+    public static Set<AgoraMapping> getMappings(DataSchema output, boolean validate) {
         logger.debug("adding all mapping for: \n"+output.toString(0));
         Set<AgoraMapping> mappings = new HashSet<AgoraMapping>();
 
-        traverse(output, mappings, new ArrayList<String>());
+        traverse(output, mappings, "", validate);
+
+
+
+        return mappings;
     }
 
 
     private void addValueTD(InteractionPattern property,
+                            IRI thingIRI,
                             IRI thingContextIRI) throws Exception {
         IRI propertyIRI = factory.createIRI(property.jsonExtension.get(Ontology2Thing.URI_KEY));
 
@@ -142,6 +206,7 @@ public class AgoraSupport {
         logger.debug("Property Value IRI: " + valueIRI);
         logger.debug("Property Value TD IRI: " + valueTDIRI);
         logger.debug("Property Value TD mapping IRI: " + valueTDIRI);
+        logger.debug("Thing IRI: " + thingIRI);
         logger.debug("Thing Context IRI: " + thingContextIRI);
 
         // property extension:
@@ -157,31 +222,47 @@ public class AgoraSupport {
         valueDescription.add(factory.createStatement(valueTDIRI, factory.createIRI(DESCRIBES), valueIRI));
         valueDescription.add(factory.createStatement(valueTDIRI, factory.createIRI(IDENTIFIER), factory.createLiteral(valueId)));
 
-        IRI mappingIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
-        valueDescription.add(factory.createStatement(valueTDIRI, factory.createIRI(HAS_ACCESS_MAPPING), mappingIRI));
-        valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(RDF_TYPE), factory.createIRI(ACCESS_MAPPING_CLASS)));
+        IRI hasMappingIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
+        valueDescription.add(factory.createStatement(valueTDIRI, factory.createIRI(HAS_ACCESS_MAPPING), hasMappingIRI));
+        valueDescription.add(factory.createStatement(hasMappingIRI, factory.createIRI(RDF_TYPE), factory.createIRI(ACCESS_MAPPING_CLASS)));
 
         IRI resourceIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
-        valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPS_RESOURCE_FROM), resourceIRI));
+        valueDescription.add(factory.createStatement(hasMappingIRI, factory.createIRI(MAPS_RESOURCE_FROM), resourceIRI));
         valueDescription.add(factory.createStatement(resourceIRI, factory.createIRI(RDF_TYPE), factory.createIRI(LINK_CLASS)));
         valueDescription.add(factory.createStatement(resourceIRI, factory.createIRI(HREF), factory.createLiteral("/objects/"+thing.oid+"/properties/"+property.id)));
         valueDescription.add(factory.createStatement(resourceIRI, factory.createIRI(MEDIA_TYPE), factory.createLiteral("application/json")));
 
-        addMappings(mappingIRI, property.readEndpoint.output);
+        Set<AgoraMapping> mappings = getMappings(property.readEndpoint.output, true);
+        for(AgoraMapping m : mappings) {
+            IRI mappingIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
+            valueDescription.add(factory.createStatement(hasMappingIRI, factory.createIRI(HAS_MAPPING), mappingIRI));
 
-//        addStatements(propertyExtension, thingContextIRI);
-//        addStatements(valueDescription, valueTDIRI);
+            valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(RDF_TYPE), factory.createIRI(MAPPING_CLASS)));
+            if(m.jsonPath != null && !m.jsonPath.trim().equals("")){
+                valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPPING_JSON_PATH), factory.createLiteral(m.jsonPath)));
+            }
+            valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPPING_KEY), factory.createLiteral(m.key)));
+            valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPPING_PREDICATE), factory.createLiteral(m.predicate)));
+
+        }
+
+        Set<Statement> thingExtension = new HashSet<Statement>();
+        thingExtension.add(factory.createStatement(thingIRI, factory.createIRI(HAS_CONTEXT_GRAPH), valueTDIRI));
+
+        addStatements(thingContextIRI, thingExtension);
+        addStatements(thingContextIRI, propertyExtension);
+        addStatements(valueTDIRI, valueDescription);
 
     }
 
-    private void addValuesTD(IRI thingContextIRI) throws Exception {
+    private void addValuesTD(IRI thingIRI, IRI thingContextIRI) throws Exception {
 
         logger.debug("adding TD support for thing readable properties");
 
         for (Map.Entry<String, InteractionPattern> entry : thing.properties.entrySet()) {
             InteractionPattern prop = entry.getValue();
             if(prop.readEndpoint != null && prop.readEndpoint.output != null) {
-                addValueTD(prop, thingContextIRI);
+                addValueTD(prop, thingIRI, thingContextIRI);
             }
         }
 
@@ -190,36 +271,25 @@ public class AgoraSupport {
     public void add(){
         logger.debug("adding support for: ["+thing.oid+"]");
         try{
-            RepositoryConnection connection = repository.getConnection();
-            try{
-                String uri = OntologyResource.thingInstanceURI(thing.oid);
-                String contextURI = OntologyResource.thingInstanceURI(thing.oid);
+            String uri = OntologyResource.thingInstanceURI(thing.oid);
+            String contextURI = OntologyResource.thingInstanceURI(thing.oid);
 
-                Graph graph = repository.loadGraph(uri, contextURI);
 
-                logger.debug("getting graph for OID: [" + thing.oid + "]");
-                logger.debug("OID URI: "+uri);
-                logger.debug("OID CONTEXT URI: "+contextURI);
+            logger.debug("OID URI: "+uri);
+            logger.debug("OID CONTEXT URI: "+contextURI);
 
-                if(graph == null) throw new Exception("Missing semantic graph for thing [oid="+thing.oid+"]!");
-                logger.debug("graph: \n"+graph.describe());
 
-                IRI thingIRI = factory.createIRI(uri);
-                IRI thingContextIRI = factory.createIRI(contextURI);
+            IRI thingIRI = factory.createIRI(uri);
+            IRI thingContextIRI = factory.createIRI(contextURI);
 
-                logger.debug("Thing IRI: "+thingIRI);
-                logger.debug("Thing context IRI: "+thingContextIRI);
+            logger.debug("Thing IRI: "+thingIRI);
+            logger.debug("Thing context IRI: "+thingContextIRI);
 
-                addThingTD(thingIRI, thingContextIRI);
-                addValuesTD(thingContextIRI);
 
-            }
-            catch(Exception e){
-                logger.error("EXCEPTION", e);
-            }
-            finally {
-                connection.close();
-            }
+            addThingTD(thingIRI, thingContextIRI);
+            addValuesTD(thingIRI, thingContextIRI);
+
+            addStatements();
         }
         catch(Exception e){
             logger.error("EXCEPTION", e);

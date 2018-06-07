@@ -1,0 +1,67 @@
+{
+    "oid": "test-agora",
+    "adapter-id": "test-adapter",
+    "name": "human reads my name herex xxl",
+    "type": "adapters:ActivityTracker",
+    "properties": [
+        {
+            "pid": "brightness",
+            "monitors": "adapters:Luminance",
+            "read_link": {
+                "href": "/device/{oid}/property/{pid}/updated",
+                "output":
+{
+    "type": "object",
+    "description": "person name and address",
+    "field": [
+        {
+            "name": "person-name",
+            "description": "person name",
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "address",
+            "description": "person address",
+            "schema": {
+                "type": "object",
+                "field": [
+                    {
+                        "name": "street",
+                        "predicate": "core:timestamp",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "country",
+                        "schema": {
+                            "type": "array",
+                            "item": {
+                                "type": "object",
+                                "field": {
+                                    "name": "keket",
+                                    "schema": {
+                                        "type": "object",
+                                        "field": {
+                                            "name": "xxl",
+                                            "predicate": "core:value",
+                                            "schema": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+            }
+        }
+    ]
+}

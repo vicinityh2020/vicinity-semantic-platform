@@ -13,6 +13,7 @@ import org.eclipse.rdf4j.rio.helpers.StatementCollector;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sk.intersoft.vicinity.platform.semantic.graph.Graph;
 import sk.intersoft.vicinity.platform.semantic.lifting.AgoraSupport;
 import sk.intersoft.vicinity.platform.semantic.lifting.ThingsLifter;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
@@ -196,7 +197,6 @@ public class Thing2Ontology {
                 logger.debug("THING FROM GRAPH: \n"+thing.toString(0));
 
 //                (new AgoraSupport(thing)).add();
-//                System.exit(1);
 
 
 
@@ -242,27 +242,51 @@ public class Thing2Ontology {
 
 
     public boolean delete(String oid) {
-        logger.info("DELETING INSTANCE FOR: ["+oid+"]");
-        String contextURI = OntologyResource.thingInstanceURI(oid);
-        logger.info("CONTEXT URI: ["+contextURI+"]");
 
         try{
-            RepositoryConnection connection = repository.getConnection();
-            try{
-                boolean contextExists = contextExists(contextURI, connection);
-                if(contextExists){
+
+            logger.info("DELETING INSTANCE FOR: ["+oid+"]");
+            String contextURI = OntologyResource.thingInstanceURI(oid);
+            String uri = OntologyResource.thingInstanceURI(oid);
+
+            logger.info("THING URI: ["+uri+"]");
+            logger.info("CONTEXT URI: ["+contextURI+"]");
+
+            Graph graph = repository.loadGraph(uri, contextURI);
+
+            logger.debug("getting graph for OID: [" + oid + "]");
+
+            if(graph != null) {
+                logger.debug("graph exists: \n"+graph.describe());
+                Set<String> contexts = graph.values(AgoraSupport.HAS_CONTEXT_GRAPH);
+
+                logger.debug("deleting subgraphs: "+contexts);
+
+
+                RepositoryConnection connection = repository.getConnection();
+                try{
+                    connection.begin();
+                    for(String ctx: contexts){
+                        logger.debug("deleting subgraph: "+ctx);
+                        connection.clear(factory.createIRI(ctx));
+                    }
+                    logger.debug("deleting thing: "+contextURI);
                     connection.clear(factory.createIRI(contextURI));
+
+                    connection.commit();
                     return true;
+
                 }
-                else return false;
+                catch(Exception e){
+                    logger.error("EXCEPTION", e);
+                }
+                finally {
+                    connection.close();
+                }
 
             }
-            catch(Exception e){
-                logger.error("EXCEPTION", e);
-            }
-            finally {
-                connection.close();
-            }
+
+
         }
         catch(Exception e){
             logger.error("EXCEPTION", e);

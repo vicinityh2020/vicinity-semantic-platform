@@ -8,7 +8,8 @@ public class TestThing2Ontology {
 
     public void populate(boolean create) {
         try{
-            String json = TestUtil.file2string(TestUtil.path(jsonPath+"example-thing.json"));
+//            String json = TestUtil.file2string(TestUtil.path(jsonPath+"example-thing.json"));
+            String json = TestUtil.file2string(TestUtil.path(jsonPath+"agora-thing.json"));
 
             System.out.println("INPUT: \n"+json);
             System.out.println("CREATE: "+create);
@@ -34,7 +35,7 @@ public class TestThing2Ontology {
     public void testDelete() {
         try{
 
-            String uuid = "test3";
+            String uuid = "test-agora";
             System.out.println("DELETE: "+uuid);
 
             Thing2Ontology handler = new Thing2Ontology();
@@ -86,9 +87,9 @@ public class TestThing2Ontology {
     public static void main(String[] args) throws  Exception {
         TestThing2Ontology t = new TestThing2Ontology();
 //        t.populate(true);
-//        t.populate(false);
+        t.populate(false);
 //        t.o2t();
 //        t.testDelete();
-        t.validate();
+//        t.validate();
     }
 }

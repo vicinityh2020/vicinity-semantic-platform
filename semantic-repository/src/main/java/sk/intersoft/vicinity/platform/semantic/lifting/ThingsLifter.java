@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sk.intersoft.vicinity.platform.semantic.lifting.model.AgoraMapping;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.*;
@@ -82,6 +83,20 @@ public class ThingsLifter {
             if (!propertyIndividuals.contains(property.refersTo)) {
                 validator.errors.add("unknown ontology property individual for [monitors]: [" + property.refersTo + "], thing ["+thing.oid+"] property ["+property.id+"]");
             }
+
+            System.out.println("VALIDATING AGORA");
+            InteractionPatternEndpoint read = property.readEndpoint;
+            if(read != null && read.output != null){
+                Set<AgoraMapping> mappings = AgoraSupport.getMappings(read.output, false);
+                System.out.println("MAPPINGS "+mappings.size());
+                for(AgoraMapping m : mappings) {
+                    System.out.println("CHACK: "+m);
+                    if(!AgoraSupport.mappingPredicates.contains(m.predicate)) {
+                        validator.errors.add("unknown agora predicate annotation: [" + m.predicate + "], thing ["+thing.oid+"] property ["+property.id+"]");
+                    }
+                }
+            }
+
 
             liftLinks(property);
         }
