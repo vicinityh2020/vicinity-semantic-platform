@@ -135,8 +135,8 @@ public class TestClient {
         String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-things-validation.json";
         String json = TestUtil.file2string(source);
 //        System.out.println("VALIDATE TD: \n"+json.toString(2));
-//        String result  =post(ENDPOINT + "td/validate", json);
-        String result  =post("https://vicinity.bavenir.eu:3000/api/repository/validate", json);
+        String result  =post(ENDPOINT + "td/validate", json);
+//        String result  =post("https://vicinity.bavenir.eu:3000/api/repository/validate", json);
 //        String result  = post(ENDPOINT, json);
         System.out.println("VALIDATION RESULT ["+ENDPOINT+"]: \n"+result);
         try{
@@ -159,8 +159,8 @@ public class TestClient {
 //        t.query();
 //        t.remove("abc2");
 //        t.create();
-//        t.validate();
-        t.annotations();
+        t.validate();
+//        t.annotations();
     }
 
 }

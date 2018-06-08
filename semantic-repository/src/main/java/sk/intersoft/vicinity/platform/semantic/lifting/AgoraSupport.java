@@ -160,7 +160,7 @@ public class AgoraSupport {
             if(schema.field != null){
                 for(DataSchemaField field : schema.field){
                     if(field.predicate != null){
-                        AgoraMapping mapping = new AgoraMapping(path, field.name, field.predicate);
+                        AgoraMapping mapping = new AgoraMapping("$"+path, field.name, field.predicate);
                         if(validate){
                             for(String predicate : mappingPredicates){
                                 if(predicate.equals(field.predicate)){

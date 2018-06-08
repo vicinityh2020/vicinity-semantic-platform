@@ -2,16 +2,9 @@
     "adapter-id": "kokot",
     "thing-descriptions": [
         {
-            "oid": "test-valid",
-            "adapter-id": "test3adapter",
-            "name": "human reads my name herex xxl",
-            "type": "adapters:ActivityTracker"
-        },
-        {
-            "oidx": "test-valid-1",
-            "adapter-idx": "test3adapter",
-            "name": "human reads my name here xxl",
-            "type": "adapters:ActivityTracker",
+            "oid": "test-valid-1",
+            "namex": "human reads my name here xxl",
+            "typex": "adapters:ActivityTracker",
             "properties": [
                 {
                     "pidx": "test-pid",

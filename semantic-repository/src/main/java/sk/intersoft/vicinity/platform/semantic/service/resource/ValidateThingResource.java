@@ -49,6 +49,7 @@ public class ValidateThingResource extends ServerResource {
 
     private JSONObject validate(JSONObject thing) {
         Thing2Ontology handler = new Thing2Ontology();
+        thing.put("adapter-id", "simulated-adapter-id");
         JSONObject wrapper = wrap(thing);
         try{
             ThingsLifterResult result = handler.validateAndLift(thing.toString());
