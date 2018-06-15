@@ -16,6 +16,7 @@ among the data.
 
 VICINITY Ontology:
 * [Complete set of VICINITY Ontologies](http://vicinity.iot.linkeddata.es/vicinity/)
+* [Ontology updates for VICINITY adapters](docs/ADAPTERS_ONTOLOGY.md)
 * [The actualized extension of VICINITY ontology](docs/ONTOLOGY.md)
 
 
