@@ -29,8 +29,8 @@ import java.util.Scanner;
 
 public class TestClient {
     HttpClient client = HttpClientBuilder.create().build();
-    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
-//    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
+//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
 
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -124,7 +124,7 @@ public class TestClient {
     }
 
     public void create(){
-        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-thing-validation.json";
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-thing.json";
         JSONObject json = new JSONObject(TestUtil.file2string(source));
         System.out.println("CREATE TD: \n"+json.toString(2));
         System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "td/create", json.toString()))).toString(2));
@@ -132,7 +132,7 @@ public class TestClient {
     }
     public void validate(){
 //        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-thing-validation.json";
-        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-things-validation.json";
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/example-thing.json";
         String json = TestUtil.file2string(source);
 //        System.out.println("VALIDATE TD: \n"+json.toString(2));
         String result  =post(ENDPOINT + "td/validate", json);
@@ -158,8 +158,8 @@ public class TestClient {
         TestClient t = new TestClient();
 //        t.query();
 //        t.remove("abc2");
-//        t.create();
-        t.validate();
+        t.create();
+//        t.validate();
 //        t.annotations();
     }
 

@@ -28,6 +28,7 @@ public class ThingValidator {
             }
         }
         catch(Exception e){
+            logger.error("", e);
         }
         return null;
     }

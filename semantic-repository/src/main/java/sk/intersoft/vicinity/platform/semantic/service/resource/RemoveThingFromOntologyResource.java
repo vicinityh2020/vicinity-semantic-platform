@@ -17,6 +17,8 @@ public class RemoveThingFromOntologyResource extends ServerResource {
         try{
             String oid = getAttribute("oid");
 
+            logger.info("=============================");
+            logger.info("=============================");
             logger.info("EXECUTE DELETE FOR: ["+oid+"]");
 
             Thing2Ontology handler = new Thing2Ontology();

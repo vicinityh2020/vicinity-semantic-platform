@@ -17,11 +17,15 @@ public class Thing2OntologyResource extends ServerResource {
     @Post()
     public String create(Representation entity) throws Exception {
 
+        logger.info("=============================");
+        logger.info("=============================");
         logger.info("EXECUTE Thing2Ontology CREATE");
 
         Thing2Ontology handler = new Thing2Ontology();
         try{
-            JSONObject result = handler.create(entity.getText());
+            String payload = entity.getText();
+            logger.info("CREATE PAYLOAD: \n" +payload);
+            JSONObject result = handler.create(payload);
             return ServiceResponse.success(result).toString();
         }
         catch(Exception e){
@@ -33,11 +37,15 @@ public class Thing2OntologyResource extends ServerResource {
     @Put()
     public String update(Representation entity) throws Exception {
 
+        logger.info("=============================");
+        logger.info("=============================");
         logger.info("EXECUTE Thing2Ontology UPDATE");
 
         Thing2Ontology handler = new Thing2Ontology();
         try{
-            JSONObject result = handler.update(entity.getText());
+            String payload = entity.getText();
+            logger.info("UPDATE PAYLOAD: \n" +payload);
+            JSONObject result = handler.update(payload);
             return ServiceResponse.success(result).toString();
         }
         catch(Exception e){

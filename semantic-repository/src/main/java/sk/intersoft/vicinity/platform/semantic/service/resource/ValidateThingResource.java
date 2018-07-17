@@ -25,6 +25,7 @@ public class ValidateThingResource extends ServerResource {
             result.put("oid", thing.getString("oid"));
         }
         catch(Exception e){
+            logger.error("", e);
             result.put("oid", "unknown!");
         }
 
@@ -62,6 +63,7 @@ public class ValidateThingResource extends ServerResource {
 
         }
         catch(Exception e){
+            logger.error("", e);
             return fail(wrapper, e.getMessage());
         }
 
@@ -79,10 +81,14 @@ public class ValidateThingResource extends ServerResource {
     @Post()
     public String validate(Representation entity) throws Exception {
 
+        logger.info("=============================");
+        logger.info("=============================");
         logger.info("EXECUTE Thing VALIDATOR");
 
         try{
-            JSONObject object = new JSONObject(entity.getText());
+            String payload = entity.getText();
+
+            JSONObject object = new JSONObject(payload);
             if(object.has("adapter-id") && object.has("thing-descriptions")){
                 logger.info("VALIDATING ADAPTER OBJECTS");
                 JSONArray array = object.getJSONArray("thing-descriptions");

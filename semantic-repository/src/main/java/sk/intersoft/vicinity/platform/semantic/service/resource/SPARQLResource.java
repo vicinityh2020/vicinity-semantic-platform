@@ -19,7 +19,11 @@ public class SPARQLResource extends ServerResource {
 
         SPARQL sparql = new SPARQL();
         try{
+            logger.info("=============================");
+            logger.info("=============================");
             String queryJSON = entity.getText();
+
+            logger.debug("EXECUTE SPARQL: \n"+queryJSON);
             JSONObject object = new JSONObject(queryJSON);
             String query = object.getString("query");
             logger.debug("EXECUTE SPARQL: \n"+query);

@@ -1,6 +1,8 @@
 package sk.intersoft.vicinity.platform.semantic.lifting.model.thing;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.utils.Dump;
 import sk.intersoft.vicinity.platform.semantic.utils.JSONUtil;
 
@@ -8,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InteractionPattern {
+    final static Logger logger = LoggerFactory.getLogger(InteractionPattern.class.getName());
 
     public String id = null;
     public String refersTo = null;
@@ -83,6 +86,7 @@ public class InteractionPattern {
             }
         }
         catch(Exception e){
+            logger.error("", e);
             validator.error("Unable to process property: "+validator.identify(pattern.id, patternJSON));
         }
         return pattern;
@@ -109,6 +113,7 @@ public class InteractionPattern {
 
         }
         catch(Exception e){
+            logger.error("", e);
             validator.error("Unable to process action: "+validator.identify(pattern.id, patternJSON));
         }
 
@@ -140,6 +145,7 @@ public class InteractionPattern {
 
         }
         catch(Exception e){
+            logger.error("", e);
             validator.error("Unable to process event: "+validator.identify(pattern.id, patternJSON));
         }
 

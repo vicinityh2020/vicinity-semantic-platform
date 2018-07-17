@@ -1,6 +1,8 @@
 package sk.intersoft.vicinity.platform.semantic.lifting.model.thing;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.utils.Dump;
 import sk.intersoft.vicinity.platform.semantic.utils.JSONUtil;
 
@@ -8,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InteractionPatternEndpoint {
+    final static Logger logger = LoggerFactory.getLogger(InteractionPatternEndpoint.class.getName());
+
     public String href = null;
     public DataSchema output = null;
     public DataSchema input = null;
@@ -64,6 +68,7 @@ public class InteractionPatternEndpoint {
 
             }
             catch(Exception e){
+                logger.error("", e);
                 validator.error("Unable to process link: " + linkJSON.toString());
                 return null;
             }

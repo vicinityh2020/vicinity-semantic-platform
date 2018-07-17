@@ -126,10 +126,10 @@ public class Thing2Ontology {
 //                        st.getSubject() + " " +
 //                                st.getPredicate() + " "+
 //                                st.getObject());
-//                logger.debug(
-//                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
-//                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
-//                                Namespaces.toPrefixed(st.getObject().stringValue()));
+                logger.debug("TRIPLE IN: " +
+                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
+                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
+                                Namespaces.toPrefixed(st.getObject().stringValue()));
 
                 connection.add(st, factory.createIRI(contextURI));
             }
@@ -170,7 +170,7 @@ public class Thing2Ontology {
     }
 
     public JSONObject populate(String data, boolean updateContent)  {
-        logger.info("POPULATING NEW THING");
+        logger.info("POPULATING NEW THING: \n"+data);
 
         ThingsLifterResult lifting = validateAndLift(data);
 

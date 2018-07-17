@@ -110,7 +110,7 @@ public class TestRepo {
 //        t.query();
 //        t.graph();
 //        t.delete();
-//        t.o2t();
+        t.o2t();
     }
 
 }

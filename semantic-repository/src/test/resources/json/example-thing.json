@@ -1,5 +1,5 @@
 {
-    "oid": "test3",
+    "oid": "my-test-1",
     "adapter-id": "test3adapter",
     "name": "human reads my name herex xxl",
     "type": "adapters:ActivityTracker",

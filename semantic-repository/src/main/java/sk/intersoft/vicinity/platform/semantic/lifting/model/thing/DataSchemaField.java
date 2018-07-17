@@ -1,10 +1,14 @@
 package sk.intersoft.vicinity.platform.semantic.lifting.model.thing;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.utils.Dump;
 import sk.intersoft.vicinity.platform.semantic.utils.JSONUtil;
 
 public class DataSchemaField {
+    final static Logger logger = LoggerFactory.getLogger(DataSchemaField.class.getName());
+
     public String name;
     public String predicate;
     public DataSchema schema;
@@ -41,6 +45,7 @@ public class DataSchemaField {
 
         }
         catch(Exception e){
+            logger.error("", e);
             validator.error("unable to process data-schema-field: "+fieldJSON.toString());
             return null;
         }
