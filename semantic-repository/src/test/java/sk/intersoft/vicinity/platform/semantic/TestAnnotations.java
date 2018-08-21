@@ -56,7 +56,7 @@ public class TestAnnotations {
 
     public static void main(String[] args) throws  Exception {
         TestAnnotations t = new TestAnnotations();
-//        t.traverse();
-        t.agoraMapping();
+        t.traverse();
+//        t.agoraMapping();
     }
 }

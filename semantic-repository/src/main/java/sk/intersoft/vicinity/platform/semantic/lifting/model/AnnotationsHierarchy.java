@@ -1,5 +1,6 @@
 package sk.intersoft.vicinity.platform.semantic.lifting.model;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
@@ -13,6 +14,9 @@ import sk.intersoft.vicinity.platform.semantic.Repository;
 import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
 import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AnnotationsHierarchy {
     final static Logger logger = LoggerFactory.getLogger(AnnotationsHierarchy.class.getName());
     Repository repository = Repository.getInstance();
@@ -23,12 +27,30 @@ public class AnnotationsHierarchy {
     private static final String SUBCLASSES_KEY = "sub-classes";
     private static final String INDIVIDUALS_KEY = "individuals";
 
-    public JSONObject traverse(String className, String path, boolean withIndividuals) {
-        path = path + " / "+className;
+    public JSONObject traverse(String className, List<String> path, boolean withIndividuals) {
 
-//        logger.info("GETTING ANNOTATIONS HIERARCHY FOR [" + className + " :: path: " + path + " :: individuals: " + withIndividuals + "]");
+//        logger.info("GETTING ANNOTATIONS HIERARCHY FOR [" + className + "] :: individuals: " + withIndividuals + "]");
+//        logger.info("actual path: " + path);
+
+        if(path.contains(className)) {
+//            logger.info("class on path .. avoid recursion, right?");
+            return null;
+        }
+
+
+        List<String> pathExtension = new ArrayList<String>();
+        pathExtension.addAll(path);
+        pathExtension.add(className);
+//        logger.info("class NOT on path ");
+//        logger.info("path extension: "+pathExtension);
+
+        JSONArray pathArray = new JSONArray();
+        for(String p : pathExtension) {
+            pathArray.put(p);
+        }
+
         JSONObject result = new JSONObject();
-        result.put(PATH_KEY, path);
+        result.put(PATH_KEY, pathArray);
         JSONArray subclassArray = new JSONArray();
         JSONArray individualArray = new JSONArray();
 
@@ -58,7 +80,10 @@ public class AnnotationsHierarchy {
                             String subclass = Namespaces.toPrefixed(st.getSubject().stringValue());
 //                            logger.debug("trying subclass: ["+subclass+"]");
 //                            logger.debug("predicate::object ["+st.getPredicate().toString()+" :: "+st.getObject().toString()+"]");
-                            subclassArray.put(traverse(subclass, path, withIndividuals));
+                            JSONObject subresult = traverse(subclass, pathExtension, withIndividuals);
+                            if(subresult != null){
+                                subclassArray.put(subresult);
+                            }
                         }
                         catch(Exception ex){
                             logger.error("", ex);
@@ -111,9 +136,9 @@ public class AnnotationsHierarchy {
 
     public JSONObject dump(){
         JSONObject result = new JSONObject();
-        result.put("device-hierarchy", traverse("core:Device", "", false));
-        result.put("service-hierarchy", traverse("core:Service", "", false));
-        result.put("property-hierarchy", traverse("ssn:Property", "", true));
+        result.put("device-hierarchy", traverse("core:Device", new ArrayList<String>(), false));
+        result.put("service-hierarchy", traverse("core:Service", new ArrayList<String>(), false));
+        result.put("property-hierarchy", traverse("ssn:Property", new ArrayList<String>(), true));
         return result;
     }
 }
