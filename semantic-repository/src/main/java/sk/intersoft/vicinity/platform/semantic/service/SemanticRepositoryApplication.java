@@ -8,6 +8,7 @@ import org.restlet.security.ChallengeAuthenticator;
 import sk.intersoft.vicinity.platform.semantic.service.resource.*;
 
 public class SemanticRepositoryApplication extends Application {
+    public static final String TEST = "/test";
     public static final String ALIVE = "/alive";
     public static final String SPARQL = "/sparql";
     public static final String ANNOTATIONS = "/annotations";
@@ -30,6 +31,9 @@ public class SemanticRepositoryApplication extends Application {
 
     public Router createApiRouter() {
         Router apiRouter = new Router(getContext());
+        apiRouter.attach(TEST, TestResource.class);
+        apiRouter.attach(TEST+"/", TestResource.class);
+
         apiRouter.attach(ALIVE, AliveResource.class);
         apiRouter.attach(ALIVE+"/", AliveResource.class);
 

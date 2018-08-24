@@ -1,5 +1,6 @@
 package sk.intersoft.vicinity.platform.semantic;
 
+import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
@@ -7,6 +8,7 @@ import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.query.QueryLanguage;
 import org.eclipse.rdf4j.query.resultio.sparqljson.SPARQLResultsJSONWriter;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.RDFParser;
 import org.eclipse.rdf4j.rio.Rio;
@@ -18,8 +20,7 @@ import sk.intersoft.vicinity.platform.semantic.sparql.SPARQL;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.StringReader;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class TestRepo {
 
@@ -105,12 +106,59 @@ public class TestRepo {
 
     }
 
+    public List<String> ctxs() throws Exception {
+        List<String> ctxs = new ArrayList<>();
+        try{
+            RepositoryConnection connection = repository.getConnection();
+            try{
+                RepositoryResult<Resource> contexts = connection.getContextIDs();
+                if(contexts.hasNext()){
+                    while(contexts.hasNext()){
+                        String r = contexts.next().stringValue();
+                        if(r.contains("things")){
+                            ctxs.add(r);
+                        }
+                    }
+                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            finally {
+                connection.close();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        Collections.shuffle(ctxs);
+        return ctxs;
+    }
+
+    public void test(){
+        Repository repo = Repository.getInstance();
+        try{
+            List<String> ctxs = ctxs();
+            if(!ctxs.isEmpty()){
+
+                String ctx = ctxs.get(0);
+                System.out.println("selecting random context: "+ctx);
+                Graph g = repo.loadGraph(ctx, ctx);
+                System.out.println("G: "+g.size());
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws  Exception {
         TestRepo t = new TestRepo();
 //        t.query();
 //        t.graph();
 //        t.delete();
-        t.o2t();
+//        t.o2t();
+        t.test();
     }
 
 }

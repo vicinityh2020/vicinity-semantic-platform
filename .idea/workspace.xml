@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4f95401-083a-41c8-9082-1aa8f02f1945" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="c4f95401-083a-41c8-9082-1aa8f02f1945" name="Default" comment="fixed error with recursive annotation hierarchy extraction (recursive upper model?)">
+      <change afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/TestSimulator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/TestResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semantic-repository/semantic-repository.iml" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/semantic-repository.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/AnnotationsHierarchy.java" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/AnnotationsHierarchy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestAnnotations.java" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestAnnotations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/utils.iml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vicinity-semantic-platform.iml" beforeDir="false" afterPath="$PROJECT_DIR$/vicinity-semantic-platform.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/SemanticRepositoryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/SemanticRepositoryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepoParallel.java" beforeDir="false" afterPath="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepoParallel.java" afterDir="false" />
     </list>
     <ignored path="vicinity-semantic-platform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,28 +29,37 @@
     <session id="-1124400207">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.65" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="4" />
+          <entry key="java" value="14" />
+          <entry key="log" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="4" />
+          <entry key="JAVA" value="14" />
+          <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="395" />
+          <entry key="java" value="1941" />
+          <entry key="log" value="4" />
+          <entry key="txt" value="88" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="395" />
+          <entry key="JAVA" value="1941" />
+          <entry key="PLAIN_TEXT" value="92" />
         </counts>
       </usages-collector>
     </session>
@@ -59,13 +69,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepoParallel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1144">
-              <caret line="237" column="21" selection-start-line="237" selection-start-column="21" selection-end-line="237" selection-end-column="21" />
+            <state relative-caret-position="352">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#5024#5025#0" expanded="true" />
+                <element signature="e#5060#5061#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,65 +86,56 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/SemanticRepositoryApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/AnnotationsHierarchyResource.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestAnnotations.java">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/TestResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="59" column="17" lean-forward="true" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+            <state relative-caret-position="110">
+              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/AnnotationsHierarchy.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/TestSimulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2063">
-              <caret line="31" column="17" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="17" />
+            <state relative-caret-position="440">
+              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
               <folding>
-                <element signature="e#1618#1626#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/sparql/SPARQL.java">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestClient.java">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/SPARQLResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2266">
-              <caret line="128" selection-start-line="128" selection-end-line="128" />
+            <state relative-caret-position="594">
+              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/Thing2OntologyResource.java">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+            <state relative-caret-position="308">
+              <caret line="41" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -140,28 +143,47 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2046">
-              <caret line="112" column="16" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="16" />
+            <state relative-caret-position="523">
+              <caret line="152" selection-start-line="139" selection-end-line="152" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/semantic-repository/bin/semantic-repository.sh">
+        <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="308">
+              <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+              <folding>
+                <element signature="e#666#667#0" expanded="true" />
+                <element signature="e#701#702#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>traverse(</find>
       <find>recur</find>
       <find>path</find>
+      <find>loadg</find>
+      <find>open</find>
+      <find>log(</find>
+      <find>load</find>
+      <find>q(</find>
+      <find>test(</find>
+      <find>queryth</find>
+      <find>parallel(</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -177,12 +199,40 @@
       <list>
         <option value="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestAnnotations.java" />
         <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/AnnotationsHierarchy.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/test/resources/log/log" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/SemanticRepositoryApplication.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepo.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/TestSimulator.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/TestResource.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java" />
+        <option value="$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepoParallel.java" />
       </list>
     </option>
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand />
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Semantic Platform" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Semantic Platform" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Semantic Repository" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Semantic Repository" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
       <select />
     </treeState>
   </component>
@@ -201,8 +251,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,7 +303,38 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="semantic" type="462c0819:PsiDirectoryNode" />
+              <item name="graph" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vicinity-semantic-platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vicinity-semantic-platform" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic-repository" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic" type="462c0819:PsiDirectoryNode" />
+              <item name="ontology" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vicinity-semantic-platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vicinity-semantic-platform" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic-repository" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vicinity-semantic-platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vicinity-semantic-platform" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic-repository" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="vicinity-semantic-platform" type="b2602c69:ProjectViewProjectNode" />
@@ -278,6 +359,23 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="semantic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vicinity-semantic-platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vicinity-semantic-platform" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic-repository" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vicinity-semantic-platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vicinity-semantic-platform" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic-repository" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -320,26 +418,25 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/semantic-repository/bin/config" />
+      <recent name="$PROJECT_DIR$/semantic-repository/src/test/resources/json-ld" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sk.intersoft.vicinity.platform.semantic.service.resource" />
+      <recent name="sk.intersoft.vicinity.platform.semantic" />
+      <recent name="sk.intersoft.vicinity.platform.semantic.lifting.model.thing" />
+      <recent name="sk.intersoft.vicinity.platform.semantic.lifting" />
+      <recent name="sk.intersoft.vicinity.platform.semantic.utils" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/semantic-repository/src/test/resources/json" />
       <recent name="$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/thing" />
       <recent name="$PROJECT_DIR$/utils/src/main/java" />
       <recent name="$PROJECT_DIR$/semantic-repository/bin/config/jsonld" />
       <recent name="$PROJECT_DIR$/semantic-repository/bin/logging" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/semantic-repository/bin/config" />
-      <recent name="$PROJECT_DIR$/semantic-repository/src/test/resources/json-ld" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="sk.intersoft.vicinity.platform.semantic" />
-      <recent name="sk.intersoft.vicinity.platform.semantic.service.resource" />
-      <recent name="sk.intersoft.vicinity.platform.semantic.lifting.model.thing" />
-      <recent name="sk.intersoft.vicinity.platform.semantic.lifting" />
-      <recent name="sk.intersoft.vicinity.platform.semantic.utils" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -354,7 +451,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestAnnotations">
+  <component name="RunManager" selected="Application.TestRepoParallel">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -476,8 +573,7 @@
     <configuration name="TestRepo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sk.intersoft.vicinity.platform.semantic.TestRepo" />
       <module name="semantic-repository" />
-      <option name="VM_PARAMETERS" value="-Dgraphdb.endpoint=http://94.130.151.234:7200/repositories/vicinity-test" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-Dgraphdb.endpoint=http://localhost:7200/repositories/vicinity-test" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="" />
         <option name="TRANSPORT" value="0" />
@@ -493,8 +589,7 @@
     <configuration name="TestRepoParallel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sk.intersoft.vicinity.platform.semantic.TestRepoParallel" />
       <module name="semantic-repository" />
-      <option name="VM_PARAMETERS" value="-Dgraphdb.endpoint=http://localhost:7200/repositories/vicinity-test" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="-Dgraphdb.endpoint=http://localhost:7200/repositories/vicinity-test " />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="" />
         <option name="TRANSPORT" value="0" />
@@ -593,9 +688,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestAnnotations" />
         <item itemvalue="Application.TestRepoParallel" />
         <item itemvalue="Application.TestRepo" />
+        <item itemvalue="Application.TestAnnotations" />
         <item itemvalue="Application.TestThing2Ontology" />
       </list>
     </recent_temporary>
@@ -610,13 +705,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516711414918</updated>
-    </task>
-    <task id="LOCAL-00003" summary="updated build/run scripts and added logging to files">
-      <created>1516801282676</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1516801282676</updated>
     </task>
     <task id="LOCAL-00004" summary="updated logging">
       <created>1516882689254</created>
@@ -954,20 +1042,27 @@
       <option name="project" value="LOCAL" />
       <updated>1531906979389</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="fixed error with recursive annotation hierarchy extraction (recursive upper model?)">
+      <created>1534860722774</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1534860722774</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="39" width="1920" height="1045" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25187165" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25989306" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Palette&#9;" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3251073" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33189654" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32435346" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33189654" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -975,7 +1070,7 @@
       <window_info anchor="bottom" id="Changes" order="7" visible="true" weight="0.3254818" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32937366" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.3286638" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32831" />
       <window_info anchor="bottom" id="Application Servers" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32939914" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1003,7 +1098,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated logging configuration" />
     <MESSAGE value="small updates .. adding slash to endpoints + improved validation (got rid of infrastructure id)" />
     <MESSAGE value="ontology returns &quot;name&quot; property in TD" />
     <MESSAGE value="enabled events" />
@@ -1028,34 +1122,14 @@
     <MESSAGE value="updated thing validator, fixed json path in agora support" />
     <MESSAGE value="added more logging" />
     <MESSAGE value="added repository performance test. multiple parallel request to isolate problem, why triplestore is going down! .. no success, runs flawlessly" />
-    <option name="LAST_COMMIT_MESSAGE" value="added repository performance test. multiple parallel request to isolate problem, why triplestore is going down! .. no success, runs flawlessly" />
+    <MESSAGE value="fixed error with recursive annotation hierarchy extraction (recursive upper model?)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed error with recursive annotation hierarchy extraction (recursive upper model?)" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="100" column="87" selection-start-line="98" selection-start-column="28" selection-end-line="100" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/rdf4j/rdf4j-repository-http/2.2.2/rdf4j-repository-http-2.2.2.jar!/org/eclipse/rdf4j/repository/http/HTTPRepository.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="38" column="61" selection-start-line="38" selection-start-column="61" selection-end-line="38" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/bin/config/json-ld/thing.jsonld">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="8" column="43" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/src/main/java/sk/intersoft/vicinity/platform/semantic/utils/JSONUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1074,13 +1148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="25" column="31" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/NamespacePrefix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -1105,13 +1172,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/Namespaces.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="42" selection-start-line="24" selection-end-line="42" />
         </state>
       </provider>
     </entry>
@@ -1234,13 +1294,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/SPARQLResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/ValidateThingResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1276,13 +1329,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="86" column="57" selection-start-line="86" selection-start-column="57" selection-end-line="86" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/AgoraSupport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1300,24 +1346,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java">
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/AnnotationsHierarchyResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1628">
-          <caret line="104" column="53" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
+        <state relative-caret-position="88">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/resources/log/log">
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestAnnotations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10296">
-          <caret line="468" selection-start-line="468" selection-end-line="468" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/sparql/SPARQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="1144">
+          <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1335,10 +1374,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepo.java">
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/NamespacePrefix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2046">
-          <caret line="112" column="16" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="16" />
+        <state relative-caret-position="330">
+          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/ontology/Namespaces.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="20" column="80" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/AnnotationsHierarchy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/sparql/SPARQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1349,43 +1409,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepoParallel.java">
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/SPARQLResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1144">
-          <caret line="237" column="21" selection-start-line="237" selection-start-column="21" selection-end-line="237" selection-end-column="21" />
+        <state relative-caret-position="594">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/SemanticRepositoryApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Thing2Ontology.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/graph/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <element signature="e#666#667#0" expanded="true" />
+            <element signature="e#701#702#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="152" selection-start-line="139" selection-end-line="152" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/TestResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/resources/log/log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2833" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/Repository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="41" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/TestSimulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/SemanticRepositoryApplication.java">
+    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestRepoParallel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/service/resource/AnnotationsHierarchyResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/test/java/sk/intersoft/vicinity/platform/semantic/TestAnnotations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="59" column="17" lean-forward="true" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic-repository/src/main/java/sk/intersoft/vicinity/platform/semantic/lifting/model/AnnotationsHierarchy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2063">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="17" />
+        <state relative-caret-position="352">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
-            <element signature="e#1618#1626#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#5024#5025#0" expanded="true" />
+            <element signature="e#5060#5061#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -25,17 +25,21 @@ public class Repository {
 
     public static Repository getInstance(){
         String endpoint = System.getProperty("graphdb.endpoint");
-        logger.info("CREATING REPOSITORY INSTANCE: "+endpoint);
-        if(instance == null) {
-            if(endpoint != null){
-                logger.info("REPOSITORY ENDPOINT: "+endpoint);
-                instance = new Repository(endpoint);
-            }
-            else {
-                logger.info("REPOSITORY ENDPOINT IS NOT SET!!! :: "+endpoint);
-            }
-        }
-        return instance;
+//        logger.info("CREATING REPOSITORY INSTANCE: "+endpoint);
+//        if(instance == null) {
+//            if(endpoint != null){
+//                logger.info("REPOSITORY ENDPOINT: "+endpoint);
+//                instance = new Repository(endpoint);
+//            }
+//            else {
+//                logger.info("REPOSITORY ENDPOINT IS NOT SET!!! :: "+endpoint);
+//            }
+//        }
+//        logger.info("singleton instance");
+//        return instance;
+
+        logger.info("not singleton instance");
+        return new Repository(endpoint);
     }
 
     public RepositoryConnection getConnection() throws Exception {

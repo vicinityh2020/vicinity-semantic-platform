@@ -22,6 +22,9 @@ public class Graph {
         model.add(st);
     }
 
+    public int size(){
+        return model.size();
+    }
 
     public HashSet<String> values(String property) {
 

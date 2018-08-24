@@ -48,8 +48,10 @@ public class TestRepoParallel {
 
 
     HttpClient client = HttpClientBuilder.create().build();
-    //        public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
     public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
+//    public String ENDPOINT = "http://159.69.26.108:9004/semantic-repository/";
+
 
     public String path = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/log/log";
     public BufferedWriter w;
@@ -61,9 +63,13 @@ public class TestRepoParallel {
         w.close();
     }
     public void log(String out) throws Exception {
-        open();
-        w.write(out);
-        close();
+        try{
+            open();
+            w.write(out);
+            close();
+        }
+        catch(Exception e) {
+        }
     }
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -129,13 +135,78 @@ public class TestRepoParallel {
 
     }
 
+    public class LoadThread implements Runnable {
+        private String id;
+
+        public LoadThread(String id) {
+            this.id = id;
+        }
+
+        public void run() {
+            try{
+                String out = "";
+                long start = System.nanoTime();
+
+                System.out.println("THREAD STARTED ["+start+"]: ID ["+id+"]");
+                long end = System.nanoTime();
+                long diff = end - start;
+                out += "THREAD COMPLETED in ["+start+" - "+end+"]: [] ID ["+id+"]\n";
+                System.out.print(out);
+                log(out);
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+    public class TestThread implements Runnable {
+        private String id;
+
+        public TestThread(String id) {
+            this.id = id;
+        }
+
+        public void run() {
+            try{
+                String endpoint = ENDPOINT + "test";
+                long start = System.nanoTime();
+
+                System.out.println("THREAD STARTED ["+start+"]: ID ["+id+"]");
+
+                String out = "";
+                String result = "";
+                System.out.println("THREAD ["+id+"] query: "+endpoint);
+
+                for (int i = 0; i < 30; i++){
+                    result = get(endpoint);
+                    System.out.print(result);
+                }
+
+                long end = System.nanoTime();
+                long diff = end - start;
+                out += "THREAD COMPLETED in ["+start+" - "+end+"]: ["+result.length()+"] ID ["+id+"]\n";
+                System.out.print(out);
+                log(out);
+            }
+            catch(Exception e){
+                System.out.println("THREAD ["+id+"] EXCEPTION");
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     public class QueryThread implements Runnable {
         private String id;
         private int action;
 
         public QueryThread(String id) {
             this.id = id;
-            this.action = 0;
+            this.action = 1;
         }
         public QueryThread(String id, int action) {
             this.id = id;
@@ -143,7 +214,7 @@ public class TestRepoParallel {
         }
 
         public void run() {
-            String q = "SELECT * WHERE {?s ?p ?o} LIMIT 100000";
+            String q = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT * WHERE {?s ?p ?o.} LIMIT 100";
             try{
 
 
@@ -162,12 +233,19 @@ public class TestRepoParallel {
 
                 String result = "";
                 if(action == 0){
+                    System.out.println("THREAD ["+id+"] create: "+ENDPOINT);
                     result = put(ENDPOINT + "td/create", json.toString());
                 }
                 else if (action == 1){
-                    JSONObject queryJSON = new JSONObject();
-                    queryJSON.put("query", q);
-                    result = post(endpoint, queryJSON.toString());
+                    System.out.println("THREAD ["+id+"] query: "+endpoint);
+
+                    for (int i = 0; i < 30; i++){
+                        JSONObject queryJSON = new JSONObject();
+                        String qx = q.replace("?s", "?s"+System.nanoTime()).replace("?o", "?o"+System.nanoTime());;
+                        queryJSON.put("query", qx);
+                        result = post(endpoint, queryJSON.toString());
+
+                    }
                 }
 
                 long end = System.nanoTime();
@@ -188,6 +266,7 @@ public class TestRepoParallel {
 
         public void run() {
             try{
+
 
 
                 System.out.println("MULTI THREAD STARTED ");
@@ -285,11 +364,54 @@ public class TestRepoParallel {
         }
     }
 
-    Repository repository = Repository.getInstance();
+    public void parallelTest() throws Exception {
+        Thread t1 = new Thread(new TestThread("1"));
+        Thread t2 = new Thread(new TestThread("2"));
+        Thread t3 = new Thread(new TestThread("3"));
+        Thread t4 = new Thread(new TestThread("4"));
+        Thread t5 = new Thread(new TestThread("5"));
+        Thread t6 = new Thread(new TestThread("6"));
+        Thread t7 = new Thread(new TestThread("7"));
+        Thread t8 = new Thread(new TestThread("8"));
+        Thread t9 = new Thread(new TestThread("9"));
+        Thread t10 = new Thread(new TestThread("10"));
+        Thread t11 = new Thread(new TestThread("11"));
+        Thread t12 = new Thread(new TestThread("12"));
+        Thread t13 = new Thread(new TestThread("13"));
+        Thread t14 = new Thread(new TestThread("14"));
+        Thread t15 = new Thread(new TestThread("15"));
+        Thread t16 = new Thread(new TestThread("16"));
+        Thread t17 = new Thread(new TestThread("17"));
+        Thread t18 = new Thread(new TestThread("18"));
+        Thread t19 = new Thread(new TestThread("19"));
+        Thread t20 = new Thread(new TestThread("20"));
 
 
 
-    public void parallel() throws Exception {
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+        t5.start();
+        t6.start();
+        t7.start();
+        t8.start();
+        t9.start();
+        t10.start();
+        t11.start();
+        t12.start();
+        t13.start();
+        t14.start();
+        t15.start();
+        t16.start();
+        t17.start();
+        t18.start();
+        t19.start();
+        t20.start();
+    }
+
+
+    public void parallelQuery() throws Exception {
         Thread t1 = new Thread(new QueryThread("1"));
         Thread t2 = new Thread(new QueryThread("2"));
         Thread t3 = new Thread(new QueryThread("3"));
@@ -312,25 +434,25 @@ public class TestRepoParallel {
         Thread t20 = new Thread(new QueryThread("20"));
 
 
-        Thread t21 = new Thread(new QueryThread("21", 1));
-        Thread t22 = new Thread(new QueryThread("22", 1));
-        Thread t23 = new Thread(new QueryThread("23", 1));
-        Thread t24 = new Thread(new QueryThread("24", 1));
-        Thread t25 = new Thread(new QueryThread("25", 1));
-        Thread t26 = new Thread(new QueryThread("26", 1));
-        Thread t27 = new Thread(new QueryThread("27", 1));
-        Thread t28 = new Thread(new QueryThread("28", 1));
-        Thread t29 = new Thread(new QueryThread("29", 1));
-        Thread t30 = new Thread(new QueryThread("30", 1));
-        Thread t31 = new Thread(new QueryThread("31", 1));
-        Thread t32 = new Thread(new QueryThread("32", 1));
-        Thread t33 = new Thread(new QueryThread("33", 1));
-        Thread t34 = new Thread(new QueryThread("34", 1));
-        Thread t35 = new Thread(new QueryThread("35", 1));
-        Thread t36 = new Thread(new QueryThread("36", 1));
-        Thread t37 = new Thread(new QueryThread("37", 1));
-        Thread t38 = new Thread(new QueryThread("38", 1));
-        Thread t39 = new Thread(new QueryThread("39", 1));
+//        Thread t21 = new Thread(new QueryThread("21", 1));
+//        Thread t22 = new Thread(new QueryThread("22", 1));
+//        Thread t23 = new Thread(new QueryThread("23", 1));
+//        Thread t24 = new Thread(new QueryThread("24", 1));
+//        Thread t25 = new Thread(new QueryThread("25", 1));
+//        Thread t26 = new Thread(new QueryThread("26", 1));
+//        Thread t27 = new Thread(new QueryThread("27", 1));
+//        Thread t28 = new Thread(new QueryThread("28", 1));
+//        Thread t29 = new Thread(new QueryThread("29", 1));
+//        Thread t30 = new Thread(new QueryThread("30", 1));
+//        Thread t31 = new Thread(new QueryThread("31", 1));
+//        Thread t32 = new Thread(new QueryThread("32", 1));
+//        Thread t33 = new Thread(new QueryThread("33", 1));
+//        Thread t34 = new Thread(new QueryThread("34", 1));
+//        Thread t35 = new Thread(new QueryThread("35", 1));
+//        Thread t36 = new Thread(new QueryThread("36", 1));
+//        Thread t37 = new Thread(new QueryThread("37", 1));
+//        Thread t38 = new Thread(new QueryThread("38", 1));
+//        Thread t39 = new Thread(new QueryThread("39", 1));
 
 
         t1.start();
@@ -354,25 +476,35 @@ public class TestRepoParallel {
         t19.start();
         t20.start();
 
-        t21.start();
-        t22.start();
-        t23.start();
-        t24.start();
-        t25.start();
-        t26.start();
-        t27.start();
-        t28.start();
-        t29.start();
-        t30.start();
-        t31.start();
-        t32.start();
-        t33.start();
-        t34.start();
-        t35.start();
-        t36.start();
-        t37.start();
-        t38.start();
-        t39.start();
+//        t21.start();
+//        t22.start();
+//        t23.start();
+//        t24.start();
+//        t25.start();
+//        t26.start();
+//        t27.start();
+//        t28.start();
+//        t29.start();
+//        t30.start();
+//        t31.start();
+//        t32.start();
+//        t33.start();
+//        t34.start();
+//        t35.start();
+//        t36.start();
+//        t37.start();
+//        t38.start();
+//        t39.start();
+
+    }
+
+    public void test() throws Exception {
+        System.out.println("TEST GRAPH");
+        String endpoint = ENDPOINT + "test";
+        System.out.println("ENDPOINT: "+endpoint);
+
+        String result = get(endpoint);
+        System.out.println("result: "+result);
 
     }
 
@@ -412,9 +544,36 @@ public class TestRepoParallel {
         t10.start();
     }
 
+    public void parallelLoad() throws Exception {
+        Thread t1 = new Thread(new LoadThread("1"));
+        Thread t2 = new Thread(new LoadThread("2"));
+        Thread t3 = new Thread(new LoadThread("3"));
+        Thread t4 = new Thread(new LoadThread("4"));
+        Thread t5 = new Thread(new LoadThread("5"));
+        Thread t6 = new Thread(new LoadThread("6"));
+        Thread t7 = new Thread(new LoadThread("7"));
+        Thread t8 = new Thread(new LoadThread("8"));
+        Thread t9 = new Thread(new LoadThread("9"));
+        Thread t10 = new Thread(new LoadThread("10"));
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+        t5.start();
+        t6.start();
+        t7.start();
+        t8.start();
+        t9.start();
+        t10.start();
+    }
+
     public static void main(String[] args) throws  Exception {
         TestRepoParallel t = new TestRepoParallel();
-        t.parallel();
+
+        t.parallelQuery();
+        t.parallelTest();
+//        t.parallelLoad();
 //        t.multiParallel();
 //        t.q();
     }
