@@ -1,0 +1,14 @@
+// prop-1:
+
+{
+  "level-1": "string"
+}
+
+,
+// prop-2:
+
+{
+  "level-1": {
+    "level-2": "string"
+  }
+}

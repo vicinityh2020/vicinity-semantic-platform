@@ -22,6 +22,8 @@ public class Namespaces {
     public static final String rdfs = "http://www.w3.org/2000/01/rdf-schema";
     public static final String xsd = "http://www.w3.org/2001/XMLSchema";
 
+    public static final String ted = "http://vicinity.eu/data/ted";
+
     private static final Map<String, String> uriMapping =
             Collections.unmodifiableMap(new HashMap<String, String>() {{
                 put(NamespacePrefix.rdf, rdf);
@@ -32,6 +34,7 @@ public class Namespaces {
                 put(NamespacePrefix.wot, wot);
                 put(NamespacePrefix.adapters, adapters);
                 put(NamespacePrefix.mappings, mappings);
+                put(NamespacePrefix.ted, ted);
 
                 put(NamespacePrefix.thing, thing);
                 put(NamespacePrefix.thingDescription, thingDescription);
@@ -39,6 +42,7 @@ public class Namespaces {
                 put(NamespacePrefix.sosa, sosa);
                 put(NamespacePrefix.ssn, ssn);
                 put(NamespacePrefix.ssnSystems, ssnSystems);
+
             }});
 
 
@@ -67,7 +71,7 @@ public class Namespaces {
         return prefixed;
     }
 
-    public static String getPrefix(String uri) {
+    public static String uriToPrefix(String uri) {
         for (Map.Entry<String, String> entry : uriMapping.entrySet()) {
             String prefix = entry.getKey();
             String uriPart = entry.getValue();
@@ -84,7 +88,7 @@ public class Namespaces {
             String uriPart = parts[0];
             String value = parts[1];
 
-            String prefix = getPrefix(uriPart);
+            String prefix = uriToPrefix(uriPart);
             if(prefix != null){
                 List<String> out = new ArrayList<String>();
                 out.add(prefix);
@@ -110,7 +114,7 @@ public class Namespaces {
             }
             String uriPart = StringUtils.join(uriParts, "/")+"/";
 
-            String prefix = getPrefix(uriPart);
+            String prefix = uriToPrefix(uriPart);
             if(prefix != null){
                 List<String> out = new ArrayList<String>();
                 out.add(prefix);
@@ -151,6 +155,16 @@ public class Namespaces {
         String[] prefixParts = prefixed.split(":");
         if(prefixParts.length == 2) {
             return prefixParts[1];
+        }
+        else{
+            return null;
+        }
+    }
+
+    public static String prefixFromPrefixed(String prefixed) {
+        String[] prefixParts = prefixed.split(":");
+        if(prefixParts.length == 2) {
+            return prefixParts[0];
         }
         else{
             return null;

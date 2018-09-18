@@ -90,7 +90,7 @@ public class ThingsLifter {
                 Set<AgoraMapping> mappings = AgoraSupport.getMappings(read.output, false);
                 System.out.println("MAPPINGS "+mappings.size());
                 for(AgoraMapping m : mappings) {
-                    System.out.println("CHACK: "+m);
+                    System.out.println("CHECK: "+m);
                     if(!AgoraSupport.mappingPredicates.contains(m.predicate)) {
                         validator.errors.add("unknown agora predicate annotation: [" + m.predicate + "], thing ["+thing.oid+"] property ["+property.id+"]");
                     }

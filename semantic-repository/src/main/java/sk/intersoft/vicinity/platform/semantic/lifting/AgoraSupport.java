@@ -6,6 +6,7 @@ import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.Ontology2Thing;
@@ -19,7 +20,9 @@ import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingDescript
 import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
 import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 import sk.intersoft.vicinity.platform.semantic.ontology.OntologyResource;
+import sk.intersoft.vicinity.platform.semantic.sparql.SPARQL;
 import sk.intersoft.vicinity.platform.semantic.util.UniqueID;
+import sk.intersoft.vicinity.platform.semantic.utils.JSONUtil;
 
 import java.util.*;
 
@@ -34,6 +37,8 @@ public class AgoraSupport {
     private static String THING_DESCRIPTION_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "ThingDescription"));
     private static String VALUE_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "Value"));
     private static String HAS_VALUE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "hasValue"));
+    private static String LITERAL_VALUE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "literalValue"));
+    private static String THING_NAME = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "thingName"));
 
     private static String RDF_TYPE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.rdf, "type"));
 
@@ -55,6 +60,7 @@ public class AgoraSupport {
     private static String HREF = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "href"));
     private static String MEDIA_TYPE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "mediaType"));
 
+    private static String HAS_COMPONENT = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "hasComponent"));
 
     private static String TIMESTAMP_PREDICATE = "core:timestamp";
     private static String VALUE_PREDICATE = "core:value";
@@ -117,13 +123,17 @@ public class AgoraSupport {
     }
 
     private void addThingTD(IRI thingIRI,
-                            IRI thingContextIRI) throws Exception {
+                            IRI thingContextIRI,
+                            IRI tedIRI,
+                            IRI tedContextIRI) throws Exception {
         IRI tdIRI = factory.createIRI(getObjectTDURI(thing.oid));
 
         logger.debug("adding thing TD");
         logger.debug("Thing IRI: " + thingIRI);
         logger.debug("Thing Context IRI: " + thingContextIRI);
         logger.debug("TD IRI: " + tdIRI);
+        logger.debug("TED IRI: " + tedIRI);
+        logger.debug("TED Context IRI: " + tedContextIRI);
 
         // thing extension:
         Set<Statement> thingExtension = new HashSet<Statement>();
@@ -137,8 +147,13 @@ public class AgoraSupport {
 
         thingExtension.add(factory.createStatement(thingIRI, factory.createIRI(HAS_CONTEXT_GRAPH), tdIRI));
 
+        Set<Statement> tedComponents = new HashSet<Statement>();
+        tedComponents.add(factory.createStatement(tedIRI, factory.createIRI(HAS_COMPONENT), thingIRI));
+
+
         addStatements(thingContextIRI, thingExtension);
         addStatements(tdIRI, thingDescription);
+        addStatements(tedContextIRI, tedComponents);
     }
 
     private IRI createIRI(String prefix, String value) {
@@ -173,7 +188,7 @@ public class AgoraSupport {
                         }
                     }
 
-                    traverse(field.schema, mappings, path+"."+field.name, validate);
+                    traverse(field.schema, mappings, path+".['"+field.name+"']", validate);
                 }
             }
         }
@@ -193,7 +208,9 @@ public class AgoraSupport {
 
     private void addValueTD(InteractionPattern property,
                             IRI thingIRI,
-                            IRI thingContextIRI) throws Exception {
+                            IRI thingContextIRI,
+                            IRI tedIRI,
+                            IRI tedContextIRI) throws Exception {
         IRI propertyIRI = factory.createIRI(property.jsonExtension.get(Ontology2Thing.URI_KEY));
 
         String valueId = UniqueID.create();
@@ -201,20 +218,30 @@ public class AgoraSupport {
         IRI valueTDIRI = factory.createIRI(getObjectTDURI(valueId));
 
 
-        logger.debug("adding thing TD");
+        logger.debug("adding thing TD: ");
         logger.debug("Property IRI: " + propertyIRI);
         logger.debug("Property Value IRI: " + valueIRI);
         logger.debug("Property Value TD IRI: " + valueTDIRI);
         logger.debug("Property Value TD mapping IRI: " + valueTDIRI);
         logger.debug("Thing IRI: " + thingIRI);
         logger.debug("Thing Context IRI: " + thingContextIRI);
+        logger.debug("TED IRI: " + tedIRI);
+        logger.debug("TED Context IRI: " + tedContextIRI);
 
         // property extension:
         Set<Statement> propertyExtension = new HashSet<Statement>();
         propertyExtension.add(factory.createStatement(propertyIRI, factory.createIRI(HAS_VALUE), valueIRI));
 
-        propertyExtension.add(factory.createStatement(valueIRI, factory.createIRI(RDF_TYPE), factory.createIRI(VALUE_CLASS)));
-        propertyExtension.add(factory.createStatement(valueIRI, factory.createIRI(DESCRIBED_BY), valueTDIRI));
+        // value thing
+        Set<Statement> valueThing = new HashSet<Statement>();
+        valueThing.add(factory.createStatement(valueIRI, factory.createIRI(RDF_TYPE), factory.createIRI(VALUE_CLASS)));
+        valueThing.add(factory.createStatement(valueIRI, factory.createIRI(DESCRIBED_BY), valueTDIRI));
+        valueThing.add(factory.createStatement(valueIRI, factory.createIRI(THING_NAME), factory.createLiteral(valueId)));
+
+        // td components
+        Set<Statement> tedComponents = new HashSet<Statement>();
+        tedComponents.add(factory.createStatement(tedIRI, factory.createIRI(HAS_COMPONENT), valueIRI));
+
 
         // thing description
         Set<Statement> valueDescription = new HashSet<Statement>();
@@ -233,39 +260,79 @@ public class AgoraSupport {
         valueDescription.add(factory.createStatement(resourceIRI, factory.createIRI(MEDIA_TYPE), factory.createLiteral("application/json")));
 
         Set<AgoraMapping> mappings = getMappings(property.readEndpoint.output, true);
+
+        logger.debug("acquired thing value mappings: ");
+        for(AgoraMapping m : mappings) {
+            logger.debug(m.toString());
+        }
         for(AgoraMapping m : mappings) {
             IRI mappingIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
             valueDescription.add(factory.createStatement(hasMappingIRI, factory.createIRI(HAS_MAPPING), mappingIRI));
 
             valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(RDF_TYPE), factory.createIRI(MAPPING_CLASS)));
-            if(m.jsonPath != null && !m.jsonPath.trim().equals("")){
+            if(m.jsonPath != null && !m.jsonPath.trim().equals("$")){
                 valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPPING_JSON_PATH), factory.createLiteral(m.jsonPath)));
             }
             valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPPING_KEY), factory.createLiteral(m.key)));
-            valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPPING_PREDICATE), factory.createLiteral(m.predicate)));
+            valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(MAPPING_PREDICATE), factory.createIRI(LITERAL_VALUE)));
 
         }
 
-        Set<Statement> thingExtension = new HashSet<Statement>();
-        thingExtension.add(factory.createStatement(thingIRI, factory.createIRI(HAS_CONTEXT_GRAPH), valueTDIRI));
+        Set<Statement> thingContexts = new HashSet<Statement>();
+        thingContexts.add(factory.createStatement(thingIRI, factory.createIRI(HAS_CONTEXT_GRAPH), valueTDIRI));
+        thingContexts.add(factory.createStatement(thingIRI, factory.createIRI(HAS_CONTEXT_GRAPH), valueIRI));
 
-        addStatements(thingContextIRI, thingExtension);
+        addStatements(thingContextIRI, thingContexts);
         addStatements(thingContextIRI, propertyExtension);
+        addStatements(valueIRI, valueThing);
         addStatements(valueTDIRI, valueDescription);
-
+        addStatements(tedContextIRI, tedComponents);
     }
 
-    private void addValuesTD(IRI thingIRI, IRI thingContextIRI) throws Exception {
+    private void addValuesTD(IRI thingIRI,
+                             IRI thingContextIRI,
+                             IRI tedIRI,
+                             IRI tedContextIRI) throws Exception {
 
         logger.debug("adding TD support for thing readable properties");
 
         for (Map.Entry<String, InteractionPattern> entry : thing.properties.entrySet()) {
             InteractionPattern prop = entry.getValue();
             if(prop.readEndpoint != null && prop.readEndpoint.output != null) {
-                addValueTD(prop, thingIRI, thingContextIRI);
+                addValueTD(prop, thingIRI, thingContextIRI, tedIRI, tedContextIRI);
             }
         }
 
+    }
+
+    public static String getTEDInstance(){
+        String query = "PREFIX core: <"+Namespaces.nsToPrefixURI(Namespaces.core)+"> " +
+                "PREFIX rdf: <"+Namespaces.nsToPrefixURI(Namespaces.rdf)+"> " +
+                "select ?ted where {" +
+                "?es rdf:type core:ThingEcosystemDescription ." +
+                "?es core:describes ?ted ." +
+                "}";
+
+
+        try{
+            SPARQL sparql = new SPARQL();
+            JSONObject result = sparql.query(query);
+
+
+            List<JSONObject> bindings = JSONUtil.getObjectArray("bindings", result.getJSONObject("results"));
+            if(bindings.size() > 0) {
+                JSONObject ted = bindings.get(0);
+
+                String tedURI = JSONUtil.getObject("ted", ted).getString("value");
+                return tedURI;
+
+            }
+        }
+        catch(Exception e){
+            logger.error("EXCEPTION", e);
+        }
+
+        return null;
     }
 
     public void add(){
@@ -273,26 +340,84 @@ public class AgoraSupport {
         try{
             String uri = OntologyResource.thingInstanceURI(thing.oid);
             String contextURI = OntologyResource.thingInstanceURI(thing.oid);
+            String tedContextURI = Namespaces.ted;
 
 
             logger.debug("OID URI: "+uri);
             logger.debug("OID CONTEXT URI: "+contextURI);
+            logger.debug("TED CONTEXT URI: "+tedContextURI);
 
 
             IRI thingIRI = factory.createIRI(uri);
             IRI thingContextIRI = factory.createIRI(contextURI);
+            IRI tedContextIRI = factory.createIRI(tedContextURI);
+            String tedInstance = getTEDInstance();
+
+            if(tedInstance == null){
+                throw new Exception("TED instance NOT found!");
+            }
+
+            IRI tedIRI = factory.createIRI(tedInstance);
 
             logger.debug("Thing IRI: "+thingIRI);
             logger.debug("Thing context IRI: "+thingContextIRI);
+            logger.debug("TED IRI: "+tedIRI);
+            logger.debug("TED Context IRI: "+tedContextIRI);
 
 
-            addThingTD(thingIRI, thingContextIRI);
-            addValuesTD(thingIRI, thingContextIRI);
+            addThingTD(thingIRI, thingContextIRI, tedIRI, tedContextIRI);
+            addValuesTD(thingIRI, thingContextIRI, tedIRI, tedContextIRI);
 
             addStatements();
         }
         catch(Exception e){
             logger.error("EXCEPTION", e);
+        }
+    }
+
+    public static boolean isThing(String uri){
+//        logger.debug("is thing: "+uri);
+        String prefixed = Namespaces.toPrefixed(uri);
+        String prefix = Namespaces.prefixFromPrefixed(prefixed);
+//        logger.debug("prefixed: "+prefixed);
+//        logger.debug("prefix: "+prefix);
+        if(prefix.equals(NamespacePrefix.thing)){
+//            logger.debug("is thing");
+            return true;
+        }
+        else {
+//            logger.debug("not thing");
+            return false;
+        }
+    }
+
+
+    public static void deleteTEDRelations(String thingURI,
+                                          Set<String> contexts,
+                                          String tedURI,
+                                          RepositoryConnection conn) {
+
+        ValueFactory factory = SimpleValueFactory.getInstance();
+
+        IRI tedIRI = factory.createIRI(tedURI);
+
+        logger.info("DELETING TED RELATIONS FOR THING: ["+thingURI+"]");
+        logger.info("TED IRI: ["+tedIRI+"]");
+        try{
+            Statement st = factory.createStatement(tedIRI, factory.createIRI(HAS_COMPONENT), factory.createIRI(thingURI));
+            logger.info("removing TED -> THING statement: "+st);
+            conn.remove(st);
+
+            for(String ctx : contexts) {
+                if(isThing(ctx)){
+                    Statement ctxst = factory.createStatement(tedIRI, factory.createIRI(HAS_COMPONENT), factory.createIRI(ctx));
+                    logger.info("removing TED -> sub-THING statement: "+ctxst);
+                    conn.remove(ctxst);
+                }
+            }
+        }
+        catch(Exception e){
+            logger.error("error deleting TED content", e);
         }
     }
 

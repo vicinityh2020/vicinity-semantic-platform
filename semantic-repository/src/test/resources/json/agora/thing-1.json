@@ -1,0 +1,32 @@
+{
+    "oid": "test-agora",
+    "adapter-id": "test-adapter",
+    "name": "human reads my name herex xxl",
+    "type": "adapters:ActivityTracker",
+    "properties": [
+        {
+            "pid": "prop-1",
+            "monitors": "adapters:Luminance",
+            "read_link": {
+                "href": "/device/{oid}/property/{pid}",
+                "output":
+{
+    "type": "object",
+    "description": "prop-1-one-level-object",
+    "field": [
+        {
+            "name": "level-1",
+            "description": "1 level property",
+            "predicate": "core:value",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ]
+}
+            }
+        }
+    ],
+    "actions": [],
+    "events": []
+}

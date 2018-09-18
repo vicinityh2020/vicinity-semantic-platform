@@ -11,6 +11,7 @@ public class NamespacePrefix {
     public static final String wot = "wot";
     public static final String adapters = "adapters";
     public static final String mappings = "mappings";
+    public static final String ted = "ted";
 
     public static final String ssn = "ssn";
     public static final String ssnSystems = "systems";

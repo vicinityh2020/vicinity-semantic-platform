@@ -1,5 +1,6 @@
 package sk.intersoft.vicinity.platform.semantic;
 
+import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
@@ -16,10 +17,8 @@ import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.graph.Graph;
 import sk.intersoft.vicinity.platform.semantic.lifting.AgoraSupport;
 import sk.intersoft.vicinity.platform.semantic.lifting.ThingsLifter;
-import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingJSON;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingDescription;
-import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingValidator;
 import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
 import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 import sk.intersoft.vicinity.platform.semantic.ontology.OntologyResource;
@@ -196,7 +195,7 @@ public class Thing2Ontology {
 
                 logger.debug("THING FROM GRAPH: \n"+thing.toString(0));
 
-//                (new AgoraSupport(thing)).add();
+                (new AgoraSupport(thing)).add();
 
 
 
@@ -260,18 +259,29 @@ public class Thing2Ontology {
                 logger.debug("graph exists: \n"+graph.describe());
                 Set<String> contexts = graph.values(AgoraSupport.HAS_CONTEXT_GRAPH);
 
-                logger.debug("deleting subgraphs: "+contexts);
+                String tedURI = AgoraSupport.getTEDInstance();
 
+                logger.debug("deleting subgraphs: "+contexts);
 
                 RepositoryConnection connection = repository.getConnection();
                 try{
+
                     connection.begin();
                     for(String ctx: contexts){
                         logger.debug("deleting subgraph: "+ctx);
                         connection.clear(factory.createIRI(ctx));
+
                     }
                     logger.debug("deleting thing: "+contextURI);
                     connection.clear(factory.createIRI(contextURI));
+
+                    if(tedURI == null){
+                        logger.error("TED instance NOT found!");
+                    }
+                    else {
+                        AgoraSupport.deleteTEDRelations(contextURI, contexts, tedURI, connection);
+                    }
+
 
                     connection.commit();
                     return true;

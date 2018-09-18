@@ -48,8 +48,8 @@ public class TestRepoParallel {
 
 
     HttpClient client = HttpClientBuilder.create().build();
-//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
-    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
+    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+//    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
 //    public String ENDPOINT = "http://159.69.26.108:9004/semantic-repository/";
 
 
