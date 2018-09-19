@@ -23,6 +23,7 @@ import sk.intersoft.vicinity.platform.semantic.ontology.NamespacePrefix;
 import sk.intersoft.vicinity.platform.semantic.ontology.Namespaces;
 import sk.intersoft.vicinity.platform.semantic.ontology.OntologyResource;
 import sk.intersoft.vicinity.platform.semantic.sparql.SPARQL;
+import sk.intersoft.vicinity.platform.semantic.utils.DateTimeUtil;
 import sk.intersoft.vicinity.platform.semantic.utils.JSONUtil;
 
 import java.io.StringReader;
@@ -65,8 +66,8 @@ public class Thing2Ontology {
                 "}";
 
         Set<String> result = extract(query, "x");
-        logger.info("PROPERTIES QUERY: \n"+query);
-        logger.info("PROPERTY INDIVIDUALS: \n" + result);
+//        logger.info("PROPERTIES QUERY: \n"+query);
+//        logger.info("PROPERTY INDIVIDUALS: \n" + result);
 
         return result;
     }
@@ -79,8 +80,8 @@ public class Thing2Ontology {
 
         Set<String> result = extract(query, "x");
         result.add(Namespaces.prefixed(NamespacePrefix.core, "Device"));
-        logger.info("DEVICES QUERY: \n"+query);
-        logger.info("DEVICE TYPES: \n"+result);
+//        logger.info("DEVICES QUERY: \n"+query);
+//        logger.info("DEVICE TYPES: \n"+result);
 
         return result;
     }
@@ -93,8 +94,8 @@ public class Thing2Ontology {
 
         Set<String> result = extract(query, "x");
         result.add(Namespaces.prefixed(NamespacePrefix.core, "Service"));
-        logger.info("SERVICES QUERY: \n"+query);
-        logger.info("SERVICE TYPES: \n"+result);
+//        logger.info("SERVICES QUERY: \n"+query);
+//        logger.info("SERVICE TYPES: \n"+result);
 
         return result;
     }
@@ -105,10 +106,8 @@ public class Thing2Ontology {
         try{
             RDFParser rdfParser = Rio.createParser(RDFFormat.JSONLD);
 
-            logger.info("THING POPULATION STUFF:");
-
             String contextURI = OntologyResource.thingInstanceURI(thing.getString(ThingDescription.OID_KEY));
-            logger.info("CtX: "+contextURI);
+            logger.info("POPULATION ONTOLOGY with CtX: "+contextURI);
 
             TreeModel graph = new TreeModel();
             rdfParser.setRDFHandler(new StatementCollector(graph));
@@ -125,14 +124,14 @@ public class Thing2Ontology {
 //                        st.getSubject() + " " +
 //                                st.getPredicate() + " "+
 //                                st.getObject());
-                logger.debug("TRIPLE IN: " +
-                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
-                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
-                                Namespaces.toPrefixed(st.getObject().stringValue()));
+//                logger.debug("TRIPLE IN: " +
+//                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
+//                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
+//                                Namespaces.toPrefixed(st.getObject().stringValue()));
 
                 connection.add(st, factory.createIRI(contextURI));
             }
-            logger.info("THING POPULATION STUFF: DONE");
+            logger.info("THING POPULATION: DONE");
 
             connection.commit();
         }
@@ -155,7 +154,7 @@ public class Thing2Ontology {
 
         logger.info("LIFTING: "+lifting.thing);
         if(lifting.thing != null){
-            logger.info(lifting.thing.toString(2));
+            logger.info(lifting.thing.toString());
         }
         else{
             lifting.errors.add("Thing was not processed!");
@@ -169,16 +168,22 @@ public class Thing2Ontology {
     }
 
     public JSONObject populate(String data, boolean updateContent)  {
+        long start = DateTimeUtil.millis();
+
         logger.info("POPULATING NEW THING: \n"+data);
 
+        long vstart = DateTimeUtil.millis();
         ThingsLifterResult lifting = validateAndLift(data);
+        long vend = DateTimeUtil.duration(vstart);
 
         if(lifting.thing != null && lifting.errors.isEmpty()){
             if(updateContent){
                 logger.info("UPDATING CONTENT .. DELETE FIRST");
                 String oid = lifting.thing.getString(ThingDescription.OID_KEY);
                 if(oid != null){
+                    long dstart = DateTimeUtil.millis();
                     delete(oid);
+                    long dend = DateTimeUtil.duration(dstart);
                 }
                 else{
                     logger.info("UNABLE TO DELETE THING WITH UNKNOWN OID!");
@@ -188,18 +193,32 @@ public class Thing2Ontology {
             }
             logger.info("POPULATING!");
             try{
+                long pstart = DateTimeUtil.millis();
                 populate(lifting.thing);
+                long pend = DateTimeUtil.duration(pstart);
 
+                long o2tstart = DateTimeUtil.millis();
                 Ontology2Thing o2t = new Ontology2Thing();
                 ThingDescription thing = o2t.toThing(lifting.thing.getString(ThingDescription.OID_KEY));
+                long o2tend = DateTimeUtil.duration(o2tstart);
 
-                logger.debug("THING FROM GRAPH: \n"+thing.toString(0));
+                logger.debug("THING FROM GRAPH: \n"+thing.toSimpleString());
 
-                (new AgoraSupport(thing)).add();
+                //(new AgoraSupport(thing)).add();
 
 
 
+                long t2jstart = DateTimeUtil.millis();
                 JSONObject thingJSON = o2t.toJSON(thing);
+                long t2jend = DateTimeUtil.duration(t2jstart);
+                long end = DateTimeUtil.duration(start);
+
+                logger.info("POPULATION TIME: ");
+                logger.info("validation: "+DateTimeUtil.format(vend));
+                logger.info("ontology population: "+DateTimeUtil.format(pend));
+                logger.info("ontology 2 thing export: "+DateTimeUtil.format(o2tend));
+                logger.info("thing 2 json export: "+DateTimeUtil.format(t2jend));
+                logger.info("POPULATION TOOK: "+DateTimeUtil.format(end));
 
                 JSONObject out = new JSONObject();
                 out.put("lifting", thingJSON);
@@ -217,6 +236,8 @@ public class Thing2Ontology {
             logger.info("NOT POPULATING!");
 
         }
+        long end = DateTimeUtil.duration(start);
+        logger.info("POPULATION TOOK: "+DateTimeUtil.format(end));
 
         return lifting.failure();
     }
@@ -256,7 +277,8 @@ public class Thing2Ontology {
             logger.debug("getting graph for OID: [" + oid + "]");
 
             if(graph != null) {
-                logger.debug("graph exists: \n"+graph.describe());
+//                logger.debug("graph exists: \n"+graph.describe());
+                logger.debug("graph exists");
                 Set<String> contexts = graph.values(AgoraSupport.HAS_CONTEXT_GRAPH);
 
                 String tedURI = AgoraSupport.getTEDInstance();

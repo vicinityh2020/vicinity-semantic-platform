@@ -11,6 +11,7 @@ public class TestThing2Ontology {
 //            String json = TestUtil.file2string(TestUtil.path(jsonPath+"example-thing.json"));
             String json = TestUtil.file2string(TestUtil.path(jsonPath+"agora/thing-1-top-level.json"));
 
+            System.out.println("POPULATING: ");
             System.out.println("INPUT: \n"+json);
             System.out.println("CREATE: "+create);
 

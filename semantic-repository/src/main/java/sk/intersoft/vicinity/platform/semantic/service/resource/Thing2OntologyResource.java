@@ -8,6 +8,7 @@ import org.restlet.resource.ServerResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.Thing2Ontology;
+import sk.intersoft.vicinity.platform.semantic.utils.DateTimeUtil;
 
 import java.util.logging.Level;
 
@@ -25,7 +26,14 @@ public class Thing2OntologyResource extends ServerResource {
         try{
             String payload = entity.getText();
             logger.info("CREATE PAYLOAD: \n" +payload);
+
+            long start = DateTimeUtil.millis();
+
             JSONObject result = handler.create(payload);
+
+            long end = DateTimeUtil.duration(start);
+            logger.info("CREATE TOOK: " +DateTimeUtil.format(end));
+
             return ServiceResponse.success(result).toString();
         }
         catch(Exception e){
@@ -45,7 +53,15 @@ public class Thing2OntologyResource extends ServerResource {
         try{
             String payload = entity.getText();
             logger.info("UPDATE PAYLOAD: \n" +payload);
+
+            long start = DateTimeUtil.millis();
+
             JSONObject result = handler.update(payload);
+            logger.info("UPDATE DONE");
+
+            long end = DateTimeUtil.duration(start);
+            logger.info("UPDATE TOOK: " +DateTimeUtil.format(end));
+
             return ServiceResponse.success(result).toString();
         }
         catch(Exception e){

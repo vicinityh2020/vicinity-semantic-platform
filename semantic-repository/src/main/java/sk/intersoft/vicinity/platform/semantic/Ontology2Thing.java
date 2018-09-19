@@ -32,7 +32,7 @@ public class Ontology2Thing {
     }
 
     private InteractionPatternEndpoint addLink(Graph graph, String linkType) throws Exception {
-        logger.debug("adding link: \n" + graph.describe());
+//        logger.debug("adding link: \n" + graph.describe());
         InteractionPatternEndpoint link = new InteractionPatternEndpoint();
 
         link.href = getValue("wot:href", graph);
@@ -44,7 +44,7 @@ public class Ontology2Thing {
     }
 
     private void addLinks(InteractionPattern pattern, Graph graph) throws Exception {
-        logger.debug("ADDING LINKS");
+//        logger.debug("ADDING LINKS");
 
         Graph read = graph.subGraph("wot:isReadableThrough");
         Graph write = graph.subGraph("wot:isWritableThrough");
@@ -58,7 +58,7 @@ public class Ontology2Thing {
     }
 
     private InteractionPattern addProperty(Graph graph) throws Exception {
-        logger.debug("ADDING PROPERTY ... ");
+//        logger.debug("ADDING PROPERTY ... ");
 
         InteractionPattern pattern = new InteractionPattern();
         pattern.id = getValue("wot:interactionName", graph);
@@ -70,7 +70,7 @@ public class Ontology2Thing {
         return pattern;
     }
     private InteractionPattern addAction(Graph graph) throws Exception {
-        logger.debug("ADDING ACTION ... ");
+//        logger.debug("ADDING ACTION ... ");
 
         InteractionPattern pattern = new InteractionPattern();
         pattern.id = getValue("wot:interactionName", graph);
@@ -81,7 +81,7 @@ public class Ontology2Thing {
         return pattern;
     }
     private InteractionPattern addEvent(Graph graph) throws Exception {
-        logger.debug("ADDING EVENT ... ");
+//        logger.debug("ADDING EVENT ... ");
 
         InteractionPattern pattern = new InteractionPattern();
         pattern.id = getValue("wot:interactionName", graph);
@@ -99,7 +99,7 @@ public class Ontology2Thing {
         for(Graph pattern : patterns) {
             String type = getValue("rdf:type", pattern);
 
-            logger.debug("ADDING PATTERN: \n" + pattern.describe());
+//            logger.debug("ADDING PATTERN: \n" + pattern.describe());
 
             String typeName = Namespaces.valueFromPrefixed(Namespaces.toPrefixed(type));
             if(typeName.equals("Property")){
@@ -139,7 +139,8 @@ public class Ontology2Thing {
         logger.debug("OID CONTEXT URI: "+contextURI);
 
         if(graph == null) throw new Exception("Missing semantic graph for thing [oid="+oid+"]!");
-        logger.debug("graph: \n"+graph.describe());
+//        logger.debug("got graph: \n"+graph.describe());
+        logger.debug("got graph");
 
         ThingDescription thing = new ThingDescription();
         addThingProperties(thing, graph);

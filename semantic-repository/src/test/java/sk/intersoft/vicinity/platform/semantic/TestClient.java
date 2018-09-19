@@ -29,8 +29,8 @@ import java.util.Scanner;
 
 public class TestClient {
     HttpClient client = HttpClientBuilder.create().build();
-//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
-    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
+    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+//    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
 
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -157,7 +157,7 @@ public class TestClient {
     public static void main(String[] args) throws  Exception {
         TestClient t = new TestClient();
 //        t.query();
-//        t.remove("abc2");
+        t.remove("abc2");
         t.create();
 //        t.validate();
 //        t.annotations();

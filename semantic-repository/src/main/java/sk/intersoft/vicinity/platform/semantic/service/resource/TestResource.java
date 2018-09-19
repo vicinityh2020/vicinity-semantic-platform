@@ -21,9 +21,18 @@ public class TestResource extends ServerResource {
         logger.info("=============================");
         logger.info("EXECUTE TEST");
 
-        TestSimulator handler = new TestSimulator();
+//        TestSimulator handler = new TestSimulator();
         try{
-            JSONObject result = handler.test();
+//            JSONObject result = handler.test();
+            JSONObject result = new JSONObject();
+            result.put("test-simulator", "done");
+            try{
+                logger.info("sleeping 2 secs");
+                Thread.sleep(2000);
+            }
+            catch(Exception ex){
+                ex.printStackTrace();
+            }
             return ServiceResponse.success(result).toString();
         }
         catch(Exception e){

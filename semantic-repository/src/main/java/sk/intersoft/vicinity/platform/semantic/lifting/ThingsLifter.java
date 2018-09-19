@@ -84,13 +84,13 @@ public class ThingsLifter {
                 validator.errors.add("unknown ontology property individual for [monitors]: [" + property.refersTo + "], thing ["+thing.oid+"] property ["+property.id+"]");
             }
 
-            System.out.println("VALIDATING AGORA");
+            logger.info("VALIDATING AGORA");
             InteractionPatternEndpoint read = property.readEndpoint;
             if(read != null && read.output != null){
                 Set<AgoraMapping> mappings = AgoraSupport.getMappings(read.output, false);
-                System.out.println("MAPPINGS "+mappings.size());
+                logger.info("MAPPINGS "+mappings.size());
                 for(AgoraMapping m : mappings) {
-                    System.out.println("CHECK: "+m);
+                    logger.info("CHECK: "+m);
                     if(!AgoraSupport.mappingPredicates.contains(m.predicate)) {
                         validator.errors.add("unknown agora predicate annotation: [" + m.predicate + "], thing ["+thing.oid+"] property ["+property.id+"]");
                     }
@@ -133,15 +133,15 @@ public class ThingsLifter {
             thing.jsonExtension.put("@context", JSONLD_SCHEMA_LOCATION);
             thing.jsonExtension.put(ThingJSON.idAnnotation, Namespaces.prefixed(NamespacePrefix.thing, thing.oid));
 
-            logger.debug("Checking thing type annotation ["+thing.type+"]");
-            logger.debug("device types: "+deviceTypes);
-            logger.debug("service types: "+serviceTypes);
+//            logger.debug("Checking thing type annotation ["+thing.type+"]");
+//            logger.debug("device types: "+deviceTypes);
+//            logger.debug("service types: "+serviceTypes);
             if (deviceTypes.contains(thing.type)) {
-                logger.debug("hurray, its device!");
+//                logger.debug("hurray, its device!");
                 thing.jsonExtension.put(ThingJSON.typeAnnotation, thing.type);
             }
             else if (serviceTypes.contains(thing.type)) {
-                logger.debug("hurray, its service!");
+//                logger.debug("hurray, its service!");
                 thing.jsonExtension.put(ThingJSON.typeAnnotation, thing.type);
             }
             else {

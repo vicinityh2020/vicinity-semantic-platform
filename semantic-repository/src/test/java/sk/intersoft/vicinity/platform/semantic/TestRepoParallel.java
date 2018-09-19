@@ -89,6 +89,26 @@ public class TestRepoParallel {
         return null;
     }
 
+    public String staticGET(String uri) {
+        System.out.println("DO static GET: " + uri);
+        try {
+            HttpClient client = HttpClientBuilder.create().build();
+
+            HttpGet request = new HttpGet(uri);
+            HttpResponse response = client.execute(request);
+            System.out.println("executed: " + response);
+
+            HttpEntity entity = response.getEntity();
+            System.out.println("entity: " + entity);
+
+            if (entity != null) return EntityUtils.toString(entity);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String post(String uri, String json) {
         try{
             HttpPost request = new HttpPost(uri);
@@ -172,19 +192,21 @@ public class TestRepoParallel {
 
         public void run() {
             try{
-                String endpoint = ENDPOINT + "test";
+                String endpoint = ENDPOINT + "test?id="+id;
                 long start = System.nanoTime();
 
                 System.out.println("THREAD STARTED ["+start+"]: ID ["+id+"]");
 
                 String out = "";
                 String result = "";
-                System.out.println("THREAD ["+id+"] query: "+endpoint);
+                System.out.println("THREAD ["+id+"] call: "+endpoint);
 
-                for (int i = 0; i < 30; i++){
-                    result = get(endpoint);
-                    System.out.print(result);
-                }
+                result = staticGET(endpoint);
+                System.out.print("THREAD ["+id+"] result: "+result);
+
+//                for (int i = 0; i < 30; i++){
+//                    System.out.println("THREAD ["+id+"] ["+i+"] call: "+endpoint);
+//                }
 
                 long end = System.nanoTime();
                 long diff = end - start;
@@ -572,7 +594,7 @@ public class TestRepoParallel {
         TestRepoParallel t = new TestRepoParallel();
 
         t.parallelQuery();
-        t.parallelTest();
+//        t.parallelTest();
 //        t.parallelLoad();
 //        t.multiParallel();
 //        t.q();
