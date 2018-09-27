@@ -138,11 +138,11 @@ public class ThingsLifter {
 //            logger.debug("service types: "+serviceTypes);
             if (deviceTypes.contains(thing.type)) {
 //                logger.debug("hurray, its device!");
-                thing.jsonExtension.put(ThingJSON.typeAnnotation, thing.type);
+                thing.jsonExtension.put(ThingJSON.typeAnnotation, AgoraSupport.WOT_THING_CLASS);
             }
             else if (serviceTypes.contains(thing.type)) {
 //                logger.debug("hurray, its service!");
-                thing.jsonExtension.put(ThingJSON.typeAnnotation, thing.type);
+                thing.jsonExtension.put(ThingJSON.typeAnnotation, AgoraSupport.WOT_THING_CLASS);
             }
             else {
                 validator.errors.add("unknown ontology class for thing [type]: [" + thing.type + "]");
@@ -178,7 +178,7 @@ public class ThingsLifter {
 
                     instantiateObjects(lifted);
 
-                    return new ThingsLifterResult(lifted);
+                    return new ThingsLifterResult(thing, lifted);
                 }
             }
             catch(Exception e){
@@ -189,7 +189,7 @@ public class ThingsLifter {
             logger.error("", e);
         }
 
-        return new ThingsLifterResult(null, validator.errors);
+        return new ThingsLifterResult(validator.errors);
 
     }
 }

@@ -1,0 +1,32 @@
+{
+    "oid": "test-agora-3",
+    "adapter-id": "test-adapter",
+    "name": "test agora 3",
+    "type": "adapters:Thermometer",
+    "properties": [
+        {
+            "pid": "prop-1",
+            "monitors": "adapters:AverageTemperature",
+            "read_link": {
+                "href": "/adapter-endpoint/objects/{oid}/property/{pid}",
+                "output":
+{
+    "type": "object",
+    "description": "test-agora-3-property-1",
+    "field": [
+        {
+            "name": "test-agora-3-data",
+            "description": "test-agora-3 property",
+            "predicate": "core:value",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ]
+}
+            }
+        }
+    ],
+    "actions": [],
+    "events": []
+}

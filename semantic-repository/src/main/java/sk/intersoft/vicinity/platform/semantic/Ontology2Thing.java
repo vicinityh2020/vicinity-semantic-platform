@@ -123,7 +123,7 @@ public class Ontology2Thing {
         thing.oid = Namespaces.valueFromPrefixed(Namespaces.toPrefixed(graph.baseURI));
         thing.adapterId = getValue("wot:adapter-id", graph);
         thing.name = getValue("wot:name", graph);
-        thing.type = Namespaces.toPrefixed(getValue("rdf:type", graph));
+        thing.type = Namespaces.toPrefixed(getValue("wot:type", graph));
     }
 
 

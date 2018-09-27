@@ -2,23 +2,26 @@ package sk.intersoft.vicinity.platform.semantic.lifting.model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import sk.intersoft.vicinity.platform.semantic.lifting.model.thing.ThingDescription;
 import sk.intersoft.vicinity.platform.semantic.service.resource.ServiceResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ThingsLifterResult {
-    public JSONObject thing = null;
+    public ThingDescription thing = null;
+    public JSONObject thingJSON = null;
     public List<String> errors = new ArrayList<String>();
 
-    public ThingsLifterResult(JSONObject thing, List<String> errors){
+    public ThingsLifterResult(ThingDescription thing,
+                              JSONObject thingJSON){
         this.thing = thing;
-        this.errors = errors;
-    }
-    public ThingsLifterResult(JSONObject thing){
-        this.thing = thing;
+        this.thingJSON = thingJSON;
     }
 
+    public ThingsLifterResult(List<String> errors){
+        this.errors = errors;
+    }
 
     public JSONArray failureArray() {
         JSONArray list = new JSONArray();

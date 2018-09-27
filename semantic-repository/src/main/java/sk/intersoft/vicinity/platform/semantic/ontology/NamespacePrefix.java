@@ -6,6 +6,7 @@ public class NamespacePrefix {
     public static final String xsd = "xsd";
 
     public static final String thing = "thing";
+    public static final String physicalThing = "physicalthing";
     public static final String thingDescription = "thing-description";
     public static final String core = "core";
     public static final String wot = "wot";

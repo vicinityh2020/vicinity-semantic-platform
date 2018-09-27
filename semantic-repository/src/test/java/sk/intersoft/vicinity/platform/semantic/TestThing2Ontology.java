@@ -54,7 +54,7 @@ public class TestThing2Ontology {
     public void o2t() {
         try{
 
-            String oid = "test3";
+            String oid = "test-agora";
             System.out.println("O2T: "+oid);
 
             Ontology2Thing handler = new Ontology2Thing();

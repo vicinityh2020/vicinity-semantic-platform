@@ -7,7 +7,7 @@ import org.restlet.data.Protocol;
 public class SemanticRepositoryComponent extends Component {
     public SemanticRepositoryComponent() throws Exception {
         Server server = getServers().add(Protocol.HTTP, Integer.parseInt(System.getProperty("server.port")));
-        server.getContext().getParameters().add("maxThreads", "100");
+        server.getContext().getParameters().add("maxThreads", "1000");
 
         getDefaultHost().attach("/semantic-repository", new SemanticRepositoryApplication());
 

@@ -101,17 +101,18 @@ public class Thing2Ontology {
     }
 
 
-    public void populate(JSONObject thing) throws Exception {
+    public void populate(ThingDescription thing, JSONObject thingJSON) throws Exception {
         RepositoryConnection connection = repository.getConnection();
         try{
             RDFParser rdfParser = Rio.createParser(RDFFormat.JSONLD);
 
-            String contextURI = OntologyResource.thingInstanceURI(thing.getString(ThingDescription.OID_KEY));
-            logger.info("POPULATION ONTOLOGY with CtX: "+contextURI);
+            String contextURI = OntologyResource.thingInstanceURI(thingJSON.getString(ThingDescription.OID_KEY));
+            IRI contextIRI = factory.createIRI(contextURI);
+            logger.info("POPULATION ONTOLOGY with CtX: "+contextURI+ " / " + contextIRI);
 
             TreeModel graph = new TreeModel();
             rdfParser.setRDFHandler(new StatementCollector(graph));
-            rdfParser.parse(new StringReader(thing.toString()), "");
+            rdfParser.parse(new StringReader(thingJSON.toString()), "");
 
 
             connection.begin();
@@ -129,8 +130,21 @@ public class Thing2Ontology {
 //                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
 //                                Namespaces.toPrefixed(st.getObject().stringValue()));
 
-                connection.add(st, factory.createIRI(contextURI));
+                connection.add(st, contextIRI);
+
             }
+
+            logger.info("ADDING THING REPRESENTATION: START");
+            Set<Statement> representation = AgoraSupport.addthingRepresentation(contextURI, thing);
+            for(Statement s : representation) {
+                logger.debug("REPRESENTATION TRIPLE IN: " +
+                        Namespaces.toPrefixed(s.getSubject().stringValue()) + " " +
+                        Namespaces.toPrefixed(s.getPredicate().stringValue()) + " "+
+                        Namespaces.toPrefixed(s.getObject().stringValue()));
+                connection.add(s, contextIRI);
+            }
+            logger.info("ADDING THING REPRESENTATION: DONE");
+
             logger.info("THING POPULATION: DONE");
 
             connection.commit();
@@ -152,9 +166,9 @@ public class Thing2Ontology {
         ThingsLifter lifter = new ThingsLifter(getDeviceTypes(), getServiceTypes(), getProperties());
         ThingsLifterResult lifting = lifter.lift(data);
 
-        logger.info("LIFTING: "+lifting.thing);
-        if(lifting.thing != null){
-            logger.info(lifting.thing.toString());
+        logger.info("LIFTING: "+lifting.thingJSON);
+        if(lifting.thingJSON != null){
+            logger.info(lifting.thingJSON.toString());
         }
         else{
             lifting.errors.add("Thing was not processed!");
@@ -176,10 +190,10 @@ public class Thing2Ontology {
         ThingsLifterResult lifting = validateAndLift(data);
         long vend = DateTimeUtil.duration(vstart);
 
-        if(lifting.thing != null && lifting.errors.isEmpty()){
+        if(lifting.thingJSON != null && lifting.errors.isEmpty()){
             if(updateContent){
                 logger.info("UPDATING CONTENT .. DELETE FIRST");
-                String oid = lifting.thing.getString(ThingDescription.OID_KEY);
+                String oid = lifting.thingJSON.getString(ThingDescription.OID_KEY);
                 if(oid != null){
                     long dstart = DateTimeUtil.millis();
                     delete(oid);
@@ -194,17 +208,17 @@ public class Thing2Ontology {
             logger.info("POPULATING!");
             try{
                 long pstart = DateTimeUtil.millis();
-                populate(lifting.thing);
+                populate(lifting.thing, lifting.thingJSON);
                 long pend = DateTimeUtil.duration(pstart);
 
                 long o2tstart = DateTimeUtil.millis();
                 Ontology2Thing o2t = new Ontology2Thing();
-                ThingDescription thing = o2t.toThing(lifting.thing.getString(ThingDescription.OID_KEY));
+                ThingDescription thing = o2t.toThing(lifting.thingJSON.getString(ThingDescription.OID_KEY));
                 long o2tend = DateTimeUtil.duration(o2tstart);
 
                 logger.debug("THING FROM GRAPH: \n"+thing.toSimpleString());
 
-                //(new AgoraSupport(thing)).add();
+                (new AgoraSupport(thing)).add();
 
 
 
@@ -229,7 +243,7 @@ public class Thing2Ontology {
                 lifting.errors.add(e.getMessage());
                 lifting.errors.add("something went ape during ontology population!");
                 logger.error("EXCEPTION", e);
-                delete(lifting.thing.getString(ThingDescription.OID_KEY));
+                delete(lifting.thingJSON.getString(ThingDescription.OID_KEY));
             }
         }
         else {

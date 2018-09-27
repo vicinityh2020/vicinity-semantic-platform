@@ -32,6 +32,10 @@ public class AgoraSupport {
     private ThingDescription thing = null;
     private Map<IRI, Set<Statement>> statements = new HashMap<IRI, Set<Statement>>();
 
+    public static String WOT_THING_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "Thing"));
+    public static String REPRESENTS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "represents"));
+    public static String IS_REPRESENTED_BY = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "isRepresentedBy"));
+
     public static String HAS_CONTEXT_GRAPH = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "hasContextGraph"));
 
     private static String THING_DESCRIPTION_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "ThingDescription"));
@@ -421,4 +425,44 @@ public class AgoraSupport {
         }
     }
 
+    public static Set<Statement> addthingRepresentation(String thingURI,
+                                              ThingDescription thing) {
+        ValueFactory factory = SimpleValueFactory.getInstance();
+        try {
+            logger.debug("adding agora thing representation for: "+thingURI);
+
+            IRI thingIRI = factory.createIRI(thingURI);
+
+            String rURI = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.physicalThing, UniqueID.create()));
+            IRI rIRI = factory.createIRI(rURI);
+            String thingTypeURI = Namespaces.toURI(thing.type);
+            IRI thingTypeIRI = factory.createIRI(thingTypeURI);
+
+            logger.debug("thing URI: "+thingURI);
+            logger.debug("thing IRI: "+thingIRI);
+
+            logger.debug("representation URI: "+rURI);
+            logger.debug("representation IRI: "+rIRI);
+
+            logger.debug("thing name: "+thing.name);
+            logger.debug("thing type: "+thing.type);
+
+            logger.debug("thing type URI: "+thingTypeURI);
+            logger.debug("thing type IRI: "+thingTypeIRI);
+
+            Set<Statement> thingRepresentation = new HashSet<Statement>();
+            thingRepresentation.add(factory.createStatement(thingIRI, factory.createIRI(REPRESENTS), rIRI));
+
+            thingRepresentation.add(factory.createStatement(rIRI, factory.createIRI(RDF_TYPE), thingTypeIRI));
+            thingRepresentation.add(factory.createStatement(rIRI, factory.createIRI(IS_REPRESENTED_BY), thingIRI));
+            thingRepresentation.add(factory.createStatement(rIRI, factory.createIRI(THING_NAME), factory.createLiteral(thing.name)));
+
+
+            return thingRepresentation;
+        }
+        catch(Exception e){
+            logger.error("error adding agora thing representation ", e);
+            return new HashSet<Statement>();
+        }
+    }
 }

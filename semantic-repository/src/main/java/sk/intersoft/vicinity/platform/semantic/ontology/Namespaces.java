@@ -7,6 +7,7 @@ import java.util.*;
 public class Namespaces {
     public static final String vicinity = "http://vicinity.eu";
     public static final String thing = vicinity+"/data/things/";
+    public static final String physicalThing = vicinity+"/data/physicalthings/";
     public static final String thingDescription = vicinity+"/data/descriptions/";
 
     public static final String core = "http://iot.linkeddata.es/def/core";
@@ -37,6 +38,7 @@ public class Namespaces {
                 put(NamespacePrefix.ted, ted);
 
                 put(NamespacePrefix.thing, thing);
+                put(NamespacePrefix.physicalThing, physicalThing);
                 put(NamespacePrefix.thingDescription, thingDescription);
 
                 put(NamespacePrefix.sosa, sosa);
