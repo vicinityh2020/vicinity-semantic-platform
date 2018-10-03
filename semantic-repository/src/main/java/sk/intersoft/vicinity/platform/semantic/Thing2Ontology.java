@@ -121,14 +121,14 @@ public class Thing2Ontology {
             while(i.hasNext()) {
                 Statement st = i.next();
 
-//                logger.debug(
-//                        st.getSubject() + " " +
-//                                st.getPredicate() + " "+
-//                                st.getObject());
-//                logger.debug("TRIPLE IN: " +
-//                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
-//                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
-//                                Namespaces.toPrefixed(st.getObject().stringValue()));
+                logger.debug("TRIPLE IN: " +
+                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
+                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
+                                Namespaces.toPrefixed(st.getObject().stringValue()));
+                logger.debug(
+                        st.getSubject() + " " +
+                                st.getPredicate() + " "+
+                                st.getObject());
 
                 connection.add(st, contextIRI);
 

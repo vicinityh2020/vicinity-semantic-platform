@@ -39,7 +39,7 @@ public class ThingsLifter {
         if (object.has(ThingJSON.idAnnotation)) {
         } else {
             String id = UniqueID.create();
-            String instance = Namespaces.prefixed(NamespacePrefix.thing, id);
+            String instance = Namespaces.prefixed(NamespacePrefix.bnode, id);
             object.put(ThingJSON.idAnnotation, instance);
         }
         for (String key : object.keySet()) {

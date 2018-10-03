@@ -7,6 +7,7 @@
 		"adapters": "http://iot.linkeddata.es/def/adapters#",
 		"ssn": "http://www.w3.org/ns/ssn/",
 		"sosa": "http://www.w3.org/ns/sosa/",
+		"bnode": "http://bnodes/",
 		"xsd": "http://www.w3.org/2001/XMLSchema#",
 		"read_link": {
 			"@id": "wot:isReadableThrough",

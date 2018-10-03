@@ -253,11 +253,11 @@ public class AgoraSupport {
         valueDescription.add(factory.createStatement(valueTDIRI, factory.createIRI(DESCRIBES), valueIRI));
         valueDescription.add(factory.createStatement(valueTDIRI, factory.createIRI(IDENTIFIER), factory.createLiteral(valueId)));
 
-        IRI hasMappingIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
+        IRI hasMappingIRI = createIRI(NamespacePrefix.bnode, UniqueID.create());
         valueDescription.add(factory.createStatement(valueTDIRI, factory.createIRI(HAS_ACCESS_MAPPING), hasMappingIRI));
         valueDescription.add(factory.createStatement(hasMappingIRI, factory.createIRI(RDF_TYPE), factory.createIRI(ACCESS_MAPPING_CLASS)));
 
-        IRI resourceIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
+        IRI resourceIRI = createIRI(NamespacePrefix.bnode, UniqueID.create());
         valueDescription.add(factory.createStatement(hasMappingIRI, factory.createIRI(MAPS_RESOURCE_FROM), resourceIRI));
         valueDescription.add(factory.createStatement(resourceIRI, factory.createIRI(RDF_TYPE), factory.createIRI(LINK_CLASS)));
         valueDescription.add(factory.createStatement(resourceIRI, factory.createIRI(HREF), factory.createLiteral("/objects/"+thing.oid+"/properties/"+property.id)));
@@ -270,7 +270,7 @@ public class AgoraSupport {
             logger.debug(m.toString());
         }
         for(AgoraMapping m : mappings) {
-            IRI mappingIRI = createIRI(NamespacePrefix.thingDescription, UniqueID.create());
+            IRI mappingIRI = createIRI(NamespacePrefix.bnode, UniqueID.create());
             valueDescription.add(factory.createStatement(hasMappingIRI, factory.createIRI(HAS_MAPPING), mappingIRI));
 
             valueDescription.add(factory.createStatement(mappingIRI, factory.createIRI(RDF_TYPE), factory.createIRI(MAPPING_CLASS)));
@@ -433,7 +433,7 @@ public class AgoraSupport {
 
             IRI thingIRI = factory.createIRI(thingURI);
 
-            String rURI = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.physicalThing, UniqueID.create()));
+            String rURI = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.bnode, UniqueID.create()));
             IRI rIRI = factory.createIRI(rURI);
             String thingTypeURI = Namespaces.toURI(thing.type);
             IRI thingTypeIRI = factory.createIRI(thingTypeURI);

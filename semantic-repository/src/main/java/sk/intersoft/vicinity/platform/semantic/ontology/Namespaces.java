@@ -10,6 +10,8 @@ public class Namespaces {
     public static final String physicalThing = vicinity+"/data/physicalthings/";
     public static final String thingDescription = vicinity+"/data/descriptions/";
 
+    public static final String bnode = "http://bnodes/";
+
     public static final String core = "http://iot.linkeddata.es/def/core";
     public static final String wot = "http://iot.linkeddata.es/def/wot";
     public static final String adapters = "http://iot.linkeddata.es/def/adapters";
@@ -40,6 +42,8 @@ public class Namespaces {
                 put(NamespacePrefix.thing, thing);
                 put(NamespacePrefix.physicalThing, physicalThing);
                 put(NamespacePrefix.thingDescription, thingDescription);
+
+                put(NamespacePrefix.bnode, bnode);
 
                 put(NamespacePrefix.sosa, sosa);
                 put(NamespacePrefix.ssn, ssn);

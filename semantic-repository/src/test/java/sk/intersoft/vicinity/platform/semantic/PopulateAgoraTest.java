@@ -1,6 +1,9 @@
 package sk.intersoft.vicinity.platform.semantic;
 
+import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.json.JSONObject;
+import sk.intersoft.vicinity.platform.semantic.lifting.AgoraSupport;
 import sk.intersoft.vicinity.platform.semantic.lifting.model.ThingsLifterResult;
 
 public class PopulateAgoraTest {
@@ -50,12 +53,20 @@ public class PopulateAgoraTest {
         create(oid);
     }
 
+
     public static void main(String[] args) throws  Exception {
         PopulateAgoraTest t = new PopulateAgoraTest();
-        t.populate("test-agora-1");
-        t.populate("test-agora-2");
-        t.populate("test-agora-3");
-        t.populate("test-agora-4");
-        t.populate("test-agora-5");
+//        t.delete("test-agora-naming");
+//
+//        t.populate("test-agora-1");
+//        t.populate("test-agora-2");
+//        t.populate("test-agora-3");
+//        t.populate("test-agora-4");
+//        t.populate("test-agora-5");
+//        t.delete("test-agora-1");
+//        t.delete("test-agora-2");
+//        t.delete("test-agora-3");
+//        t.delete("test-agora-4");
+//        t.delete("test-agora-5");
     }
 }

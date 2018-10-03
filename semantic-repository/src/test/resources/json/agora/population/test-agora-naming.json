@@ -1,0 +1,32 @@
+{
+    "oid": "test-agora-naming",
+    "adapter-id": "test-adapter",
+    "name": "test agora naming",
+    "type": "adapters:ActivityTracker",
+    "properties": [
+        {
+            "pid": "prop-1",
+            "monitors": "adapters:Motion",
+            "read_link": {
+                "href": "/adapter-endpoint/objects/{oid}/property/{pid}",
+                "output":
+{
+    "type": "object",
+    "description": "test-agora-naming-property-1",
+    "field": [
+        {
+            "name": "test-agora-naming-data",
+            "description": "test-agora-naming property",
+            "predicate": "core:value",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ]
+}
+            }
+        }
+    ],
+    "actions": [],
+    "events": []
+}
