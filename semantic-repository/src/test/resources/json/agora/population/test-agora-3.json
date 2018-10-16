@@ -8,7 +8,7 @@
             "pid": "prop-1",
             "monitors": "adapters:AverageTemperature",
             "read_link": {
-                "href": "/adapter-endpoint/objects/{oid}/property/{pid}",
+                "href": "/objects/{oid}/property/{pid}",
                 "output":
 {
     "type": "object",

@@ -8,7 +8,7 @@
             "pid": "prop-1",
             "monitors": "adapters:Motion",
             "read_link": {
-                "href": "/adapter-endpoint/objects/{oid}/property/{pid}",
+                "href": "/objects/{oid}/property/{pid}",
                 "output":
 {
     "type": "object",
