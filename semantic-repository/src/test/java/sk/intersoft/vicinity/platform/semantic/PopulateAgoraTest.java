@@ -21,6 +21,7 @@ public class PopulateAgoraTest {
         iid2oid.put("test-agora-3", "a5643934-16c8-4a91-a015-380ef4f52a38");
         iid2oid.put("test-agora-4", "b4538b89-2cd1-4614-bcd0-d16d93c513e6");
         iid2oid.put("test-agora-5", "03bda50b-7d69-4279-837e-ef344481d391");
+        iid2oid.put("test-bad", "test-bad");
     }
 
     public void create(String oid) {
@@ -84,15 +85,18 @@ public class PopulateAgoraTest {
         PopulateAgoraTest t = new PopulateAgoraTest();
 //        t.delete("test-agora-naming");
 //
-        t.populate("test-agora-1");
-        t.populate("test-agora-2");
-        t.populate("test-agora-3");
-        t.populate("test-agora-4");
-        t.populate("test-agora-5");
+//        t.populate("test-agora-1");
+//        t.populate("test-agora-2");
+//        t.populate("test-agora-3");
+//        t.populate("test-agora-4");
+//        t.populate("test-agora-5");
 //        t.delete("test-agora-1");
 //        t.delete("test-agora-2");
 //        t.delete("test-agora-3");
 //        t.delete("test-agora-4");
 //        t.delete("test-agora-5");
+
+        t.populate("test-bad");
+
     }
 }

@@ -55,7 +55,7 @@ public class AgoraSupport {
     private static String MAPPING_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "Mapping"));
     private static String HAS_ACCESS_MAPPING = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "hasAccessMapping"));
     private static String HAS_MAPPING = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "hasMapping"));
-    private static String MAPS_RESOURCE_FROM = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "mapsResourceFrom"));
+    private static String MAPS_RESOURCE_FROM = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "mapsResourcesFrom"));
     private static String MAPPING_KEY = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "key"));
     private static String MAPPING_PREDICATE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "predicate"));
     private static String MAPPING_JSON_PATH = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.mappings, "jsonPath"));

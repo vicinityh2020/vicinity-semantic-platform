@@ -1,0 +1,32 @@
+{
+    "oid": "test-bad",
+    "adapter-id": "test-adapter",
+    "name": "test bad",
+    "type": "adapters:ActivityTracker",
+    "properties": [
+        {
+            "pid": "prop-bad",
+            "monitors": "adapters:Motion",
+            "read_link": {
+                "href": "/adapter-endpoint/objects/{oid}/property/{pid}",
+                "output":
+{
+    "type": "object",
+    "description": "test-bad-property-1",
+    "field": [
+        {
+            "name": "test-bad-data",
+            "description": "test-bad property",
+            "predicate": "core:value",
+            "schema": {
+                "type": "string"
+            }
+        }
+    ]
+}
+            }
+        }
+    ],
+    "actions": [],
+    "events": []
+}
