@@ -62,7 +62,7 @@ public class AgoraSupport {
 
     private static String LINK_CLASS = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "Link"));
     private static String HREF = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "href"));
-    private static String MEDIA_TYPE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "mediaType"));
+    private static String MEDIA_TYPE = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.wot, "hasMediaType"));
 
     private static String HAS_COMPONENT = Namespaces.toURI(Namespaces.prefixed(NamespacePrefix.core, "hasComponent"));
 
@@ -98,10 +98,10 @@ public class AgoraSupport {
 
                 logger.debug("ADDING STATEMENTS TO CONTEXT [" + context + "]");
                 for (Statement s : statementSet) {
-                    logger.debug("adding: " +
-                            Namespaces.toPrefixed(s.getSubject().stringValue()) + " " +
-                            Namespaces.toPrefixed(s.getPredicate().stringValue()) + " " +
-                            Namespaces.toPrefixed(s.getObject().stringValue()));
+//                    logger.debug("adding: " +
+//                            Namespaces.toPrefixed(s.getSubject().stringValue()) + " " +
+//                            Namespaces.toPrefixed(s.getPredicate().stringValue()) + " " +
+//                            Namespaces.toPrefixed(s.getObject().stringValue()));
                     connection.add(s, context);
                 }
             }

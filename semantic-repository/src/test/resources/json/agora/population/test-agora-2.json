@@ -12,7 +12,7 @@
                 "output":
 {
     "type": "object",
-    "description": "test-agora-2-property-1",
+    "description": "value",
     "field": [
         {
             "name": "test-agora-2-data",

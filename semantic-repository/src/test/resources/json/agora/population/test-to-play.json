@@ -1,0 +1,53 @@
+{
+  "oid": "test-to-play",
+  "adapter-id": "test-adapter",
+  "name": "test to play",
+  "type": "adapters:Thermometer",
+  "properties": [
+    {
+      "pid": "prop-1",
+      "monitors": "adapters:AmbientTemperature",
+      "read_link": {
+        "href": "/objects/{oid}/properties/{pid}",
+        "output":
+        {
+          "type": "object",
+          "description": "test-property-1",
+          "field": [
+            {
+              "name": "value",
+              "description": "test property",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "actions": [],
+  "events": [
+    {
+      "eid": "live",
+      "monitors": "adapters:AmbientTemperature",
+      "output": {
+        "type": "object",
+        "field": [
+          {
+            "name": "observed-property",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "value",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -121,14 +121,14 @@ public class Thing2Ontology {
             while(i.hasNext()) {
                 Statement st = i.next();
 
-                logger.debug("TRIPLE IN: " +
-                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
-                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
-                                Namespaces.toPrefixed(st.getObject().stringValue()));
-                logger.debug(
-                        st.getSubject() + " " +
-                                st.getPredicate() + " "+
-                                st.getObject());
+//                logger.debug("TRIPLE IN: " +
+//                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
+//                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
+//                                Namespaces.toPrefixed(st.getObject().stringValue()));
+//                logger.debug(
+//                        st.getSubject() + " " +
+//                                st.getPredicate() + " "+
+//                                st.getObject());
 
                 connection.add(st, contextIRI);
 
@@ -137,10 +137,10 @@ public class Thing2Ontology {
             logger.info("ADDING THING REPRESENTATION: START");
             Set<Statement> representation = AgoraSupport.addthingRepresentation(contextURI, thing);
             for(Statement s : representation) {
-                logger.debug("REPRESENTATION TRIPLE IN: " +
-                        Namespaces.toPrefixed(s.getSubject().stringValue()) + " " +
-                        Namespaces.toPrefixed(s.getPredicate().stringValue()) + " "+
-                        Namespaces.toPrefixed(s.getObject().stringValue()));
+//                logger.debug("REPRESENTATION TRIPLE IN: " +
+//                        Namespaces.toPrefixed(s.getSubject().stringValue()) + " " +
+//                        Namespaces.toPrefixed(s.getPredicate().stringValue()) + " "+
+//                        Namespaces.toPrefixed(s.getObject().stringValue()));
                 connection.add(s, contextIRI);
             }
             logger.info("ADDING THING REPRESENTATION: DONE");
