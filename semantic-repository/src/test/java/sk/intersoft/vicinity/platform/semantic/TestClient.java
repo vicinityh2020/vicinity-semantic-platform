@@ -29,8 +29,9 @@ import java.util.Scanner;
 
 public class TestClient {
     HttpClient client = HttpClientBuilder.create().build();
-    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
 //    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
+    public String ENDPOINT = "http://147.232.202.108:9090/semantic-repository/";
 
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -91,21 +92,23 @@ public class TestClient {
     }
 
     public void query(){
-        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX : <http://iot.linkeddata.es/def/core#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX wot: <http://iot.linkeddata.es/def/wot#>" +
-                "PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn#>" +
-                "PREFIX core: <http://iot.linkeddata.es/def/core#>" +
-//                "select ?x where {" +
-//                "?x rdf:type ssn:Property ." +
-//                "}";
-//                "select ?x where {" +
-//                "?x rdfs:subClassOf :Device ." +
-//                "}";
-                "select ?x where {" +
-                "?x rdf:type core:Device ." +
-                "}";
+        String query =
+                "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "+
+        "prefix core: <http://iot.linkeddata.es/def/core#> "+
+        "prefix wot: <http://iot.linkeddata.es/def/wot#> "+
+        "prefix adp: <http://iot.linkeddata.es/def/adapters#> "+
+        "prefix sosa: <http://www.w3.org/ns/sosa/> "+
+        "select * where {  "+
+        "?thing rdf:type wot:Thing . "+
+        "?thing core:represents ?clazz . "+
+        "?thing rdf:type ?thingType. "+
+        "?thingType rdf:type core:Device. "+
+        "?thing wot:providesInteractionPattern ?pattern . "+
+        "?pattern rdf:type ?patternType . "+
+        "?pattern wot:interactionName ?patternName . "+
+        "OPTIONAL{?pattern sosa:observes ?ssnProperty .}. "+
+        "OPTIONAL{?pattern sosa:affects ?ssnProperty .}. "+
+        "} limit 100";
 
         System.out.println("TEST SPQRQL for: "+query);
         JSONObject queryJSON = new JSONObject();
@@ -156,9 +159,9 @@ public class TestClient {
 
     public static void main(String[] args) throws  Exception {
         TestClient t = new TestClient();
-//        t.query();
-        t.remove("abc2");
-        t.create();
+        t.query();
+//        t.remove("abc2");
+//        t.create();
 //        t.validate();
 //        t.annotations();
     }
