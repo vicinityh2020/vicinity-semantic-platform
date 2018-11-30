@@ -16,6 +16,7 @@
     </modules>
 
     <properties>
+        <release.version>0.6.1</release.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

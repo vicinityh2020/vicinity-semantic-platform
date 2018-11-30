@@ -11,6 +11,7 @@
 
     <artifactId>utils</artifactId>
     <name>Utils</name>
+    <version>${release.version}</version>
 
     <dependencies>
         <dependency>
