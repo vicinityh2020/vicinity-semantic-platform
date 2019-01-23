@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUILD=build
-JAR=semantic-repository-1.0-SNAPSHOT.jar
+JAR=semantic-repository-0.6.3.2.jar
 
 rm -rf $BUILD
 mkdir $BUILD

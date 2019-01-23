@@ -1,8 +1,6 @@
 package sk.intersoft.vicinity.platform.semantic.lifting.model.thing;
 
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import sk.intersoft.vicinity.platform.semantic.utils.Dump;
 import sk.intersoft.vicinity.platform.semantic.utils.JSONUtil;
 
@@ -10,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InteractionPatternEndpoint {
-    final static Logger logger = LoggerFactory.getLogger(InteractionPatternEndpoint.class.getName());
-
     public String href = null;
     public DataSchema output = null;
     public DataSchema input = null;
+
+    public JSONObject staticValue = null;
 
     public String linkType = null;
 
@@ -22,12 +20,29 @@ public class InteractionPatternEndpoint {
 
     // JSON keys
     public static final String HREF_KEY = "href";
+    public static final String STATIC_VALUE_KEY = "static-value";
 
     // link type
     public static final String READ = "read";
     public static final String WRITE = "write";
 
 
+    private static JSONObject getStaticValue(JSONObject linkJSON,
+                                             ThingValidator validator) throws Exception {
+        if(linkJSON.has(STATIC_VALUE_KEY)){
+            try{
+                return linkJSON.getJSONObject(STATIC_VALUE_KEY);
+            }
+            catch(Exception e){
+                validator.error("Static value must be JSONObject: "+linkJSON.get(STATIC_VALUE_KEY).toString());
+
+                throw new Exception("Static value must be JSONObject: "+linkJSON.getString(STATIC_VALUE_KEY));
+            }
+        }
+        else {
+            return null;
+        }
+    }
 
     public static InteractionPatternEndpoint create(JSONObject linkJSON,
                                                     String linkType,
@@ -49,6 +64,9 @@ public class InteractionPatternEndpoint {
                     if(endpoint.output == null) fail = true;
                 }
 
+                if (linkType.equals(InteractionPatternEndpoint.READ)) {
+                    endpoint.staticValue = getStaticValue(linkJSON, validator);
+                }
                 if (linkType.equals(InteractionPatternEndpoint.WRITE)) {
                     JSONObject input = JSONUtil.getObject(DataSchema.INPUT_KEY, linkJSON);
                     if (input == null){
@@ -68,7 +86,6 @@ public class InteractionPatternEndpoint {
 
             }
             catch(Exception e){
-                logger.error("", e);
                 validator.error("Unable to process link: " + linkJSON.toString());
                 return null;
             }
@@ -82,6 +99,10 @@ public class InteractionPatternEndpoint {
 
         object.put(HREF_KEY, endpoint.href);
         object.put(DataSchema.OUTPUT_KEY, DataSchema.toJSON(endpoint.output));
+
+        if(endpoint.staticValue != null){
+            object.put(STATIC_VALUE_KEY, endpoint.staticValue);
+        }
 
         ThingDescription.addExtension(endpoint.jsonExtension, object);
 
@@ -111,6 +132,10 @@ public class InteractionPatternEndpoint {
         }
         dump.add("output: ", (indent + 1));
         dump.add(output.toString(indent + 2));
+
+        if(staticValue != null){
+            dump.add("static value: "+staticValue.toString(), (indent + 1));
+        }
 
         return dump.toString();
     }

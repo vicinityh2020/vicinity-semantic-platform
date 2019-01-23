@@ -146,6 +146,6 @@
     <orderEntry type="library" name="Maven: org.codehaus.woodstox:stax2-api:3.1.4" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.13" level="project" />
     <orderEntry type="library" name="Maven: org.restlet.jee:org.restlet.ext.servlet:2.3.9" level="project" />
-    <orderEntry type="library" name="Maven: sk.intersoft.vicinity.repository:utils:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="utils" />
   </component>
 </module>

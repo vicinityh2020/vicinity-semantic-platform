@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JAR=semantic-repository-1.0-SNAPSHOT.jar
+JAR=semantic-repository-0.6.3.2.jar
 
 SERVER_PORT=9004
 GRAPHDB_ENDPOINT=http://localhost:7200/repositories/vicinity-test
