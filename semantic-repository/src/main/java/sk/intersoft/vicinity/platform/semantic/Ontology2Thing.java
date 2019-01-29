@@ -126,6 +126,32 @@ public class Ontology2Thing {
         thing.type = Namespaces.toPrefixed(getValue("wot:type", graph));
     }
 
+    private void addThingLocations(ThingDescription thing, Graph graph) throws Exception {
+        Set<Graph> locations = graph.subGraphs("core:isLocatedAt");
+
+
+        for(Graph location : locations) {
+
+            logger.debug("ADDING LOCATION: \n" + location.describe());
+            logger.debug(location.show());
+            logger.debug("rdf type: " + location.value("rdf:type"));
+            logger.debug("rdf type uri: " + Namespaces.toURI("rdf:type"));
+
+
+            String label = getValue("rdfs:label", location);
+            logger.debug("rdfs label: " + label);
+
+
+            String type = getValue("rdf:type", location);
+
+
+            String typeName = Namespaces.valueFromPrefixed(Namespaces.toPrefixed(type));
+
+            ThingLocation loc = new ThingLocation(typeName, label);
+            thing.locations.put(loc.className, loc);
+        }
+    }
+
 
 
     public ThingDescription toThing(String oid) throws Exception {
@@ -145,6 +171,7 @@ public class Ontology2Thing {
         ThingDescription thing = new ThingDescription();
         addThingProperties(thing, graph);
         addThingInteractionPatterns(thing, graph);
+        addThingLocations(thing, graph);
 
         return thing;
     }

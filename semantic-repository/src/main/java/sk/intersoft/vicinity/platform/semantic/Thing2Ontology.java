@@ -88,6 +88,7 @@ public class Thing2Ontology {
     public Set<String> getServiceTypes()  {
         String query = "PREFIX : <"+Namespaces.nsToPrefixURI(Namespaces.core)+"> " +
                 "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
+                "PREFIX geo: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
                 "select ?x where {" +
                 "?x rdfs:subClassOf :Service ." +
                 "}";
@@ -100,6 +101,19 @@ public class Thing2Ontology {
         return result;
     }
 
+    public Set<String> getLocationTypes()  {
+        String query = "PREFIX geosp: <"+Namespaces.nsToPrefixURI(Namespaces.geosp)+"> " +
+                "PREFIX rdfs: <"+Namespaces.nsToPrefixURI(Namespaces.rdfs)+"> " +
+                "select ?x where {" +
+                "?x rdfs:subClassOf geosp:Feature ." +
+                "}";
+
+        Set<String> result = extract(query, "x");
+//        logger.info("LOCATIONS QUERY: \n"+query);
+//        logger.info("LOCATION TYPES: \n"+result);
+
+        return result;
+    }
 
     public void populate(ThingDescription thing, JSONObject thingJSON) throws Exception {
         RepositoryConnection connection = repository.getConnection();
@@ -163,7 +177,7 @@ public class Thing2Ontology {
         logger.info("VALIDATING AND LIFTING THING DATA");
 
 
-        ThingsLifter lifter = new ThingsLifter(getDeviceTypes(), getServiceTypes(), getProperties());
+        ThingsLifter lifter = new ThingsLifter(getDeviceTypes(), getServiceTypes(), getProperties(), getLocationTypes());
         ThingsLifterResult lifting = lifter.lift(data);
 
         logger.info("LIFTING: "+lifting.thingJSON);

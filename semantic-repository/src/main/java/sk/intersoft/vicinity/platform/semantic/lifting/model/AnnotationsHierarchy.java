@@ -139,6 +139,7 @@ public class AnnotationsHierarchy {
         result.put("device-hierarchy", traverse("core:Device", new ArrayList<String>(), false));
         result.put("service-hierarchy", traverse("core:Service", new ArrayList<String>(), false));
         result.put("property-hierarchy", traverse("ssn:Property", new ArrayList<String>(), true));
+        result.put("location-hierarchy", traverse("geosp:Feature", new ArrayList<String>(), false));
         return result;
     }
 }

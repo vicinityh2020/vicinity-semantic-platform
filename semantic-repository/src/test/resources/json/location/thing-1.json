@@ -1,0 +1,44 @@
+{
+    "oid": "test-location",
+    "adapter-id": "test-adapter",
+    "name": "human reads my name herex xxl",
+    "type": "adapters:ActivityTracker",
+    "properties": [
+        {
+            "pid": "latitude",
+            "monitors": "adapters:GPSLatitude",
+            "read_link": {
+                "href": "/device/{oid}/property/{pid}",
+                "static-value": {
+                    "gps-lat": "goes here"
+                },
+                "output": {
+                    "type": "object",
+                    "description": "gps lat",
+                    "field": [
+                        {
+                            "name": "gps-latitude",
+                            "predicate": "core:value",
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                }
+
+            }
+        }
+    ],
+    "actions": [],
+    "events": [],
+    "located-in": [
+        {
+            "location_type": "s4bldg:Building",
+            "label": "building label"
+        },
+        {
+            "location_type": "s4city:Country",
+            "label": "country label"
+        }
+    ]
+}

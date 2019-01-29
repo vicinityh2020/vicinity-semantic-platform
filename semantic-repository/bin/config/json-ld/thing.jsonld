@@ -9,6 +9,13 @@
 		"sosa": "http://www.w3.org/ns/sosa/",
 		"bnode": "http://bnodes/",
 		"xsd": "http://www.w3.org/2001/XMLSchema#",
+
+		"geosp": "http://www.opengis.net/ont/geosparql#",
+		"s4bldg": "https://w3id.org/def/saref4bldg#",
+		"s4city": "https://w3id.org/def/saref4city#",
+		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+
 		"read_link": {
 			"@id": "wot:isReadableThrough",
 			"@type": "@id"
@@ -75,6 +82,19 @@
 		},
 		"datatype": {
 			"@id": "wot:hasValueType",
+			"@type": "@id"
+		},
+
+
+		"located-in": {
+			"@id": "core:isLocatedAt",
+			"@type": "@id"
+		},
+		"label": {
+			"@id": "rdfs:label"
+		},
+		"location_type": {
+			"@id": "rdf:type",
 			"@type": "@id"
 		}
 	}

@@ -22,17 +22,23 @@ public class ThingsLifter {
     private Set<String> deviceTypes;
     private Set<String> serviceTypes;
     private Set<String> propertyIndividuals;
+    private Set<String> locationTypes;
 
 
-    public ThingsLifter(Set<String> deviceTypes, Set<String> serviceTypes, Set<String> propertyIndividuals) {
+    public ThingsLifter(Set<String> deviceTypes,
+                        Set<String> serviceTypes,
+                        Set<String> propertyIndividuals,
+                        Set<String> locationTypes) {
         this.deviceTypes = deviceTypes;
         this.serviceTypes = serviceTypes;
         this.propertyIndividuals = propertyIndividuals;
+        this.locationTypes = locationTypes;
 
         logger.info("THINGS-LIFTER INITIALIZED WITH: ");
         logger.info("device types: " + this.deviceTypes);
         logger.info("service types: " + this.serviceTypes);
         logger.info("property individuals: " + this.propertyIndividuals);
+        logger.info("location types: " + this.locationTypes);
     }
 
     private void instantiateObjects(JSONObject object) {
@@ -128,6 +134,17 @@ public class ThingsLifter {
         }
     }
 
+    private void liftLocations(ThingDescription thing, ThingValidator validator) {
+        for (Map.Entry<String, ThingLocation> entry : thing.locations.entrySet()) {
+            ThingLocation location = entry.getValue();
+
+            if (!locationTypes.contains(location.className)) {
+                validator.errors.add("unknown ontology location for [type]: [" + location.className+ "], thing ["+thing.oid+"]");
+            }
+
+        }
+    }
+
     private void lift(ThingDescription thing, ThingValidator validator) {
         if(thing != null){
             thing.jsonExtension.put("@context", JSONLD_SCHEMA_LOCATION);
@@ -151,6 +168,7 @@ public class ThingsLifter {
             liftProperties(thing, validator);
             liftActions(thing, validator);
             liftEvents(thing, validator);
+            liftLocations(thing, validator);
 
 
         }

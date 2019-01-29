@@ -27,6 +27,10 @@ public class Namespaces {
 
     public static final String ted = "http://vicinity.eu/data/ted";
 
+    public static final String geosp = "http://www.opengis.net/ont/geosparql";
+    public static final String s4bldg = "https://w3id.org/def/saref4bldg";
+    public static final String s4city = "https://w3id.org/def/saref4city";
+
     private static final Map<String, String> uriMapping =
             Collections.unmodifiableMap(new HashMap<String, String>() {{
                 put(NamespacePrefix.rdf, rdf);
@@ -48,6 +52,10 @@ public class Namespaces {
                 put(NamespacePrefix.sosa, sosa);
                 put(NamespacePrefix.ssn, ssn);
                 put(NamespacePrefix.ssnSystems, ssnSystems);
+
+                put(NamespacePrefix.geosp, geosp);
+                put(NamespacePrefix.s4bldg, s4bldg);
+                put(NamespacePrefix.s4city, s4city);
 
             }});
 

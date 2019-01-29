@@ -20,4 +20,9 @@ public class NamespacePrefix {
     public static final String ssn = "ssn";
     public static final String ssnSystems = "systems";
     public static final String sosa = "sosa";
+
+    public static final String geosp = "geosp";
+    public static final String s4bldg = "s4bldg";
+    public static final String s4city = "s4city";
+
 }
