@@ -17,6 +17,9 @@ public class SemanticRepositoryApplication extends Application {
     public static final String CREATE_TD = "/td/create";
     public static final String REMOVE_TD = "/td/remove/{oid}";
 
+    public static final String CREATE_AGENTS = "/agents/create";
+    public static final String REMOVE_AGENTS = "/agents/delete";
+
     private ChallengeAuthenticator createApiGuard(Restlet next) {
 
         ChallengeAuthenticator apiGuard = new ChallengeAuthenticator(getContext(), ChallengeScheme.HTTP_BASIC, "realm");
@@ -54,6 +57,12 @@ public class SemanticRepositoryApplication extends Application {
 
         apiRouter.attach(REMOVE_TD, RemoveThingFromOntologyResource.class);
         apiRouter.attach(REMOVE_TD+"/", RemoveThingFromOntologyResource.class);
+
+        apiRouter.attach(CREATE_AGENTS, Agents2OntologyResource.class);
+        apiRouter.attach(CREATE_AGENTS+"/", Agents2OntologyResource.class);
+
+        apiRouter.attach(REMOVE_AGENTS, RemoveAgentsFromOntologyResource.class);
+        apiRouter.attach(REMOVE_AGENTS+"/", RemoveAgentsFromOntologyResource.class);
 
         return apiRouter;
     }

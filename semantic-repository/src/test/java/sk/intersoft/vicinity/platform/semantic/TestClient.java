@@ -29,9 +29,9 @@ import java.util.Scanner;
 
 public class TestClient {
     HttpClient client = HttpClientBuilder.create().build();
-//    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
+    public String ENDPOINT = "http://localhost:9004/semantic-repository/";
 //    public String ENDPOINT = "http://94.130.151.234:9004/semantic-repository/";
-    public String ENDPOINT = "http://147.232.202.108:9090/semantic-repository/";
+//    public String ENDPOINT = "http://147.232.202.108:9090/semantic-repository/";
 
     public String get(String uri) {
         System.out.println("DO GET: " + uri);
@@ -90,6 +90,7 @@ public class TestClient {
         return null;
 
     }
+
 
     public void query(){
         String query =
@@ -157,13 +158,32 @@ public class TestClient {
         System.out.println((new JSONObject(result)).toString(2));
     }
 
+    public void createAgents(){
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/agent/a-1.json";
+        JSONArray json = new JSONArray(TestUtil.file2string(source));
+        System.out.println("CREATE: \n"+json.toString(2));
+        System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "agents/create", json.toString()))).toString(2));
+
+    }
+    public void deleteAgents(){
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/agent/a-1-d.json";
+        JSONArray json = new JSONArray(TestUtil.file2string(source));
+        System.out.println("CREATE: \n"+json.toString(2));
+        System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "agents/delete", json.toString()))).toString(2));
+
+    }
+
     public static void main(String[] args) throws  Exception {
         TestClient t = new TestClient();
-        t.query();
+//        t.query();
 //        t.remove("abc2");
 //        t.create();
 //        t.validate();
 //        t.annotations();
+
+//        t.createAgents();
+        t.deleteAgents();
+
     }
 
 }

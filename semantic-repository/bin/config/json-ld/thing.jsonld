@@ -15,6 +15,9 @@
 		"s4city": "https://w3id.org/def/saref4city#",
 		"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
 		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+		"owl": "http://www.w3.org/2002/07/owl#",
+
+		"foaf": "http://xmlns.com/foaf/0.1/",
 
 		"read_link": {
 			"@id": "wot:isReadableThrough",
@@ -96,6 +99,22 @@
 		"location_type": {
 			"@id": "rdf:type",
 			"@type": "@id"
+		},
+		"location_id": {
+			"@id": "owl:sameAs"
+		},
+
+		"agent_type": {
+			"@id": "rdf:type",
+			"@type": "@id"
+		},
+		"agent_name": {
+			"@id": "foaf:name",
+			"@type": "xsd:string"
+		},
+		"agent_oid": {
+			"@id": "foaf:openid",
+			"@type": "xsd:string"
 		}
 	}
 }

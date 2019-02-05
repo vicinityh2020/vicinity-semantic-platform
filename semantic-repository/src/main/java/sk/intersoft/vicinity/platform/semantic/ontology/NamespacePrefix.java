@@ -3,6 +3,7 @@ package sk.intersoft.vicinity.platform.semantic.ontology;
 public class NamespacePrefix {
     public static final String rdf = "rdf";
     public static final String rdfs = "rdfs";
+    public static final String owl = "owl";
     public static final String xsd = "xsd";
 
     public static final String thing = "thing";

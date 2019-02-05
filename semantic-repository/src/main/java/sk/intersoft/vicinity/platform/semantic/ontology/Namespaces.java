@@ -23,6 +23,7 @@ public class Namespaces {
 
     public static final String rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns";
     public static final String rdfs = "http://www.w3.org/2000/01/rdf-schema";
+    public static final String owl = "http://www.w3.org/2002/07/owl";
     public static final String xsd = "http://www.w3.org/2001/XMLSchema";
 
     public static final String ted = "http://vicinity.eu/data/ted";
@@ -35,6 +36,7 @@ public class Namespaces {
             Collections.unmodifiableMap(new HashMap<String, String>() {{
                 put(NamespacePrefix.rdf, rdf);
                 put(NamespacePrefix.rdfs, rdfs);
+                put(NamespacePrefix.owl, owl);
                 put(NamespacePrefix.xsd, xsd);
 
                 put(NamespacePrefix.core, core);

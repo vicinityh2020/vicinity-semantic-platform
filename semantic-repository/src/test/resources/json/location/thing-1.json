@@ -34,10 +34,11 @@
     "located-in": [
         {
             "location_type": "s4bldg:Building",
-            "label": "building label"
+            "label": "building label xxl"
         },
         {
             "location_type": "s4city:Country",
+            "location_id": "http://dbpedia.org/Greece",
             "label": "country label"
         }
     ]

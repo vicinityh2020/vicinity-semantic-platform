@@ -25,6 +25,14 @@ public class Ontology2Thing {
         }
         else throw new Exception("graph property ["+graphProperty+"] not found!");
     }
+    private String getOptionalValue(String graphProperty,
+                                    Graph graph) throws Exception  {
+        String value = graph.value(graphProperty);
+        if(value != null){
+            return Namespaces.toPrefixed(value);
+        }
+        else return null;
+    }
 
     private DataSchema addDataSchema(String key, Graph graph) throws Exception {
         String content = getValue("wot:"+key, graph);
@@ -134,6 +142,7 @@ public class Ontology2Thing {
 
             logger.debug("ADDING LOCATION: \n" + location.describe());
             logger.debug(location.show());
+            logger.debug("rdf id: " + location.value("ows:sameAs"));
             logger.debug("rdf type: " + location.value("rdf:type"));
             logger.debug("rdf type uri: " + Namespaces.toURI("rdf:type"));
 
@@ -143,11 +152,12 @@ public class Ontology2Thing {
 
 
             String type = getValue("rdf:type", location);
+            String id = getOptionalValue("owl:sameAs", location);
 
 
             String typeName = Namespaces.valueFromPrefixed(Namespaces.toPrefixed(type));
 
-            ThingLocation loc = new ThingLocation(typeName, label);
+            ThingLocation loc = new ThingLocation(id, typeName, label);
             thing.locations.put(loc.className, loc);
         }
     }
