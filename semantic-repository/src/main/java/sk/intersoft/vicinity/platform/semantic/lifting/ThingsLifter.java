@@ -165,6 +165,7 @@ public class ThingsLifter {
                 validator.errors.add("unknown ontology class for thing [type]: [" + thing.type + "]");
             }
 
+
             liftProperties(thing, validator);
             liftActions(thing, validator);
             liftEvents(thing, validator);

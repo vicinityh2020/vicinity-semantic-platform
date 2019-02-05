@@ -132,6 +132,9 @@ public class Ontology2Thing {
         thing.adapterId = getValue("wot:adapter-id", graph);
         thing.name = getValue("wot:name", graph);
         thing.type = Namespaces.toPrefixed(getValue("wot:type", graph));
+
+        thing.hasOwner = getOptionalValue("core:hasOwner", graph);
+
     }
 
     private void addThingLocations(ThingDescription thing, Graph graph) throws Exception {

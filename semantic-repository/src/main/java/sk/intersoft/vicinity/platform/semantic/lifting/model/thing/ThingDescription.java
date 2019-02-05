@@ -21,6 +21,7 @@ public class ThingDescription {
     public String adapterInfrastructureID = null;
 
     public String name = null;
+    public String hasOwner = null;
     public String password = null;
     public String type;
 
@@ -38,6 +39,7 @@ public class ThingDescription {
     public static String ADAPTER_ID_KEY = "adapter-id";
     public static String NAME_KEY = "name";
     public static String TYPE_KEY = "type";
+    public static String HAS_OWNER_KEY = "has-owner";
     public static String PROPERTIES_KEY = "properties";
     public static String ACTIONS_KEY = "actions";
     public static String EVENTS_KEY = "events";
@@ -85,6 +87,8 @@ public class ThingDescription {
 
             thing.name = JSONUtil.getString(NAME_KEY, thingJSON);
             if(thing.name == null) fail = validator.error("Missing thing [name].");
+
+            thing.hasOwner = JSONUtil.getString(HAS_OWNER_KEY, thingJSON);
 
 
             List<JSONObject> properties = JSONUtil.getObjectArray(PROPERTIES_KEY, thingJSON);
@@ -187,6 +191,9 @@ public class ThingDescription {
         object.put(TYPE_KEY, thing.type);
         object.put(ADAPTER_ID_KEY, thing.adapterId);
         object.put(NAME_KEY, thing.name);
+        if(thing.hasOwner != null){
+            object.put(HAS_OWNER_KEY, thing.hasOwner);
+        }
 
         for (Map.Entry<String, InteractionPattern> entry : thing.properties.entrySet()) {
             InteractionPattern pattern = entry.getValue();
@@ -220,6 +227,7 @@ public class ThingDescription {
         dump.add("adapter-oid: "+adapterOID, (indent + 1));
         dump.add("adapter-infrastructure-id: "+adapterInfrastructureID, (indent + 1));
         dump.add("type: "+type, (indent + 1));
+        dump.add("has-owner: "+hasOwner, (indent + 1));
         dump.add("name: "+name, (indent + 1));
         dump.add("password: "+password, (indent + 1));
         dump.add("PROPERTIES: "+properties.size(), (indent + 1));

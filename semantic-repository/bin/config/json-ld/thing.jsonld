@@ -115,6 +115,10 @@
 		"agent_oid": {
 			"@id": "foaf:openid",
 			"@type": "xsd:string"
+		},
+		"has-owner": {
+			"@id": "core:hasOwner",
+            "@type": "@id"
 		}
 	}
 }

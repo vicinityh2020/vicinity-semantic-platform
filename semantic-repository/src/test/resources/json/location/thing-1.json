@@ -3,6 +3,7 @@
     "adapter-id": "test-adapter",
     "name": "human reads my name herex xxl",
     "type": "adapters:ActivityTracker",
+    "has-owner": "thing:a3-oid",
     "properties": [
         {
             "pid": "latitude",

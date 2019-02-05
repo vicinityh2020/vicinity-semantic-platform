@@ -123,6 +123,7 @@ public class Thing2Ontology {
             String contextURI = OntologyResource.thingInstanceURI(thingJSON.getString(ThingDescription.OID_KEY));
             IRI contextIRI = factory.createIRI(contextURI);
             logger.info("POPULATION ONTOLOGY with CtX: "+contextURI+ " / " + contextIRI);
+            logger.info("LIFTED THING: \n"+thingJSON.toString(2));
 
             TreeModel graph = new TreeModel();
             rdfParser.setRDFHandler(new StatementCollector(graph));
@@ -135,10 +136,10 @@ public class Thing2Ontology {
             while(i.hasNext()) {
                 Statement st = i.next();
 
-//                logger.debug("TRIPLE IN: " +
-//                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
-//                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
-//                                Namespaces.toPrefixed(st.getObject().stringValue()));
+                logger.debug("TRIPLE IN: " +
+                        Namespaces.toPrefixed(st.getSubject().stringValue()) + " " +
+                                Namespaces.toPrefixed(st.getPredicate().stringValue()) + " "+
+                                Namespaces.toPrefixed(st.getObject().stringValue()));
 //                logger.debug(
 //                        st.getSubject() + " " +
 //                                st.getPredicate() + " "+
