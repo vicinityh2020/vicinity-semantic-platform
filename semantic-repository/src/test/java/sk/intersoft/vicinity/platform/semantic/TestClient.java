@@ -165,11 +165,25 @@ public class TestClient {
         System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "agents/create", json.toString()))).toString(2));
 
     }
+    public void createContracts(){
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/agent/c-1.json";
+        JSONArray json = new JSONArray(TestUtil.file2string(source));
+        System.out.println("CREATE: \n"+json.toString(2));
+        System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "contracts/create", json.toString()))).toString(2));
+
+    }
     public void deleteAgents(){
         String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/agent/a-1-d.json";
         JSONArray json = new JSONArray(TestUtil.file2string(source));
-        System.out.println("CREATE: \n"+json.toString(2));
+        System.out.println("DELETE GRAPHS: \n"+json.toString(2));
         System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "agents/delete", json.toString()))).toString(2));
+
+    }
+    public void deleteContracts(){
+        String source = new File("").getAbsolutePath() + "/semantic-repository/src/test/resources/json/agent/a-1-d.json";
+        JSONArray json = new JSONArray(TestUtil.file2string(source));
+        System.out.println("DELETE GRAPHS: \n"+json.toString(2));
+        System.out.println("query post: "+(new JSONObject(post(ENDPOINT + "contracts/delete", json.toString()))).toString(2));
 
     }
 
@@ -181,8 +195,9 @@ public class TestClient {
 //        t.validate();
 //        t.annotations();
 
-//        t.createAgents();
-        t.deleteAgents();
+        t.createAgents();
+        t.createContracts();
+//        t.deleteContracts();
 
     }
 

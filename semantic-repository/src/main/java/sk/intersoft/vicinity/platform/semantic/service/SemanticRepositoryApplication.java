@@ -19,6 +19,8 @@ public class SemanticRepositoryApplication extends Application {
 
     public static final String CREATE_AGENTS = "/agents/create";
     public static final String REMOVE_AGENTS = "/agents/delete";
+    public static final String CREATE_CONTRACTS = "/contracts/create";
+    public static final String REMOVE_CONTRACTS = "/contracts/delete";
 
     private ChallengeAuthenticator createApiGuard(Restlet next) {
 
@@ -61,8 +63,14 @@ public class SemanticRepositoryApplication extends Application {
         apiRouter.attach(CREATE_AGENTS, Agents2OntologyResource.class);
         apiRouter.attach(CREATE_AGENTS+"/", Agents2OntologyResource.class);
 
-        apiRouter.attach(REMOVE_AGENTS, RemoveAgentsFromOntologyResource.class);
-        apiRouter.attach(REMOVE_AGENTS+"/", RemoveAgentsFromOntologyResource.class);
+        apiRouter.attach(REMOVE_AGENTS, RemoveGraphsFromOntologyResource.class);
+        apiRouter.attach(REMOVE_AGENTS+"/", RemoveGraphsFromOntologyResource.class);
+
+        apiRouter.attach(CREATE_CONTRACTS, Contracts2OntologyResource.class);
+        apiRouter.attach(CREATE_CONTRACTS+"/", Contracts2OntologyResource.class);
+
+        apiRouter.attach(REMOVE_CONTRACTS, RemoveGraphsFromOntologyResource.class);
+        apiRouter.attach(REMOVE_CONTRACTS+"/", RemoveGraphsFromOntologyResource.class);
 
         return apiRouter;
     }

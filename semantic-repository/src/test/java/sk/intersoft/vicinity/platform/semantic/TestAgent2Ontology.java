@@ -35,10 +35,29 @@ public class TestAgent2Ontology {
         }
     }
 
+
+    public void populateContracts() {
+        try {
+            String json = TestUtil.file2string(TestUtil.path(jsonPath + "c-1.json"));
+
+            System.out.println("POPULATING: ");
+            System.out.println("INPUT: \n" + json);
+            Agent2Ontology handler = new Agent2Ontology();
+            JSONObject result = handler.createContracts(json);
+            System.out.println("RESULT: " + result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws  Exception {
         TestAgent2Ontology t = new TestAgent2Ontology();
-        t.delete();
-        t.populate();
+//        t.delete();
+//        t.populate();
+        t.populateContracts();
+//        t.delete();
+//        t.deleteContracts();
 //        t.o2t();
 //        t.validate();
     }

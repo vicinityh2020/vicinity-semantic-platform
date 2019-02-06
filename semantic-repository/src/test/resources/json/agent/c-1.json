@@ -1,0 +1,24 @@
+[
+  {
+    "contract_id": "c1-oid",
+    "write_rights": true,
+    "requested_service": "test-location",
+    "petitioner_items": [
+      "test-location",
+      "test-location-1"
+    ],
+    "service_owner": "a3-oid",
+    "service_petitioner": "a4-oid"
+  },
+  {
+    "contract_id": "c2-oid",
+    "write_rights": false,
+    "requested_service": "test-location",
+    "petitioner_items": [
+      "test-location-2",
+      "test-location-3"
+    ],
+    "service_owner": "a1-oid",
+    "service_petitioner": "a2-oid"
+  }
+]

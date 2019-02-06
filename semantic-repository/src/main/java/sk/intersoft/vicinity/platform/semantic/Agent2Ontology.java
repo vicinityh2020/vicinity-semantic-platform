@@ -60,12 +60,11 @@ public class Agent2Ontology {
 
     }
 
-    public String populate(JSONObject agent) throws Exception {
+    public String populate(String oid, JSONObject agent) throws Exception {
         RepositoryConnection connection = repository.getConnection();
         try{
 
-            String oid = agent.getString(AgentThing.OUT_OID_KEY);
-            logger.info("POPULATING NEW AGENT: "+agent.toString());
+            logger.info("POPULATING NEW ITEM: "+agent.toString());
 
             logger.info("FIRST DELETE ...");
             long dstart = DateTimeUtil.millis();
@@ -74,7 +73,7 @@ public class Agent2Ontology {
             logger.info("DELETE TOOK: "+DateTimeUtil.format(dend));
 
             long start = DateTimeUtil.millis();
-            logger.info("POPULATING NEW AGENT: "+agent.toString());
+            logger.info("POPULATING NEW ITEM: "+agent.toString());
 
             RDFParser rdfParser = Rio.createParser(RDFFormat.JSONLD);
 
@@ -86,7 +85,7 @@ public class Agent2Ontology {
 
             logger.info("LIFTED AS INSTANCE: "+agent.toString());
 
-            logger.info("POPULATING ONTOLOGY WITH AGENT with CtX: "+contextURI+ " / " + contextIRI);
+            logger.info("POPULATING ONTOLOGY WITH ITEM with CtX: "+contextURI+ " / " + contextIRI);
 
             TreeModel graph = new TreeModel();
             rdfParser.setRDFHandler(new StatementCollector(graph));
@@ -126,7 +125,7 @@ public class Agent2Ontology {
         finally {
             connection.close();
         }
-        return agent.getString(AgentThing.OUT_OID_KEY);
+        return oid;
     }
 
     public JSONObject create(String data) throws Exception {
@@ -138,7 +137,8 @@ public class Agent2Ontology {
             Object item = i.next();
             JSONObject agent = AgentThing.create(item);
             logger.info("CREATING AGENT: "+agent.toString());
-            String oid = populate(agent);
+
+            String oid = populate(agent.getString(AgentThing.OUT_OID_KEY), agent);
             if(oid != null){
                 created.put(oid);
             }
@@ -210,5 +210,32 @@ public class Agent2Ontology {
         return bulkDelete(oids);
 
     }
+
+    // CONTRACTS
+    public JSONObject createContracts(String data) throws Exception {
+        logger.info("CREATING CONTRACTS: "+data);
+        JSONArray created = new JSONArray();
+        JSONArray notCreated = new JSONArray();
+        Iterator<Object> i = new JSONArray(data).iterator();
+        while(i.hasNext()) {
+            Object item = i.next();
+            JSONObject contract = AgentThing.createContract(item);
+            logger.info("CREATING CONTRACT: "+contract.toString());
+            String oid = populate(contract.getString(AgentThing.CONTRACT_OID_KEY), contract);
+            if(oid != null){
+                created.put(oid);
+            }
+            else {
+                notCreated.put(oid);
+            }
+        }
+
+        JSONObject out = new JSONObject();
+        out.put("created", created);
+        out.put("failed", notCreated);
+
+        return out;
+    }
+
 
 }

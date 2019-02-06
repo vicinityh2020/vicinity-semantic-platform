@@ -119,6 +119,39 @@
 		"has-owner": {
 			"@id": "core:hasOwner",
             "@type": "@id"
+		},
+
+
+
+		"contract_id": {
+            "@id": "core:contractId",
+            "@type": "xsd:string"
+		},
+		"contract_type": {
+			"@id": "rdf:type",
+			"@type": "@id"
+		},
+		"write_rights": {
+            "@id": "core:readWrite",
+            "@type": "xsd:boolean"
+		},
+		"requested_service": {
+            "@id": "core:requestedService",
+            "@type": "@id"
+		},
+		"service_owner": {
+            "@id": "core:serviceOwner",
+            "@type": "@id"
+		},
+		"service_petitioner": {
+            "@id": "core:servicePetitioner",
+            "@type": "@id"
+		},
+		"petitioner_items": {
+            "@id": "core:petitionerItemInvolved",
+            "@type": "@id"
 		}
+
+
 	}
 }
