@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20160212</version>
+            <version>20180130</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -43,12 +43,12 @@
         <dependency>
             <groupId>com.ontotext.graphdb</groupId>
             <artifactId>graphdb-free-runtime</artifactId>
-            <version>8.6.1</version>
+            <version>9.11.1</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>
             <artifactId>rdf4j-queryresultio-sparqljson</artifactId>
-            <version>2.2</version>
+            <version>2.4.3</version>
         </dependency>
 
 
